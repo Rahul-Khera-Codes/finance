@@ -4,8 +4,7 @@ import {
     OnChanges
 } from '@angular/core';
 import {
-    Router,
-    provideRouter
+    Router
 } from '@angular/router';
 import {
     Mongo
@@ -18,7 +17,6 @@ import {
 } from 'angular2-meteor';
 
 import {
-    REACTIVE_FORM_DIRECTIVES,
     FormGroup,
     FormBuilder,
     Validators
@@ -27,8 +25,7 @@ import template from './login.html';
 
 @Component({
     selector: 'login',
-    template,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    template
 })
 
 export class LoginComponent extends MeteorComponent implements OnInit {
@@ -44,9 +41,9 @@ export class LoginComponent extends MeteorComponent implements OnInit {
 
     ngOnInit() {
         //  *** checking if user is already login ***
-        if (Meteor.userId()) {
-            this._router.navigate(['/csvtemplate']);
-        }
+       if (Meteor.userId()) {
+           this._router.navigate(['/csvtemplate']);
+       }
         this.addForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
@@ -60,7 +57,7 @@ export class LoginComponent extends MeteorComponent implements OnInit {
         if (this.addForm.valid) {
             this.email = this.addForm.controls['email'].value;
             this.password = this.addForm.controls['password'].value;
-            Meteor.loginWithPassword(this.email, this.password, function(error) {
+            Meteor.loginWithPassword(this.email, this.password, function(error:any) {
                 if (Meteor.user()) {
                     self._router.navigate(['/csvtemplate']);
                 } else {

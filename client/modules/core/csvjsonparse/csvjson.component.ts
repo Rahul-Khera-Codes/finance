@@ -18,16 +18,12 @@ import {
 import {
     MeteorComponent
 } from 'angular2-meteor';
-import {
-    RowInfoComponent
-} from './rowInfoComponent/rowInfo.component';
 import template from './csvjsoncomponent.html';
 
 
 @Component({
     selector: 'csvjson',
-    template,
-    directives: [RowInfoComponent]
+    template
 })
 
 export class CsvJsonComponent extends MeteorComponent implements OnInit {
@@ -57,8 +53,8 @@ export class CsvJsonComponent extends MeteorComponent implements OnInit {
         //for using papa-parse type " meteor add harrison:papa-parse " in console
         Papa.parse(files[0], {
             header: true,
-            complete(results, file) {
-                Meteor.call('parseUpload', results.data, (error, response) => {
+            complete(results:any, file:any) {
+                Meteor.call('parseUpload', results.data, (error:any, response:any) => {
                     if (error) {
                         this.messageshow = true;
                         this.successmessage = "Document not uploaded ";

@@ -1,20 +1,12 @@
 import 'angular2-meteor-polyfills';
-import {
-    bootstrap
-} from 'angular2-meteor-auto-bootstrap';
-import {
-    AppComponent
-} from './app.component';
-import {
-    disableDeprecatedForms,
-    provideForms
-} from '@angular/forms';
-import {
-    APP_ROUTER_PROVIDERS
-} from './app.routes';
 
-bootstrap(AppComponent, [
-    disableDeprecatedForms(),
-    provideForms(),
-    APP_ROUTER_PROVIDERS
-]);
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { Meteor } from "meteor/meteor";
+import { AppModule } from './app.module';
+
+enableProdMode();
+
+Meteor.startup(() => {
+   platformBrowserDynamic().bootstrapModule(AppModule);
+});

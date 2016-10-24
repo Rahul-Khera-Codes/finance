@@ -15,7 +15,6 @@ import {
     MeteorComponent
 } from 'angular2-meteor';
 import {
-    REACTIVE_FORM_DIRECTIVES,
     FormGroup,
     FormBuilder,
     Validators
@@ -27,8 +26,7 @@ import template from './addproduct.html';
 
 @Component({
     selector: 'csvaddproduct',
-    template,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    template
 })
 
 export class CsvAddProductComponent extends MeteorComponent implements OnInit {
@@ -83,7 +81,7 @@ export class CsvAddProductComponent extends MeteorComponent implements OnInit {
         }
     }
 
-    addSubCategory(parentCategory_id) {
+    addSubCategory(parentCategory_id:string) {
         if (this.addFormsubcategory.valid) {
             Productcategory.update({
                 _id: parentCategory_id
@@ -113,10 +111,10 @@ export class CsvAddProductComponent extends MeteorComponent implements OnInit {
         }
     }
 
-    removeCategory(category) {
+    removeCategory(category:any) {
         Productcategory.remove(category._id);
     }
-    removeSubCategory(id, subarraycategoryname) {
+    removeSubCategory(id:string, subarraycategoryname:any) {
         Productcategory.update({
             _id: id
         }, {

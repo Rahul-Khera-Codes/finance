@@ -5,8 +5,7 @@ import {
     Input
 } from '@angular/core';
 import {
-    Router,
-    provideRouter
+    Router
 } from '@angular/router';
 import {
     Mongo
@@ -29,11 +28,7 @@ import template from './csvtimeline.html';
 
 @Component({
     selector: 'csvtimeline',
-    template,
-    directives: [TransactionComponent
-    // ,
-    //  suggestionComponent
-     ]
+    template
 })
 
 export class CsvTimelineComponent extends MeteorComponent implements OnInit, OnChanges {

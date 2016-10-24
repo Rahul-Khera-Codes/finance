@@ -2,9 +2,6 @@ import {
     Component,
     Input
 } from '@angular/core';
-import {
-    AssignCategoryComponent
-} from './assignCategoryComponent/assignCategory.component';
 import template from './rowInfo.html';
 import {
     Row
@@ -12,8 +9,7 @@ import {
 
 @Component({
     selector: '[other]',
-    template,
-    directives: [AssignCategoryComponent]
+    template
 })
 
 export class RowInfoComponent {

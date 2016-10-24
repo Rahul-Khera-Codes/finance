@@ -18,8 +18,7 @@ import template from './transaction.html';
 
 @Component({
     selector: '[transaction]',
-    template,
-    directives: [UserComponent,CategoryComponent,InvoiceComponent]
+    template
 })
 
 export class TransactionComponent {

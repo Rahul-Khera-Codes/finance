@@ -13,7 +13,6 @@ import {
     MeteorComponent
 } from 'angular2-meteor';
 import {
-    REACTIVE_FORM_DIRECTIVES,
     FormGroup,
     FormBuilder,
     Validators
@@ -24,8 +23,7 @@ import {
 
 @Component({
     selector: 'adduser',
-    template,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    template
 })
 
 export class adduserComponent extends MeteorComponent implements OnInit {
@@ -67,9 +65,9 @@ export class adduserComponent extends MeteorComponent implements OnInit {
         this.changePassword.controls['newPasswords']['updateValue']('');
     }
 
-    changePasswords(userId) {
+    changePasswords(userId:string) {
         var newPassword = this.changePassword.controls['newPasswords'].value;
-        Meteor.call('changePasswordForce', userId, newPassword, (error, response) => {
+        Meteor.call('changePasswordForce', userId, newPassword, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {
@@ -91,7 +89,7 @@ export class adduserComponent extends MeteorComponent implements OnInit {
                     email: this.addForm.controls['email'].value
                 }
             };
-            Meteor.call('addUser', adduser, (error, response) => {
+            Meteor.call('addUser', adduser, (error:any, response:any) => {
                 if (error) {
                     console.log(error.reason);
                 } else {
@@ -101,8 +99,8 @@ export class adduserComponent extends MeteorComponent implements OnInit {
             this.resetForm();
         }
     }
-    removeUser(user) {
-        Meteor.call('removeUser', user, (error, response) => {
+    removeUser(user:any) {
+        Meteor.call('removeUser', user, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {
