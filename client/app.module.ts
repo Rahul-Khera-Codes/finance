@@ -1,12 +1,45 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { AccountsModule } from 'angular2-meteor-accounts-ui';
+import { 
+  NgModule 
+} from '@angular/core';
+import { 
+  BrowserModule
+} from '@angular/platform-browser';
+import { 
+  FormsModule,
+  ReactiveFormsModule 
+} from '@angular/forms';
+import { 
+  RouterModule,
+  Routes,
+  Router 
+} from '@angular/router';
+import { 
+  AccountsModule 
+} from 'angular2-meteor-accounts-ui';
+import {
+  LocationStrategy,
+  HashLocationStrategy
+} from '@angular/common';
+    import {
+    routes as childRoutes,
+    TemplateComponentModule,
+    TemplateComponent
+} from './modules/core/template.component';
+import {
+    LoginComponent
+} from './modules/loginComponent/login.component';
 
 import { AppComponent } from './app.component';
-import { routes, ROUTES_PROVIDERS } from './app.routes';
-import { ALL_DECLARATIONS } from './modules';
+// import { CoreModule } from './modules/core/core.module';
+// import { ROUTES_PROVIDERS } from './app.routes';
+// import { ALL_DECLARATIONS } from './modules';
+// import { AppRoutingModule }     from './app.routes';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'csvtemplate', component: TemplateComponent, children: childRoutes }
+];
 
 @NgModule({
   imports: [
@@ -14,14 +47,18 @@ import { ALL_DECLARATIONS } from './modules';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
+    TemplateComponentModule,
+    // CoreModule,
     AccountsModule
   ],
   declarations: [
     AppComponent,
-    ...ALL_DECLARATIONS
+    LoginComponent
+    // ,
+    // TemplateComponent
   ],
   providers: [
-    ...ROUTES_PROVIDERS
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [
     AppComponent

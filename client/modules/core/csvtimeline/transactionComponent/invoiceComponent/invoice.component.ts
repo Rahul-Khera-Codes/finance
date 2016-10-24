@@ -56,7 +56,7 @@ export class InvoiceComponent implements OnInit {
         control.removeAt(i);
     }
      //  **** function use for adding invoice details ****
-    updateInvoice(id, invoice_no, descriptions, drivelink) {
+    updateInvoice(id:string, invoice_no:string, descriptions:string, drivelink:any) {
         this.invoice_no = this.addForm.controls['invoice_no'].value;
         this.description = this.addForm.controls['description'].value;
         this.linkaddressarray = this.addForm.controls['linktodrive'].value;
@@ -70,7 +70,7 @@ export class InvoiceComponent implements OnInit {
             this.linkaddressarray = drivelink;
         }
 
-        Meteor.call('addInvoice', id, this.invoice_no, this.description, this.linkaddressarray, (error, response) => {
+        Meteor.call('addInvoice', id, this.invoice_no, this.description, this.linkaddressarray, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {
@@ -78,12 +78,12 @@ export class InvoiceComponent implements OnInit {
             }
         });
     }
-    addInvoice(id) {
+    addInvoice(id:string) {
         this.invoice_no = this.addForm.controls['invoice_no'].value;
         this.description = this.addForm.controls['description'].value;
         this.linkaddressarray = this.addForm.controls['linktodrive'].value;
 
-        Meteor.call('addInvoice', id, this.invoice_no, this.description, this.linkaddressarray, (error, response) => {
+        Meteor.call('addInvoice', id, this.invoice_no, this.description, this.linkaddressarray, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {
@@ -92,8 +92,8 @@ export class InvoiceComponent implements OnInit {
         });
     }
     
-    deleteInvoice(id) {
-        Meteor.call('deleteInvoice', id, (error, response) => {
+    deleteInvoice(id:string) {
+        Meteor.call('deleteInvoice', id, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {

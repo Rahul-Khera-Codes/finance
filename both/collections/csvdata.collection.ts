@@ -42,7 +42,7 @@ Csvdata.allow({
       remove: function () { return true; }
 });
 Meteor.methods({
- 'parseUpload'( data, categoryarray ) {
+ 'parseUpload'( data:any, categoryarray:any ) {
     check( data, Array );
     for ( let i = 0; i < data.length; i++ ) {
       var item   = data[ i ];
@@ -88,27 +88,27 @@ Meteor.methods({
     }
     return true;
   },// Meteor method addcategory will assign category to our document which we choose in csvjson component
-  'addCategory'(id,category){
+  'addCategory'(id:string,category:string){
        check( id, String );
        check( category, String );
        Csvdata.update({"_id": id},{ $set:{ "Assigned_category":category,"is_processed":1}});
   },
-  'changeCategory'(id,category){
+  'changeCategory'(id:string,category:string){
        check( id, String );
        check( category, String );
        Csvdata.update({"_id": id},{ $set:{ "Assigned_category":category}});
   },
-  'addInvoice'(id,invoice_no,description,linkarray){
+  'addInvoice'(id:string,invoice_no:string,description:string,linkarray:any){
       check(id,String);
       check(invoice_no,String);
       check(description,String);
       Csvdata.update({"_id": id},{ $set:{"invoice_no":invoice_no,"invoice_description":description,"linktodrive":linkarray}});
   },
-  'deleteInvoice'(id){
+  'deleteInvoice'(id:string){
       check(id,String);
       Csvdata.update({"_id": id},{ $set:{"invoice_no":"not_assigned","invoice_description":"invoice_description","linktodrive":"notassigned"}});
   },
-  'addUser'(adduserinfo){
+  'addUser'(adduserinfo:any){
      check(adduserinfo.username, String);
      check(adduserinfo.email, String);
      check(adduserinfo.password, String);
@@ -125,7 +125,7 @@ Meteor.methods({
      }
      
   },
-  'removeUser'(user){
+  'removeUser'(user:any){
       if(Roles.userIsInRole( Meteor.userId(), 'admin' ))
       {
       check(user._id,String);
@@ -136,7 +136,7 @@ Meteor.methods({
       }
       
   },
-  'changePasswordForce'(userId,newPassword){
+  'changePasswordForce'(userId:string,newPassword:string){
      if (Meteor.isServer) {
          if(userId===Meteor.userId() || Roles.userIsInRole( Meteor.userId(), 'admin' )){
       Accounts.setPassword(userId,newPassword);
@@ -145,7 +145,7 @@ Meteor.methods({
          }
        }
   },
-  'assignTransDocToUser'(docid,userid,username){
+  'assignTransDocToUser'(docid:string,userid:string,username:string){
       if(Meteor.isServer){
            if(Roles.userIsInRole( Meteor.userId(), 'admin' )){
            Csvdata.update({"_id": docid},{ $set:{"Assigned_user_id":userid,"Assigned_username":username}});

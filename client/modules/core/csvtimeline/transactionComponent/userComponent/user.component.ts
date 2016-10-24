@@ -32,8 +32,8 @@ export class UserComponent extends MeteorComponent implements OnInit {
         }, true);
         
     }
-    assignTransDocToUser(id, userid, username) {
-        Meteor.call('assignTransDocToUser', id, userid, username, (error, response) => {
+    assignTransDocToUser(id:string, userid:string, username:string) {
+        Meteor.call('assignTransDocToUser', id, userid, username, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {

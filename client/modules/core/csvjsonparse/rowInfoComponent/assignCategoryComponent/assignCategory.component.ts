@@ -48,9 +48,9 @@ export class AssignCategoryComponent extends MeteorComponent implements OnInit {
             this.productcategory = Productcategory.find({});
         }, true);
     }
-    addCategory(id, category) {
+    addCategory(id:string, category:string) {
         // **** add category is actually assigning category to all the transaction notes ****
-        Meteor.call('addCategory', id, category, (error, response) => {
+        Meteor.call('addCategory', id, category, (error:any, response:any) => {
             if (error) {
                 console.log(error.reason);
             } else {
