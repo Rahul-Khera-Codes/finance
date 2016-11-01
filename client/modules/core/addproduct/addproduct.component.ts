@@ -40,7 +40,7 @@ import template from './addproduct.html';
 export class CsvAddProductComponent implements OnInit, OnDestroy {
     productlist: Observable<any[]>;
     subcategory: Observable<any[]>;
-    selectedCategory: Observable<any[]>;
+    selectedCategory: any;
     productSub: Subscription;
     subcategSub: Subscription;
     addForm: FormGroup;

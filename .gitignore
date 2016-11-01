@@ -1,5 +1,3 @@
 node_modules/
-.meteor/local
-.meteor
 npm-debug.log
 /nbproject/private/

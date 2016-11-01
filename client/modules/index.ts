@@ -34,8 +34,12 @@ import {
 import {
     TemplateComponent
 } from './core/template.component';
+import {
+    DashboardComponent
+} from './core/dashboard/dashboard';
 
 export const ALL_DECLARATIONS = [
+  DashboardComponent,
   CsvTimelineComponent,
   TransactionComponent,
   UserComponent,

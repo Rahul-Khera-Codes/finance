@@ -20,6 +20,9 @@ import {
 import {
     TemplateComponent
 } from './modules/core/template.component';
+import {
+    DashboardComponent
+} from './modules/core/dashboard/dashboard';
 
 export const routes: Route[] = [{
     path: '',
@@ -34,8 +37,11 @@ export const routes: Route[] = [{
     canActivate: ['canActivateForLoggedIn'],
     children: [{
         path: '',
-        redirectTo: 'csvtimeline'
+        redirectTo: 'adduser'
     }, 
+    {
+        path:'dashboard',component:DashboardComponent
+    },
     {
         path: 'csvtimeline',
         component: CsvTimelineComponent
