@@ -5,9 +5,6 @@ import {
     OnDestroy
 } from '@angular/core';
 import {
-    Router
-} from '@angular/router';
-import {
     Mongo
 } from 'meteor/mongo';
 import {
@@ -39,13 +36,10 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
     messageshow: boolean = true;
     csvSub: Subscription;
 
-    constructor(private _router: Router) {}
+    constructor() {}
 
     ngOnInit() {
-        //    **** for checking user is login or not ****  
-        if (!Meteor.userId()) {
-            this._router.navigate(['/login']);
-        }
+
         //  *** subscribing to csvdata which is unprocessed right now ***
         this.csvdata = Csvdata.find({}).zone();
         this.csvSub = MeteorObservable.subscribe('csvdata_unprocessed').subscribe();

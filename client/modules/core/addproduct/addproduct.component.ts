@@ -4,9 +4,6 @@ import {
     OnDestroy
 } from '@angular/core';
 import {
-    Router
-} from '@angular/router';
-import {
     Mongo
 } from 'meteor/mongo';
 import {
@@ -40,32 +37,24 @@ import template from './addproduct.html';
 export class CsvAddProductComponent implements OnInit, OnDestroy {
     productlist: Observable<any[]>;
     subcategory: Observable<any[]>;
-    selectedCategory: Observable<any[]>;
+    selectedCategory: any;
     productSub: Subscription;
-    subcategSub: Subscription;
     addForm: FormGroup;
     addFormsubcategory: FormGroup;
-    // selectedCategory: any;
     activateChild: boolean;
 
-    constructor(private formBuilder: FormBuilder, private _router: Router) {}
+    constructor(private formBuilder: FormBuilder) {}
 
     onSelect(category: any): void {
         this.selectedCategory = category;
         this.activateChild = true;
-        this.subcategSub = MeteorObservable.subscribe('Productcategory').subscribe(() => {
-             this.subcategory = Productcategory.find({_id:category._id}).zone();
-        });
+        this.subcategory = Productcategory.find({_id:category._id}).zone();
     }
 
         ngOnInit() {
 
         this.productlist = Productcategory.find({}).zone();
         this.productSub = MeteorObservable.subscribe('Productcategory').subscribe();
-
-        if (!Meteor.userId()) {
-            this._router.navigate(['/login']);
-        }
 
         this.addForm = this.formBuilder.group({
             category: ['', Validators.required],
@@ -96,8 +85,6 @@ export class CsvAddProductComponent implements OnInit, OnDestroy {
                 }
             }).zone();
             this.addFormsubcategory.reset();
-            // this.subcategory=selectedCategory.subarray;
-
         }
     }
 
@@ -132,7 +119,6 @@ export class CsvAddProductComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
     this.productSub.unsubscribe();
-     this.subcategSub.unsubscribe();
   }
 
 }

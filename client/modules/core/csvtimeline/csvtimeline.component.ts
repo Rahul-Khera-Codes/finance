@@ -6,9 +6,6 @@ import {
     OnDestroy
 } from '@angular/core';
 import {
-    Router
-} from '@angular/router';
-import {
     Mongo
 } from 'meteor/mongo';
 import {
@@ -53,16 +50,13 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
     dbdate: any;
     initialupperlimit: any;
 
-    constructor(private _router: Router) {}
+    constructor() {}
     ngOnChanges() {
         this.loginuser = Meteor.user();
         this.data_month = moment();
     }
     
     ngOnInit() {
-        if (!Meteor.userId()) {
-            this._router.navigate(['/login']);
-        }
 
         var sort_order = {};
         sort_order["Txn_Posted_Date"] = -1;
