@@ -72,6 +72,13 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
     dateB: any;
     dbdate: any;
     initialupperlimit: any;
+    income_id: any;
+    expense_id: any;
+    income: any;
+    expense: any;
+
+    upperbound: any;
+    lowerbound: any;
 
     constructor(private ngZone: NgZone) {}
     ngOnChanges() {
@@ -80,6 +87,18 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
+        this.headarrayobservable = Head.find({}).zone();
+        this.headarraySub = MeteorObservable.subscribe('headlist').subscribe();
+        this.headarrayobservable.subscribe((data) => {
+            this.headarraylist = data;
+        });
+        this.income = Head.findOne({
+            "head": "Income"
+        });
+        this.expense = Head.findOne({
+            "head": "Expense"
+        });
+
         //  *** all date related code ****
         this.data_month = moment();
         this.month_in_headbar = this.data_month.format('MMMM YYYY');
@@ -89,6 +108,10 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
         this.dbdate = this.dateB.format('MM-DD-YYYY');
         this.initialupperlimit = this.data_month.format('MM-DD-YYYY');
         //  *** getting data from db related to this month***  
+
+        this.upperbound = this.initialupperlimit;
+        this.lowerbound = this.dbdate;
+
         this.initialmonthdata(this.dbdate, this.initialupperlimit)
         this.data_month = this.dateB;
 
@@ -105,11 +128,12 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
             this.subcategoryarray = data;
         });
 
-        this.headarrayobservable = Head.find({}).zone();
-        this.headarraySub = MeteorObservable.subscribe('headlist').subscribe();
-        this.headarrayobservable.subscribe((data) => {
-            this.headarraylist = data;
-        });
+        if (this.income) {
+            this.income_id = this.income._id;
+            this.expense_id = this.expense._id
+        }
+        // console.log(this.income_id);
+        // console.log(this.expense_id);
     }
     //  ******** incremented monthly data *****
     csvDataMonthlyPlus() {
@@ -126,6 +150,9 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
         var dbdatelower = this.data_month.format('MM-DD-YYYY');
         var dbdateupperlimit = dateB.format('MM-DD-YYYY');
         //  *** getting data from db related to this month***
+        this.upperbound = dbdateupperlimit;
+        this.lowerbound = dbdatelower;
+
         this.monthdata(dbdatelower, dbdateupperlimit);
     }
 
@@ -143,6 +170,9 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
         var dbdate = dateB.format('MM-DD-YYYY');
 
         //  *** getting data from db related to this month***
+        this.upperbound = dbdateprevious;
+        this.lowerbound = dbdate;
+
         this.monthdata(dbdate, dbdateprevious);
     }
 
@@ -196,6 +226,35 @@ export class CsvTimelineComponent implements OnInit, OnChanges, OnDestroy {
             self.loading = false;
         }, 10000);
     }
+    filterData() {
+        this.loading = true;
+        var sort_order = {};
+        sort_order["Txn_Posted_Date"] = -1;
+        this.csvdata1 = Csvdata.find({
+            $and: [{
+                Assigned_category_id: "not assigned"
+            }, {
+                "Txn_Posted_Date": {
+                    $gte: new Date(this.lowerbound),
+                    $lt: new Date(this.upperbound)
+                }
+            }]
+        }, {
+            sort: sort_order
+        }).zone();
+        var self = this;
+        self.csvdata = null;
+        this.csvdata1.subscribe((data) => {
+            this.ngZone.run(() => {
+                self.csvdata = data;
+                self.loading = false;
+            });
+        });
+        setTimeout(function() {
+            self.loading = false;
+        }, 10000);
+    }
+
     ngOnDestroy() {
         this.csvSub.unsubscribe();
         this.productSub.unsubscribe();

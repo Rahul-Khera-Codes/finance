@@ -44,14 +44,15 @@ class="progress progress-striped active" style="overflow: visible;height: 10px;m
             </div>
             <div class="fc-center">
                 <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
-                <h2>{{ current_year_header }}</h2>
+                <h2>{{ current_year_header }} - {{ current_year + 1 }}</h2>
             </div>
         </div>
     </div>
 </div>
 
 <div>
-  <div style="display: block" class="barchartdiv">
+<!--  <legend>legend</legend> -->
+  <div style="display: block" class="barchartdiv col-md-10">
     <canvas baseChart
             [datasets]="charData"
             [labels]="barChartLabels"

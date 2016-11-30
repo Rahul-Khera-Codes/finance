@@ -50,7 +50,8 @@ export const routes: Route[] = [{
     },
     {
         path: 'csvtimeline',
-        component: CsvTimelineComponent
+        component: CsvTimelineComponent,
+        canActivate: ['canActivateForLoggedIn'],
     }, {
         path: 'csvjson',
         component: CsvJsonComponent

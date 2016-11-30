@@ -65,8 +65,6 @@ export class HeadComponent implements OnInit, OnDestroy {
 
         updateCategory() {
         this.changevalue = this.addForm.controls['head'].value;
-        console.log(this.selectedCategory.head);
-        console.log(this.changevalue);
 
         if (this.changevalue != null) {
             Head.update({
@@ -79,7 +77,6 @@ export class HeadComponent implements OnInit, OnDestroy {
             this.addForm.reset();
             this.selectedCategory = undefined;
         } else {
-            console.log("invalid input");
             this.addForm.reset();
             this.selectedCategory = undefined;
 

@@ -25,14 +25,16 @@
             Details: {{transaction_data["Description"]}} <br> Transaction ID: {{transaction_data['Transaction_ID']}} <br>
             <p *ngIf="transaction_data['ChequeNo'] !=''">Cheque No :{{transaction_data['ChequeNo']}}</p>
             <br>
-            <!--      **** for auto suggest component **** -->
-            <div *ngIf="transaction_data.is_processed==0 && sub_category_array" style="width: 50%; display: inline;">
-                <suggest-option [input]="transaction_data.Description" [id]="transaction_data._id" [child_category_list]="sub_category_array"></suggest-option>
-            </div>
-            <!-- ****this code will show if we are assigned to any category or not****-->
-            <category *ngIf="parent_category_array && sub_category_array" [is_processed]="transaction_data.is_processed" [id]="transaction_data._id" [assigned_category_id]="transaction_data.Assigned_category_id" [Cr_Dr]="transaction_data['Cr/Dr']" [parent_category_list]="parent_category_array" [child_category_list]="sub_category_array">
+            
+            <!-- **** this code will show if we are assigned to any category or not ****-->
+            <category *ngIf="parent_category_array && sub_category_array && transaction_data" [is_processed]="transaction_data.is_processed" [id]="transaction_data._id" [assigned_category_id]="transaction_data.Assigned_category_id" [Cr_Dr]="transaction_data['Cr/Dr']" [parent_category_list]="parent_category_array" [child_category_list]="sub_category_array">
             </category>
+
             <invoice *ngIf="transaction_data['Cr/Dr'] == 'DR'" [input_id]="transaction_data._id" [input_invoice_no]="transaction_data.invoice_no" [input_invoice_description]="transaction_data.invoice_description" [Input_Transaction_ID]="transaction_data.Transaction_ID" [input_linktodrive]="transaction_data.linktodrive">
             </invoice>
+            <!--**** for auto suggest component **** -->
+            <div *ngIf="transaction_data.Assigned_category_id == 'not assigned'" style="width: 50%; display: inline;">
+                <suggest-option *ngIf="sub_category_array" [input]="transaction_data.Description" [id]="transaction_data._id" [child_category_list]="sub_category_array" [parent_category_list]="parent_category_array"></suggest-option>
+            </div>
         </div>
     </div>

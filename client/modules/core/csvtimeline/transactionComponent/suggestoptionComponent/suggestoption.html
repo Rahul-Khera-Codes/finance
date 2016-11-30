@@ -1,6 +1,8 @@
+<hr>
 <button *ngFor="let sugesstion of suggestarray" 
-    (click)="assigncategory(sugesstion._id)"
-    class="btn btn-outline rounded b-info text-info" 
+    (click)="assigncategory(sugesstion.id)"
+    class="btn btn-fw warning" 
     style="margin: 2px;">
-    {{sugesstion.category}}
+    {{sugesstion.parentname}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{sugesstion.category}}
+    
 </button>

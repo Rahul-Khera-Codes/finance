@@ -258,11 +258,11 @@ Meteor.methods({
             var graphdata = {};//array json we will use 
 
             Graphdata.remove({});
-
+                // Title should be FY16-17 which is from april16 to march17
             for (let i = 0; i < all_csvdata.length; i++) {
                 var item = all_csvdata[i];
                 let n: any;
-                
+                let FY: any;
                 // **** put clouse proceed here in if condition*** 
                 let exists_graph: any;
                 let d: any = new Date(item["Txn_Posted_Date"]);
@@ -270,34 +270,48 @@ Meteor.methods({
                 let month_value: number = d.getMonth();
                 let amount: number = accounting.unformat(item["Transaction_Amount(INR)"],".");    
                 amount=Math.round(amount);
-                if(!graphdata[year]){
-                  graphdata[year] = {};
+                if(month_value>2){
+                     FY='FY'+year;
+                }
+                else{
+                     year=year-1;
+                     FY='FY'+year;
+                }
+                if(!graphdata[FY]){
+                  graphdata[FY] = {};
                 }
                 let key;
                     if (item["Assigned_head_id"] == Income) {
-                        key= month[month_value]+'_Income';
-                        
+                        key= month[month_value];
+                         if(!graphdata[FY]['Income']){
+                                   graphdata[FY]['Income'] = {};
+                             }   
+                         if(!graphdata[FY]['Income'][key]){
+                                   graphdata[FY]['Income'][key] = 0;
+                             }
+                        graphdata[FY]['Income'][key] += amount;  
                     } 
                    else if(item["Assigned_head_id"] == Expense) {
-                        key= month[month_value]+'_Expense';       
+                        key= month[month_value];  
+                         if(!graphdata[FY]['Expense']){
+                                   graphdata[FY]['Expense'] = {};
+                              }
+                         if(!graphdata[FY]['Expense'][key]){
+                                   graphdata[FY]['Expense'][key] = 0;
+                              }   
+                        graphdata[FY]['Expense'][key] += amount;       
                     }
                     else{
                         continue;
                     }
 
-                    if(!graphdata[year][key]){
-                      graphdata[year][key] = 0;
-                    }
-                    graphdata[year][key] += amount;  
                     console.log("------------------------");
                     console.log("month"+ ":" + month[month_value]);
                     console.log("transaction id " + item['Transaction_ID']);
                     console.log("description "+ item['Description']);
                     console.log("transaction amount "+ amount);
-                    console.log(key +" = "+ graphdata[year][key]);
                     console.log("assigned head id " + item["Assigned_head_id"]);
                     console.log("------------------------");
-
             }
             Graphdata.insert(graphdata);
              console.log(graphdata);

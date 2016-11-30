@@ -2,6 +2,22 @@
 <div class="progress-bar info" style="width: 125%;">  
 </div>
 </div>
+<div class="white r box-shadow-z0 m-b navbar-md" style="width: 125%;">
+    <div class="navbar ng-scope" style="margin-left: 18px;">
+        <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
+        </a>
+        <div class="navbar-item pull-left ng-binding"  id="pageTitle"><h3>Timeline</h3></div>
+       <div class="nav-item">
+           <a class="nav-link margin66" (click)="filterData()">
+           <span class="mar_top_18 hidden-xs-down btn rounded info _600">Filter</span>
+           </a>
+        </div>
+        <ul class="nav navbar-nav pull-right m-l">
+            <li class="nav-item dropdown">
+            </li>      
+        </ul>
+    </div>
+</div>
 <!-- timeline page calander -->
 <div class="pos-rlt">
     <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed" config="uiConfig.calender" ui-calender="uiConfig.calender">
@@ -39,7 +55,7 @@
                         </li>
                         <li  *ngFor="let transaction_note of csvdata" class="{{transaction_note['Cr/Dr'] === 'DR' ? 'tl-item' : 'tl-item tl-left'}}"> 
                             <!-- **** start from this ****-->
-                            <div transaction [transaction_data]="transaction_note" [sub_category_array]="subcategoryarray" [parent_category_array]="parentcategoryarray" [head_array_transaction_list]="headarraylist">
+                            <div transaction  [transaction_data]="transaction_note" [sub_category_array]="subcategoryarray" [parent_category_array]="parentcategoryarray" [head_array_transaction_list]="headarraylist" [income]="income_id" [expense]="expense_id">
                          </div>
                         </li>
                     </ul>

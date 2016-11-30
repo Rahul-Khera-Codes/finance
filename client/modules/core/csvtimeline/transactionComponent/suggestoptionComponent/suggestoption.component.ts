@@ -9,6 +9,7 @@ import {
 import {
     Meteor
 } from 'meteor/meteor';
+import * as _ from 'lodash';
 import template from './suggestoption.html';
 
 
@@ -22,22 +23,33 @@ export class suggestionComponent implements OnInit{
     allcategoryArray: any;
     category: any;
     n: any;
+    parent_category: any;
     description: string;
     @Input() input: string; // this variable will have input from parent  component
     @Input() id: string;
+    @Input() parent_category_list: any;
     @Input() child_category_list: any;
-    ngOnInit() { 
-        this.description = this.input;
+    ngOnInit() {  
+        this.description = this.input.toLowerCase();
         this.allcategoryArray= this.child_category_list;
             for (let i = 0; i < this.allcategoryArray.length; i++) {
-                this.n = this.description.indexOf(this.allcategoryArray[i].category);
+
+                this.n = this.description.indexOf(this.allcategoryArray[i].category.toLowerCase());
                 if (this.n != -1) {
+                    this.parent_category = _.filter(this.parent_category_list, {"_id": this.allcategoryArray[i].parent_id});
                     this.category = this.allcategoryArray[i];
-                    this.suggestarray.push(this.allcategoryArray[i]);
+                    let suggest={
+                             id:this.allcategoryArray[i]._id,
+                             category:this.allcategoryArray[i].category,
+                             parentname:this.parent_category[0].category
+                             };    
+                    this.suggestarray.push(suggest);
                 }
         }
 }
     assigncategory(category_id: string) {
+        console.log(category_id);
+        console.log(this.id);
         Meteor.call('addCategory', this.id, category_id, (error, response) => {
             if (error) {
                 console.log(error.reason);

@@ -1,4 +1,7 @@
 /* CSS declarations go here */
+.categoryassignedcolor{
+    background-color: #1AA49B;
+}
 .gray_color{
     background-color : #CDC5C5 !important;
 }

@@ -1,9 +1,55 @@
-<div *ngIf="is_processed==1" class="categorymainbox">
-    <a  *ngIf="show_category !=''" class="categoryboxshadow text-u-c btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} " 
+<div class="categorymainbox">
+    <a  *ngIf="!show_category || show_category==''" class="categoryboxshadow text-u-c btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} " 
        data-toggle="modal"  href="#{{id}}">
-       {{show_category[0].category}}
+       Assign Category
     </a>
+    <a  *ngIf="show_category && parent_category" class="categoryboxshadow  btn btn-lab {{Cr_Dr == 'DR' ? 'categoryassignedcolor' : 'category-color-for-blue'}} " data-toggle="modal"  href="#{{id}}">
+       {{parent_category[0].category}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{show_category[0].category}}
+    </a>
+
 <!-- this is the format for calling popup menu -->
+  <div class="modal fade " id="addcategory" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+                <h4 class="modal-title">Add New Category</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addForm" class="box">
+                    <input type="text" placeholder="Enter here for new category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
+                    <br/>
+                    <br/>
+                    <button type="submit" data-dismiss="modal" (click)="addNewCategory()" class="btn btn-primary"> Add </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+ <div class="modal fade " id="addsubcategory" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+                <h4 class="modal-title">Add New Sub Category</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addForm" class="box">
+                    <input type="text" placeholder="Enter here for new category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
+                    <br/>
+                    <br/>
+                    <button type="submit" data-dismiss="modal" (click)="addNewsubCategory(selectedparent_id)" class="btn btn-primary"> Add </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal -->
     <div class="modal fade " id="{{id}}" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -14,7 +60,7 @@
                         <i class="fa fa-times fa-2x" aria-hidden="true">
                         </i>
                     </button>
-                    <h5 class="modal-title">Choose from options to change category </h5>
+                    <h5 class="modal-title">Choose from options for category </h5>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown">
@@ -24,11 +70,17 @@
                             {{Choose_Cateogry}}
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul *ngIf="parent_category_list" class="dropdown-menu">
+                            <li>
+                                <a data-toggle="modal" href="#addcategory"  style="color: blueviolet;">
+                                      <span data-dismiss="modal"> Add New Category </span>
+                                </a>
+                           </li>
+                            <hr style="margin: auto;">
                             <li *ngFor="let category of parent_category_list">
                                 <a  (click)="ParentSelected(category)">{{category.category}}</a>
                             </li>
-                        </ul>
+                        </ul> 
                      </div>
                      <hr/>
                      <div *ngIf="!select_parent">   
@@ -37,6 +89,12 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
+                            <li>
+                                <a data-toggle="modal" href="#addsubcategory" style="color: blueviolet;">
+                                     <span data-dismiss="modal">Add Sub Category</span>
+                                </a>
+                            </li>
+                            <hr style="margin: auto;">
                             <li *ngFor="let category1 of child_list">
                                 <a data-dismiss="modal" (click)="changeCategory(id,category1._id)">{{category1.category}}</a>
                             </li>
@@ -48,3 +106,4 @@
             </div>
         </div>
    </div>
+ 

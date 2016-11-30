@@ -1,7 +1,9 @@
 import {
     Component,
     OnInit,
-    Input
+    Input,
+    OnChanges,
+    NgZone
 } from '@angular/core';
 import {
     UserComponent
@@ -39,32 +41,48 @@ import template from './transaction.html';
     template
 })
 
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, OnChanges {
     Income_id: string;
     Expense_id: string;
     show_head: any;
-    change_color: boolean;
+    change_color: boolean=false;
     @Input() transaction_data: Row;
     @Input() parent_category_array: any;
     @Input() sub_category_array: any;
     @Input() head_array_transaction_list: any;
-
-    constructor() {}
+    @Input() income: any;
+    @Input() expense: any;
+    constructor(private ngZone: NgZone) {}
     ngOnInit() {
-        // if(this.head_array_transaction_list){
-        this.show_head = _.filter(this.head_array_transaction_list, {
-            "head": "Income"
-        });
-        this.Income_id = this.show_head[0]._id;
-
-        this.show_head = _.filter(this.head_array_transaction_list, {
-            "head": "Expense"
-        });
-        this.Expense_id = this.show_head[0]._id;
-        if (this.transaction_data['Assigned_head_id'] != this.Income_id && this.transaction_data['Assigned_head_id'] != this.Expense_id) {
-            this.change_color = true;
-        }
-        // }
+       //  if(this.head_array_transaction_list){
+       //     this.Income_id = this.income;
+       //     this.Expense_id = this.expense;
+       //    var self = this;
+       //  if (this.transaction_data['Assigned_head_id'] != this.Income_id && this.transaction_data['Assigned_head_id'] != this.Expense_id) {
+       //         self.ngZone.run(() => {
+       //                  self.change_color = true;
+       //              });
+       //     console.log(self.change_color);
+       //   }
+       // }
     }
+    ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
+       if(changes["income"]){
+           this.Income_id = changes["income"].currentValue; 
+        }
+       if(changes["expense"]){
+           this.Expense_id = changes["expense"].currentValue;
+        }    
+
+       if(this.transaction_data['Assigned_head_id']!== undefined && this.Income_id!= undefined && this.Expense_id != undefined){
+         if (this.transaction_data['Assigned_head_id'] !== this.Income_id && this.transaction_data['Assigned_head_id'] !== this.Expense_id) {
+                this.change_color = true;
+            }
+            else {
+                this.change_color=false;
+            }
+     } 
+
+ }
 
 }
