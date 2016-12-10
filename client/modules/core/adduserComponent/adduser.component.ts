@@ -59,6 +59,9 @@ export class adduserComponent implements OnInit, OnDestroy {
             console.log("Your session has expired. Please log in again");
             var self = this;
             localStorage.removeItem('login_time');
+            localStorage.removeItem('Meteor.loginToken');
+            localStorage.removeItem('Meteor.loginTokenExpires');
+            localStorage.removeItem('Meteor.userId');
               Meteor.logout(function(error) {
                   if (error) {
                         console.log("ERROR: " + error.reason);

@@ -12,10 +12,23 @@
  -->            <div *ngIf="messageshow == true" class = "alert alert-success">{{successmessage}}</div>
                 <hr>
                 <div class="textinline">
-                    <form>
-                        <input type="file" id="files" name="files[]" style="display: inline;" accept=".csv" required />
-                        <button type="submit" (click)="handleFiles($event)" class="md-btn md-raised m-b-sm w-xs indigo">
+                    <form #uploadForm="ngForm" (ngSubmit)="handleFiles(uploadForm)">
+                        <label for="files">Upload File</label>
+                        <input type="file" id="files" name="files[]" style="display: inline;" accept=".csv" ngModel required />
+                        <label for="account">Select Account</label>
+                        <select name="account" ngModel required>
+                            <option *ngFor="let account of accountlist | async" value="{{account ? account._id : 'No Category Found'}}">{{account.Account_no ? account.Account_no: 'No Category Found'}}</option>
+                        </select>
+                        <label for="DateFormat" style="margin-left: 35px;">Choose Date Format</label>
+                         <select name="DateFormat" ngModel required>
+                            <option value="MM-DD-YYYY h:mm:ss a">MM-DD-YYYY h:mm:ss a</option>
+                            <option value="DD-MM-YYYY h:mm:ss a">DD-MM-YYYY h:mm:ss a</option>
+                        </select>
+                        <br>
+                        <br>
+                        <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo">
                           <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
+
                     </form>
                 </div>
                 <br>

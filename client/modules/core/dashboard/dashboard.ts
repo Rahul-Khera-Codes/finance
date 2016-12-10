@@ -4,6 +4,9 @@ import {
     OnDestroy,
     NgZone
 } from '@angular/core';
+import { 
+    NgForm 
+} from '@angular/forms';
 import {
     Observable
 } from 'rxjs/Observable';
@@ -34,7 +37,8 @@ import template from './dashboardtemplate.html';
 import {
     Graphdata,
     Csvdata,
-    Head
+    Head,
+    Graphlist
 } from '../../../../both/collections/csvdata.collection';
 
 @Component({
@@ -51,8 +55,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     total_expense: number;
     total_income: number;
 
+    //*** adding graph related variables ***
+    firstStep: boolean= true;
+    secondStep: boolean= false;
+    thirdStep: boolean= false;
+    lastStep: boolean= false;
+    showSucessMessageForNewGraph: boolean= false;
+    headAdd: Array<any>=[];
+    newGraph: Observable <any[]>;
+    newGraphSub: Subscription;
+
     income: any;
     expense: any;
+
+    headCompleteList: Observable < any[] >;
     Income: Observable < any[] > ;
     Expense: Observable < any[] > ;
     headSub: Subscription;
@@ -89,6 +105,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
             console.log("Your session has expired. Please log in again");
             var self = this;
             localStorage.removeItem('login_time');
+            localStorage.removeItem('Meteor.loginToken');
+            localStorage.removeItem('Meteor.loginTokenExpires');
+            localStorage.removeItem('Meteor.userId');
               Meteor.logout(function(error) {
                   if (error) {
                         console.log("ERROR: " + error.reason);
@@ -115,7 +134,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             label: 'Income'
         }];
+
+        this.headCompleteList = Head.find({}).zone();
         this.headSub = MeteorObservable.subscribe('headlist').subscribe();
+        
+        this.newGraph = Graphlist.find({}).zone();
+        this.newGraphSub = MeteorObservable.subscribe('graphlist').subscribe();
+
         this.Income = Head.find({
             "head": "Income"
         }).zone();
@@ -293,8 +318,49 @@ export class DashboardComponent implements OnInit, OnDestroy {
             self.processingStart = false;
         }
     }
+
+    // *** new graph adding functions and code ***
+    HeadSelected(){
+        console.log("headSelected called");
+        this.firstStep=false;
+        this.secondStep=true;
+    }
+    pushpophead(value){
+        if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
+            this.headAdd.push(value);
+        }
+        else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
+            let indexx = this.headAdd.indexOf(value);
+            this.headAdd.splice(indexx,1);
+        }
+    }
+    processSecondStep(){
+       this.secondStep=false;
+       this.lastStep=true;
+    }
+    insertNewGraph(form: NgForm){
+        if(form.value.graphname !== '')
+        {
+        Graphlist.insert({
+                "graph_name": form.value.graphname,
+                "graph_head_list": this.headAdd
+            }).zone();
+        this.showSucessMessageForNewGraph=true;
+        setTimeout(()=> { this.showSucessMessageForNewGraph=false;}, 3000);
+        }
+        this.headAdd=[];
+        this.lastStep=false;
+        this.firstStep=true;
+    }
+    clearNewGraphEntry(){
+        this.headAdd=[];
+        this.secondStep=false;
+        this.lastStep=false;
+        this.firstStep=true;
+    }
     ngOnDestroy() {
         this.graphDataSub.unsubscribe();
         this.complete_csvSub.unsubscribe();
+        this.newGraphSub.unsubscribe();
     }
 }

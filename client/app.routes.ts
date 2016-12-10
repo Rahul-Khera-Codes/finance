@@ -26,7 +26,9 @@ import {
 import {
     HeadComponent
 } from './modules/core/headComponent/head.component';
-
+import {
+    AccountComponent
+} from './modules/core/accounts/accounts';
 export const routes: Route[] = [{
     path: '',
     redirectTo: "login",
@@ -64,6 +66,9 @@ export const routes: Route[] = [{
     },{
         path: 'heads',
         component: HeadComponent
+    },{
+        path: 'accounts',
+        component: AccountComponent
     }
     ]
 }];

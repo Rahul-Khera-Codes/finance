@@ -22,15 +22,17 @@
                     <li *ngIf="user && user.profile.role=='admin'">
                         <a routerLink="heads">Add Head</a>
                     </li>
+                      <li *ngIf="user && user.profile.role=='admin'">
+                        <a routerLink="accounts">Add Account</a>
+                    </li>
                     <li *ngIf="user && user.profile.role=='admin'">
                         <a routerLink="adduser">Manage Users</a>
                     </li>
                     <li>
                         <a (click)="logout()">Logout</a>
                     </li>
-                    <li><p style="color: #00BCD4;">Version 0.0.19</p></li>
+                    <li><p style="color: #00BCD4;">Version 0.0.21</p></li>
                 </ul>
-
             </div>
             <!-- /#sidebar-wrapper -->
             <router-outlet></router-outlet>

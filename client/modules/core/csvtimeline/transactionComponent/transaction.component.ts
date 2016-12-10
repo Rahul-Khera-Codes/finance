@@ -48,29 +48,19 @@ export class TransactionComponent implements OnInit, OnChanges {
     show_head: any;
     change_color: boolean=false;
     transaction_time: any;
+    account_code: any;
+    account_codestring: string="************";
     @Input() transaction_data: Row;
     @Input() parent_category_array: any;
     @Input() sub_category_array: any;
     @Input() head_array_transaction_list: any;
     @Input() income: any;
     @Input() expense: any;
+    @Input() listofaccounts: any;
     constructor(private ngZone: NgZone) {}
-    ngOnInit() {
-       // this.transaction_time= moment(this.transaction_data["Value_Date"]);
-       // console.log(this.transaction_time);
-       //  if(this.head_array_transaction_list){
-       //     this.Income_id = this.income;
-       //     this.Expense_id = this.expense;
-       //    var self = this;
-       //  if (this.transaction_data['Assigned_head_id'] != this.Income_id && this.transaction_data['Assigned_head_id'] != this.Expense_id) {
-       //         self.ngZone.run(() => {
-       //                  self.change_color = true;
-       //              });
-       //     console.log(self.change_color);
-       //   }
-       // }
-    }
+    ngOnInit() {}
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
+      // console.log(changes);
        if(changes["income"]){
            this.Income_id = changes["income"].currentValue; 
         }
@@ -85,8 +75,16 @@ export class TransactionComponent implements OnInit, OnChanges {
             else {
                 this.change_color=false;
             }
-     } 
-
+       } 
+       if(changes["listofaccounts"] && changes["listofaccounts"].currentValue && this.transaction_data["AssignedAccountNo"]!== undefined){
+             this.filteraccount();
+       }
+ }
+ filteraccount(){
+     this.account_code = _.filter(this.listofaccounts, {
+                    "_id": this.transaction_data["AssignedAccountNo"]
+                });
+   this.account_codestring = this.account_code[0]? this.account_code[0].Account_no.slice(-4): "processing";
  }
 
 }

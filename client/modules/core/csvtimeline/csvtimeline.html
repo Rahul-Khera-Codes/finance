@@ -2,22 +2,14 @@
 <div class="progress-bar info" style="width: 125%;">  
 </div>
 </div>
-<div class="white r box-shadow-z0 m-b navbar-md" style="width: 125%;">
+<div *ngIf="!loading" class="white r box-shadow-z0 m-b navbar-md" style="width: 125%;">
     <div class="navbar ng-scope" style="margin-left: 18px;">
         <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
         </a>
         <div class="navbar-item pull-left ng-binding"  id="pageTitle"><h3>Timeline</h3></div>
        <div class="nav-item">
-          <!--  <a class=" " (click)="filterData()">
-           <span class="mar_top_18 hidden-xs-down btn rounded info _600">Filter</span>
-           </a> -->
-           <div class="nav-link margin_left_p44 mar_top_18">
-           <label class="md-switch "><input type="checkbox" (click)="filter()"><i class="blue"></i> Unassigned Transactions</label>
-          
-           <label class="md-switch "><input type="checkbox" (click)="filterDataCR()"><i class="blue"></i> Only Credit</label>
-        
-           <label class="md-switch "><input type="checkbox" (click)="filterDataDR()"><i class="blue"></i> Only Debit</label>
-           </div>
+           <div class="nav-link margin_left_p24 mar_top_18">
+           </div>  
         </div>
         <ul class="nav navbar-nav pull-right m-l">
             <li class="nav-item dropdown">
@@ -26,7 +18,7 @@
     </div>
 </div>
 <!-- timeline page calander -->
-<div class="pos-rlt">
+<div *ngIf="!loading" class="pos-rlt">
     <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed" config="uiConfig.calender" ui-calender="uiConfig.calender">
         <div class="fc-toolbar">
             <div class="fc-left">
@@ -51,7 +43,7 @@
 <!-- timeline page calender ends here -->
 
 <!-- Page Content -->
-<div id="page-content-wrapper">
+<div *ngIf="!loading" id="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div>
@@ -62,7 +54,7 @@
                         </li>
                         <li  *ngFor="let transaction_note of csvdata" class="{{transaction_note['Cr/Dr'] === 'DR' ? 'tl-item' : 'tl-item tl-left'}}"> 
                             <!-- **** start from this ****-->
-                            <div transaction  [transaction_data]="transaction_note" [sub_category_array]="subcategoryarray" [parent_category_array]="parentcategoryarray" [head_array_transaction_list]="headarraylist" [income]="income_id" [expense]="expense_id">
+                            <div transaction  [transaction_data]="transaction_note" [sub_category_array]="subcategoryarray" [parent_category_array]="parentcategoryarray" [head_array_transaction_list]="headarraylist" [income]="income_id" [expense]="expense_id" [listofaccounts]="accountlistdata">
                          </div>
                         </li>
                     </ul>
@@ -71,4 +63,49 @@
         </div>
     </div>
 </div>
-
+<div class="switcher box-color dark-white text-color ng-scope" id="sw-theme">
+     <a data-toggle="modal"  href="#filterdata" class="box-color dark-white text-color sw-btn">
+     <i class="fa fa-gear"></i>
+     </a>
+</div>  
+ <div class="modal fade " id="filterdata" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+                <h4 class="modal-title">Timeline Filter Options</h4>
+            </div>
+            <div class="modal-body">
+                <label class="md-switch ">
+                  <input type="checkbox" [(ngModel)]="apply_filter" (click)="filter()"><i class="blue"></i> Unassigned Transactions</label>
+                  <hr/>
+                <label class="md-switch ">
+                     <input type="checkbox" [(ngModel)]="apply_cr_filter" (click)="filterDataCR()"><i class="blue"></i> Only Credit</label>
+                   <hr/>   
+               <label class="md-switch ">
+                     <input type="checkbox"  [(ngModel)]="apply_dr_filter" (click)="filterDataDR()"><i class="blue"></i> Only Debit</label>
+                   <hr/>
+               <label class="md-switch ">
+                     <input type="checkbox"  [(ngModel)]="invoice_filter"  (click)="invoice_filters()"><i class="blue"></i> Invoice Filter</label>
+                   <hr/>          
+               <label class="md-switch">
+                    <input type="checkbox" [(ngModel)]="accountfilter" (click)="filterAccount()">
+                    <i class="blue"></i> Account</label>    
+              <div style="display: inline;">
+              <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
+                 {{Select_account ? 'Account : '+Selected_account_name:'Select Account'}}
+              <span class="caret"></span>
+              </button>
+              <ul *ngIf="accountlist" class="dropdown-menu">
+                    <hr style="margin: auto;">
+                    <li *ngFor="let account of accountlist | async">
+                       <a  (click)="AccountSelected(account)">Account No : {{account ? account.Account_no: 'Account Not Found'}}</a>
+                    </li>
+             </ul> 
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>   

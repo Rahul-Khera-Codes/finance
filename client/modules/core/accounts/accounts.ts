@@ -28,25 +28,25 @@ import {
     Validators
 } from '@angular/forms';
 import {
-    Head
+    Accounts_no
 } from '../../../../both/collections/csvdata.collection';
-import template from './head.html';
+import template from './accountstemplate.html';
 
 @Component({
-    selector: 'heads',
+    selector: 'accounts',
     template
 })
 
-export class HeadComponent implements OnInit, OnDestroy {
-    headlist: Observable < any[] > ;
-    selectedCategory: any;
-    headSub: Subscription;
+export class AccountComponent implements OnInit, OnDestroy {
+    accountlist: Observable < any[] > ;
+    selectedAccount: any;
+    accountSub: Subscription;
     addForm: FormGroup;
     changevalue: string;
     constructor(private formBuilder: FormBuilder, private _router: Router) {}
 
-    onSelect(category: any): void {
-        this.selectedCategory = category;
+    onSelect(accountselect: any): void {
+        this.selectedAccount = accountselect;
     }
 
         ngOnInit() {
@@ -72,43 +72,42 @@ export class HeadComponent implements OnInit, OnDestroy {
             }
         }
 
-        this.headlist = Head.find({}).zone();
-        this.headSub = MeteorObservable.subscribe('headlist').subscribe();
+        this.accountlist = Accounts_no.find({}).zone();
+        this.accountSub = MeteorObservable.subscribe('Accounts_no').subscribe();
 
         this.addForm = this.formBuilder.group({
-            head: ['', Validators.required],
+            Account_no: ['', Validators.required],
         });
     }
 
-        addCategory() {
+        addAccount() {
         if (this.addForm.valid) {
-            Head.insert(this.addForm.value).zone();
+            Accounts_no.insert(this.addForm.value).zone();
             this.addForm.reset();
         }
     }
 
-        updateCategory() {
-        this.changevalue = this.addForm.controls['head'].value;
+        updateAccount() {
+        this.changevalue = this.addForm.controls['Account_no'].value;
 
         if (this.changevalue != null) {
-            Head.update({
-                _id: this.selectedCategory._id
+            Accounts_no.update({
+                _id: this.selectedAccount._id
             }, {
                 $set: {
-                    "head": this.changevalue
+                    "Account_no": this.changevalue
                 }
             }).zone();
             this.addForm.reset();
-            this.selectedCategory = undefined;
+            this.selectedAccount = undefined;
         } else {
             this.addForm.reset();
-            this.selectedCategory = undefined;
-
+            this.selectedAccount = undefined;
         }
     }
 
-        removeCategory(category_id) {
-        Meteor.call('head_remove', category_id, (error, response) => {
+        removeAccount(category_id) {
+        Meteor.call('Account_remove', category_id, (error, response) => {
             if (error) {
                 console.log(error.reason);
             } else {
@@ -116,11 +115,11 @@ export class HeadComponent implements OnInit, OnDestroy {
             }
         });
         this.addForm.reset();
-        this.selectedCategory = "";
+        this.selectedAccount = "";
     }
 
         ngOnDestroy() {
-        this.headSub.unsubscribe();
+        this.accountSub.unsubscribe();
     }
 
 }

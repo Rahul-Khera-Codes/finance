@@ -40,7 +40,9 @@ import {
 import {
    HeadComponent
 } from './core/headComponent/head.component';
-
+import {
+   AccountComponent
+} from './core/accounts/accounts';
 
 export const ALL_DECLARATIONS = [
     DashboardComponent,
@@ -56,5 +58,6 @@ export const ALL_DECLARATIONS = [
     adduserComponent,
     TemplateComponent,
     HeadComponent,
-    ChangeHeadComponent
+    ChangeHeadComponent,
+    AccountComponent
 ];

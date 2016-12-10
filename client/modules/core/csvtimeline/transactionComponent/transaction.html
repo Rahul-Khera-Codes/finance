@@ -5,7 +5,6 @@
         <span class="arrow left pull-top {{transaction_data['Cr/Dr'] === 'DR' ? 'b-white' : 'b-info  hidden-left '}}"></span>
         <span *ngIf="transaction_data['Cr/Dr'] !== 'DR'" class="arrow b-info right pull-top visible-left"></span>
         <div class="p-x m-b-sm text-lt" style="display: inline;">
-
             Transaction Amount: {{transaction_data["Transaction_Amount(INR)"]}} INR ({{transaction_data["Cr/Dr"]}})
 
             <div class="dropdown dropdownstyles">
@@ -22,6 +21,7 @@
         </div>
 
         <div class=" b-t b-light p-a">
+            Account No : ******{{account_codestring}}<br>
             Details: {{transaction_data["Description"]}} <br> Transaction ID: {{transaction_data['Transaction_ID']}} <br>
             <p *ngIf="transaction_data['ChequeNo'] !=''">Cheque No :{{transaction_data['ChequeNo']}}</p>
             <br>

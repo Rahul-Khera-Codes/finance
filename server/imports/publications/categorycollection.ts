@@ -4,7 +4,9 @@ import {
     Users,
     Graphdata,
     Subcategory,
-    Head
+    Head,
+    Accounts_no,
+    Graphlist
 } from '../../../both/collections/csvdata.collection';
 import {
     Meteor
@@ -53,6 +55,13 @@ if (Meteor.isServer) {
         }
 
     });
+      Meteor.publish('graphlist', function(){
+        if (Roles.userIsInRole(this.userId, 'admin')) {
+            return Graphlist.find({});
+        } else {
+            this.ready()
+        }
+    });
 
     Meteor.publish('Productcategory', function() {
         var product_order = {};
@@ -75,6 +84,14 @@ if (Meteor.isServer) {
     Meteor.publish('headlist', function() {
           // if (Roles.userIsInRole(this.userId, 'admin')) {
                return Head.find({});
+        // } else {
+        //     this.ready()
+        // }
+    });
+
+    Meteor.publish('Accounts_no', function() {
+          // if (Roles.userIsInRole(this.userId, 'admin')) {
+               return Accounts_no.find({});
         // } else {
         //     this.ready()
         // }

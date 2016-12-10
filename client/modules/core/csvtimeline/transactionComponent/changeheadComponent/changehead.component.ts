@@ -44,6 +44,8 @@ export class ChangeHeadComponent implements OnInit, OnDestroy, OnChanges {
     ngOnInit() {   
       if(this.assigned_head_id) {     
          this.show_head=_.filter(this.headlist,{"_id": this.assigned_head_id});
+      }else{
+        console.log('assign head id not found');
       }
     }
     changeHead(newhead_id) {

@@ -27,7 +27,7 @@ class="progress progress-striped active" style="overflow: visible;height: 10px;m
 <div class="progress-bar info" style="width: 125%;">  
 </div>
 </div>
-<div class="pos-rlt">
+<div *ngIf="!processingStart && !processingYearStart" class="pos-rlt">
     <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed" config="uiConfig.calender" ui-calender="uiConfig.calender">
         <div class="fc-toolbar">
             <div class="fc-left">
@@ -50,7 +50,7 @@ class="progress progress-striped active" style="overflow: visible;height: 10px;m
     </div>
 </div>
 
-<div>
+<div *ngIf="!processingStart && !processingYearStart" >
 <!--  <legend>legend</legend> -->
   <div style="display: block" class="barchartdiv col-md-10">
     <canvas baseChart
@@ -74,16 +74,50 @@ class="progress progress-striped active" style="overflow: visible;height: 10px;m
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="clearNewGraphEntry()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
         <h4 class="modal-title" id="myModalLabel">New Graph</h4>
+        <div *ngIf="!!showSucessMessageForNewGraph">
+            <br/>
+            <div class ="alert alert-success">New Graph Added successfully</div>
+        </div>
       </div>
-      <div class="modal-body">
-       <h3> add your content here</h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Next</button>
-      </div>
+          <div class="modal-body">
+                    <div class="dropdown" style="position:inherit;top: 48%;left:38%;">
+                      <div *ngIf="!!firstStep">
+                        <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
+                            Choose Option
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a  (click)="HeadSelected()">Head Graph</a>
+                            </li>
+                        </ul> 
+                        <br/>
+                       </div>
+                    </div>  
+
+                    <!-- **** this will show all heads ****  -->
+                    <div *ngIf="secondStep">
+                         <label *ngFor="let headOption of headCompleteList | async" class="label_space md-switch">
+                              <h5 class="switchinline">{{headOption.head}}</h5>
+                              <input type="checkbox" value="{{headOption._id}}" (change)="pushpophead(headOption._id)" id="{{headOption._id}}"> <i class="blue"></i>
+                         </label>
+                         <br>
+                         <br>
+                        <button type="button" class="btn btn-primary next_position"  (click)="processSecondStep()" >Next</button>
+                    </div>
+                    <div *ngIf="lastStep">
+                      <form #graphName="ngForm" (ngSubmit)="insertNewGraph(graphName)">
+                      <input type="text" placeholder="Enter Graph Name" name="graphname" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" id="graphname" ngModel required/>
+                      <br>
+                      <br>
+                      <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="insertNewGraph(graphName)">Save</button>
+                      <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="clearNewGraphEntry()">Cancel</button>
+                    </div>
+           </div>
+        <div *ngIf="!!firstStep" class="modal-footer">
+        </div>
     </div>
   </div>
 </div>
