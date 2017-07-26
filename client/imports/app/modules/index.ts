@@ -33,6 +33,9 @@ import {
     LoginComponent
 } from './loginComponent/login.component';
 import {
+    ResetPasswordComponent
+} from './reset/resetpass.component';
+import {
     adduserComponent
 } from './core/adduserComponent/adduser.component';
 import {
@@ -113,7 +116,6 @@ export const ALL_DECLARATIONS = [
     HeadComponent,
     ReportByCategoryComponent,
     ChangeHeadComponent,
-    AccountComponent
+    AccountComponent,
+	ResetPasswordComponent
 ];
-
-

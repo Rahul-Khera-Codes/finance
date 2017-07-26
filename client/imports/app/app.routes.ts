@@ -18,6 +18,9 @@ import {
     LoginComponent
 } from './modules/loginComponent/login.component';
 import {
+    ResetPasswordComponent
+} from './modules/reset/resetpass.component';
+import {
     adduserComponent
 } from './modules/core/adduserComponent/adduser.component';
 import {
@@ -72,6 +75,10 @@ export const routes: Route[] = [{
 {
     path: 'login',
     component: LoginComponent
+},
+{
+    path: 'reset-password/:token',
+	component: ResetPasswordComponent
 },
 {
     path: 'csvtemplate',

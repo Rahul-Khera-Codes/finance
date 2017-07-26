@@ -28,7 +28,9 @@ import template from './login.html';
 
 export class LoginComponent implements OnInit {
     addForm: FormGroup;
+	resetEmailForm:FormGroup;
     email: string;
+	resetEmail:string;
     password: string;
     message: string;
     showmessage: boolean = false;
@@ -53,10 +55,13 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['csvtemplate/csvtimeline',this.current_month,this.current_year]);
         }
         this.getYears(-10, 10);// get Year function will give us list of 10 years date from current date.
-        this.addForm = this.formBuilder.group({// this is the form used to take input at login 
+        this.addForm = this.formBuilder.group({// this is the form used to take input at login
             email: ['', Validators.required],
             password: ['', Validators.required],
             FYYear: ['Select Financial Year', Validators.required]// option to select financial year
+        });
+		this.resetEmailForm = this.formBuilder.group({// this is the form used to take email to reset password
+            email: ['', Validators.required]
         });
 
         this.loginprocess = false;
@@ -67,7 +72,7 @@ export class LoginComponent implements OnInit {
         for (var i = 0; i < range + 1; i++){
             this.years.push(this.current_year + offset + i);
         }
-    } 
+    }
 
     // function called when we enter our login detail and click login
     login() {
@@ -104,4 +109,20 @@ export class LoginComponent implements OnInit {
             }
         }
     }
+
+	//function called when click to forgot password
+	forgotUserPassword(){
+	this.resetEmail = this.resetEmailForm.controls['email'].value;// taking out email value
+		Accounts.forgotPassword({email: this.resetEmail}, function(res) {
+		    if (res) {
+		      if (res.message === 'User not found [403]') {
+		        alert('This email does not exist.');
+		      } else {
+		        alert('We are sorry but something went wrong.');
+		      }
+		    } else {
+		      alert('Email Sent. Check your mailbox.');
+		    }
+		  });
+	}
 }
