@@ -19,7 +19,7 @@ import {
 import {
     accounting
 } from 'meteor/iain:accounting';
-import {  // importing all collection into server 
+import {  // importing all collection into server
     Csvdata,
     Productcategory,
     Users,
@@ -50,7 +50,7 @@ Meteor.startup(() => {
         return next();
     });
 
-    // function use for loading initial values in our app when our app starts 
+    // function use for loading initial values in our app when our app starts
     loadinitialheads();
     // getnewemails();
     //** add below method if you want reminder emails

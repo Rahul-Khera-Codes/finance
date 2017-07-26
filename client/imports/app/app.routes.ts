@@ -2,8 +2,8 @@
 import {
     Route
 } from '@angular/router';
-import { 
-    Meteor 
+import {
+    Meteor
 } from 'meteor/meteor';
 import {
     CsvTimelineComponent
@@ -68,11 +68,11 @@ export const routes: Route[] = [{
     path: '',
     redirectTo: "login",
     pathMatch: "full"
-}, 
+},
 {
     path: 'login',
     component: LoginComponent
-}, 
+},
 {
     path: 'csvtemplate',
     component: TemplateComponent,
@@ -81,7 +81,7 @@ export const routes: Route[] = [{
     // {
     //     path: '',
     //     redirectTo: 'dashboard'
-    // }, 
+    // },
     {
         path:'dashboard',
         component: DashboardComponent
@@ -159,5 +159,3 @@ export const ROUTES_PROVIDERS = [{
   provide: 'canActivateForLoggedIn',
   useValue: () => !! Meteor.userId()
 }];
-
-
