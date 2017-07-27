@@ -24,19 +24,51 @@
                         <label>Password</label>
                     </div>
                     <div class="md-form-group">
-                         <select class="form-control c-select" style="width: 90% !important;" formControlName="FYYear" name="FYYear">
-                                 <option> Select Financial Year </option>
-                                 <option *ngFor="let year of years" [value]="year">{{year}} - {{year + 1}}</option>
-                         </select>
+                        <select class="form-control c-select" style="width: 90% !important;" formControlName="FYYear" name="FYYear">
+                            <option> Select Financial Year </option>
+                            <option *ngFor="let year of years" [value]="year">{{year}} - {{year + 1}}</option>
+                        </select>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-block p-x-md loginsubmitbutton">
-                        <img *ngIf="loginprocess==true" class="buttonimage" src="images/login.gif">   <i class="fa fa-user" aria-hidden="true"></i>  Sign in
+                        <img *ngIf="loginprocess==true" class="buttonimage" src="images/login.gif"> <i class="fa fa-user" aria-hidden="true"></i> Sign in
                     </button>
                 </form>
+                <div class="link">
+                    <a class="forgotPass" data-target="#pwdModal" data-toggle="modal">Forgot Password</a>
+                </div>
             </div>
             <div class="p-v-lg text-center">
-                <p style="color: #00BCD4;">Version 0.0.93</p>
+                <p style="color: #00BCD4;">Version 0.0.94</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal-->
+
+<div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content col-md-6 col-md-offset-3">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h5 class="text-center">Reset Password</h5>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+                    <form [formGroup]="resetEmailForm" (ngSubmit)="forgotUserPassword()">
+                        <div class="md-form-group float-label">
+                            <input type="email" name="resetEmail" class="md-input" formControlName="email">
+                            <label>Email</label>
+                        </div>
+                        <button type="submit" class="btn btn-block p-x-md resetbutton">Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
             </div>
         </div>
     </div>

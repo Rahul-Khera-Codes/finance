@@ -35,7 +35,7 @@
 .invoiceinputfileonesline {
     float: right;
 }
-.handleoverflowincsvtimelinenote { 
+.handleoverflowincsvtimelinenote {
   }
 
 .centerbuttoninsmallscreen {
@@ -91,7 +91,7 @@
 }
 .margin_left_p24{
       margin-left: 15%;
-} 
+}
 .margin_left_p44{
       margin-left: 44%;
 }
@@ -144,7 +144,7 @@
     box-shadow: 2px 2px 2px #578288;
 }
 .categorymainbox{
-    width: 50%; 
+    width: 50%;
     display: inline;
 }
 .dropdownstyles{
@@ -181,6 +181,18 @@
 .fntsize-16{
     font-size: 16px;
 }
+.link{
+	margin-top: 10px;
+	text-align: center;
+}
+.forgotPass:hover,.forgotPass:focus{
+	color: #00BCD4;
+	background-color: #ddd;
+}
+.forgotPass{
+	color: #00BCD4;
+	font-size: 14px;
+}
 .fntsize-18{
     font-size: 18px;
 }
@@ -211,6 +223,11 @@
     height: auto;
 }
 .loginsubmitbutton{
+    height: 44px;
+    background-color: #00BCD4;
+    color: white;
+}
+.resetbutton{
     height: 44px;
     background-color: #00BCD4;
     color: white;
@@ -487,7 +504,7 @@ body {
    .margin-for-graph {
      margin-left: 0px;
     }
-    
+
    .left-position-45{
     left: 34.5%;
     display: flex;
@@ -516,14 +533,14 @@ body {
     }
 
     .left-position-36 {
-       left: 34.5%; 
+       left: 34.5%;
     }
 
    .form-control{
       /*width: 82%;*/
       max-width: 100%;
-   }    
-   
+   }
+
    .left-position-48-formobile {
     left: 37.5%;
    }
@@ -535,7 +552,7 @@ body {
    .max-width-82 {
        max-width: 82%;
    }
-   
+
    .centerbuttoninsmallscreen{
      position: inherit;
       left: 28%;
@@ -547,11 +564,11 @@ body {
     position: inherit;
     padding: 15px;
    }
-   
+
    .w-auto-xs {
     width: 100%;
    }
-   
+
    .dropdownstyles{
     float: none;
     display: table;
@@ -559,23 +576,23 @@ body {
     margin-top: 3px;
     margin: auto;
    }
-   
+
    .handleoverflowincsvtimelinenote{
     overflow: auto;
    }
-   
+
    .categoryboxshadow {
     margin-bottom: 5px;
    }
-   
+
    .timeline-center .tl-left .tl-wrap {
-     float: none; 
+     float: none;
    }
-    
+
     .btn-lab {
      font-size: 50%;
     }
-    
+
     .invoicestyle1 {
       display: inline;
       float: none;
@@ -593,7 +610,7 @@ body {
    .adduserbuttons {
       margin-left: 24%;
     }
-}  
+}
 
 
    /******** modified color css *******/
@@ -602,7 +619,7 @@ body {
    }
 
 @media(min-width:768px) {
-     
+
     .timeline-center .tl-left .tl-wrap {
          float: right;
     }
@@ -646,7 +663,7 @@ body {
     }
 }
 
-// flatfull design button 
+// flatfull design button
 
 .md-btn.md-fab, .md-btn.md-raised:not([disabled]) {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
@@ -2422,7 +2439,7 @@ a.list-group-item.hover,a.list-group-item:focus,a.list-group-item:hover{
         .scroll{width:13.75rem}
         .app-aside.lg:not(.hide)~.app-content{margin-left:13.75rem}
         .app-aside.sm:not(.folded),
-        .app-aside.sm:not(.folded) 
+        .app-aside.sm:not(.folded)
         .scroll{width:11.25rem}
         .app-aside.sm:not(.hide)~.app-content{margin-left:11.25rem}
         .app-aside.folded{width:4rem}
@@ -6189,7 +6206,7 @@ previous button's border...
     border-right: 0 hidden transparent;
 
     /* no bottom borders on rows */
-    border-bottom: 0 hidden transparent; 
+    border-bottom: 0 hidden transparent;
 }
 
 .fc-row:first-child table {
@@ -6867,7 +6884,7 @@ be a descendant of the grid when it is being dragged.
     font-weight: normal;
 }
 
-.fc-view .fc-day-header{    
+.fc-view .fc-day-header{
     padding: 4px 4px;
 }
 
@@ -6916,7 +6933,7 @@ be a descendant of the grid when it is being dragged.
 .fc-overlay.right{
     left: auto;
     right: 100%;
-    top: -15px; 
+    top: -15px;
     padding: 0 10px;
     margin: 0;
 }
