@@ -12,7 +12,7 @@
                     </li>
                     <li *ngIf="user && user.roles && user.roles[0]=='admin'">
                         <a routerLink="dashboard">Dashboard</a>
-                    </li> 
+                    </li>
                     <li>
                         <a [routerLink]="['csvtimeline',current_month,current_year]">CSV Timeline </a>
                     </li>
@@ -60,7 +60,7 @@
                     <li>
                         <a (click)="logout()">Logout</a>
                     </li>
-                    <li><p style="color: #00BCD4;">Version 0.0.93</p></li>
+                    <li><p style="color: #00BCD4;">Version 0.0.94</p></li>
                 </ul>
             </div>
             <!-- /#sidebar-wrapper -->

@@ -5,8 +5,8 @@ import {
     OnInit,
     NgZone
 } from '@angular/core';
-import { 
-    InjectUser 
+import {
+    InjectUser
 } from 'angular2-meteor-accounts-ui';
 import {
     Router
@@ -48,7 +48,7 @@ export class CompleteInvoices implements OnInit {
     allPendingInvoicesData: any;
     monthvalue: any;
     yearvalue: any;
-    month: string[] = ["January","February","March","April","May","June","July","August","September","October","November","December"]; 
+    month: string[] = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     constructor( private ngZone: NgZone, private _router: Router) {}
 
     ngOnInit() {
@@ -59,7 +59,7 @@ export class CompleteInvoices implements OnInit {
         this.yearvalue = this.date.year();// extracting current year value
         this.currentyear = parseInt(this.date.format('YYYY'));// gettting 4 digit year value
         if(parseInt(this.date.format('MM')) > 3)// checking FY using if condition
-        {    
+        {
              this.currentyearsearch = '04-01-'+this.currentyear;
              this.nextyear = this.currentyear + 1;
              this.nextyearsearch = '04-01-'+ this.nextyear;
@@ -67,18 +67,18 @@ export class CompleteInvoices implements OnInit {
         else{
              this.nextyear = this.currentyear;
              this.nextyearsearch = '04-01-'+ this.nextyear;
-             this.currentyearsearch = '04-01-'+ --this.currentyear;      
+             this.currentyearsearch = '04-01-'+ --this.currentyear;
         }
         this.loadPendingInvoices(this.currentyearsearch,this.nextyearsearch);// for loading all pending invoice list
-    } 
-    // this function will loading all pending invoice of current year. 
+    }
+    // this function will loading all pending invoice of current year.
     loadPendingInvoices(currentyear,nextyear){
         this.loading=true;
         MeteorObservable.call("completeinvoiceloading",currentyear,nextyear).subscribe(
           (response) => {
               var self=this;
             self.ngZone.run(() => {
-                 // console.log(response);
+                 console.log(response);
                   self.allPendingInvoicesData=response;
                   self.extractMonthWiseData();// after receiving data from about meteor method we call this function to format our data.
                   self.loading=false;
@@ -127,6 +127,6 @@ export class CompleteInvoices implements OnInit {
            this.nextyear = ++this.nextyear;
            this.nextyearsearch = '04-01-'+ this.nextyear;
            this.loading=true;
-           this.loadPendingInvoices(this.currentyearsearch,this.nextyearsearch);     
+           this.loadPendingInvoices(this.currentyearsearch,this.nextyearsearch);
     }
 }
