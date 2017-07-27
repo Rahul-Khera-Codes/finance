@@ -112,6 +112,7 @@ export class LoginComponent implements OnInit {
 
 	//function called when click to forgot password
 	forgotUserPassword(){
+	var self=this;
 	this.resetEmail = this.resetEmailForm.controls['email'].value;// taking out email value
 		Accounts.forgotPassword({email: this.resetEmail}, function(res) {
 		    if (res) {
@@ -119,9 +120,11 @@ export class LoginComponent implements OnInit {
 		        alert('This email does not exist.');
 		      } else {
 		        alert('We are sorry but something went wrong.');
+				console.log(res)
 		      }
 		    } else {
-		      alert('Email Sent. Check your mailbox.');
+				alert('Email Sent. Check your mailbox.');
+				this.location.reload();
 		    }
 		  });
 	}

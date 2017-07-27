@@ -57,7 +57,6 @@ export class ResetPasswordComponent implements OnInit {
 		var self=this;
 		this.password = this.resetPasswordForm.controls['password'].value;// taking out password value
 		this.confirmPassword = this.resetPasswordForm.controls['confirmPassword'].value;// taking out confirmPassword value
-		console.log(this.token_id, this.password,this.confirmPassword);
 
 		if(this.password!='' && this.confirmPassword!=''){
 			this.showmessage=false;
@@ -69,8 +68,13 @@ export class ResetPasswordComponent implements OnInit {
 					}
 					else {
 						alert('Your password has been successfully changed. Welcome back!');
-						localStorage.clear();
-						self._router.navigate(['/login']);// we are naviagating user back to login page.
+						Meteor.logout(function(error) {
+				            if (error) {
+				                console.log("ERROR: " + error.reason);
+				            } else {
+				                self._router.navigate(['/login']);// we are naviagating user back to login page.
+				            }
+				        });
 		             }
 				});
 			}
