@@ -1,13 +1,13 @@
-<!-- ****add this to button if you want to show assign doc to user --> 
+<!-- ****add this to button if you want to show assign doc to user -->
 <div *ngIf="user && user.roles && user.roles[0]==='admin'">
-<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 10px;" >
-    {{ assigned_user=="not_assigned"? "Assign User":assigned_user}}
-    <span class="caret"></span>
-</button>
-<ul class="dropdown-menu">
-    <!--**** this part will show all the category ****-->
-    <li *ngFor="let user of listofusers">
-        <a (click)="assignTransDocToUser(id,user._id, user.username, user.emails[0].address)">{{user.username}}</a>
-    </li>
-</ul>
+   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 10px;" >
+   {{ assigned_user=="not_assigned"? "Assign User":assigned_user}}
+   <span class="caret"></span>
+   </button>
+   <ul class="dropdown-menu">
+      <!--**** this part will show all the category ****-->
+      <li *ngFor="let user of listofusers">
+         <a (click)="assignTransDocToUser(id,user._id, user.username, user.emails[0].address)">{{user.username}}</a>
+      </li>
+   </ul>
 </div>

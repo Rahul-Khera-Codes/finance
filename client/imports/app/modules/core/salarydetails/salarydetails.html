@@ -1,32 +1,28 @@
 <!-- timeline page head timeline bar -->
-
 <div *ngIf="uploading" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
-<div class="progress-bar info" style="width: 125%;">  
-</div>
+   <div class="progress-bar info" style="width: 125%;">  </div>
 </div>
 <div id="page-content-wrapper" >
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12">
             <div *ngIf="messageshow == true" class = "alert alert-success">{{successmessage}}</div>
-                <hr>
-                <div class="textinline">
-                    <form #uploadForm="ngForm" (ngSubmit)="handleFiles(uploadForm)">
-                        <label for="files">Upload File</label>
-                        <input type="file" id="files" name="files[]" style="display: inline;" ngModel required />
-                       <label for="account">Select Date</label>
-                             <input type="date" name="monthfile" ngModel required />
-                        <br>
-                        <br>
-                        <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo">
-                          <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
-                    </form>
-                </div>
-                <br>
-                <br>
+            <hr>
+            <div class="textinline">
+               <form #uploadForm="ngForm" (ngSubmit)="handleFiles(uploadForm)">
+               <label for="files">Upload File</label>
+               <input type="file" id="files" name="files[]" style="display: inline;" ngModel required />
+               <label for="account">Select Date</label>
+               <input type="date" name="monthfile" ngModel required />
+               <br>
+               <br>
+               <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo">
+               <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
+               </form>
             </div>
-        </div>
-    </div>
-   
+            <br>
+            <br>
+         </div>
+      </div>
+   </div>
 </div>
-

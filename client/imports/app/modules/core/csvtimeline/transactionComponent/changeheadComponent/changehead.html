@@ -1,44 +1,41 @@
-
-    <a *ngIf="!!show_head && user && user.profile.role=='admin'" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} " 
-       data-toggle="modal"  href="#{{id}}-tag">
-       {{show_head[0] ? show_head[0].head : 'choose'}}
-    </a>
-
-    <a *ngIf="!!show_head && user && user.profile.role=='CA'" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} " 
-       data-toggle="modal">
-       {{show_head[0] ? show_head[0].head : 'Not Available'}}
-    </a>
+<a *ngIf="!!show_head && user && user.profile.role=='admin'" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} "
+   data-toggle="modal"  href="#{{id}}-tag">
+{{show_head[0] ? show_head[0].head : 'choose'}}
+</a>
+<a *ngIf="!!show_head && user && user.profile.role=='CA'" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} "
+   data-toggle="modal">
+{{show_head[0] ? show_head[0].head : 'Not Available'}}
+</a>
 <!-- this is the format for calling popup menu -->
 <!-- Modal -->
-    <div class="modal fade " id="{{id}}-tag" role="dialog">
-        <div class="modal-dialog modal-sm">
-   <!--          Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <i class="fa fa-times fa-2x" aria-hidden="true">
-                        </i>
-                    </button>
-                    <h5 class="modal-title"> Choose from options for head </h5>
-                </div>
-                <div class="modal-body">
-                    <div class="dropdown">
-                   <!--  *** parent category select *** -->
-                    <div>
-                        <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
-                            Choose
-                            <span class="caret"></span>
-                        </button>
-                        <ul *ngIf="!!show_head" class="dropdown-menu">
-                            <li *ngFor="let headvalue of headlist">
-                                <a data-dismiss="modal" (click)="changeHead(headvalue._id)">{{headvalue.head}}</a>
-                            </li>
-                        </ul>
-                     </div>
-                     <hr/>
-                    </div>                              
-                  </div>
+<div class="modal fade " id="{{id}}-tag" role="dialog">
+   <div class="modal-dialog modal-sm">
+      <!--          Modal content -->
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+            <i class="fa fa-times fa-2x" aria-hidden="true">
+            </i>
+            </button>
+            <h5 class="modal-title"> Choose from options for head </h5>
+         </div>
+         <div class="modal-body">
+            <div class="dropdown">
+               <!--  *** parent category select *** -->
+               <div>
+                  <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
+                  Choose
+                  <span class="caret"></span>
+                  </button>
+                  <ul *ngIf="!!show_head" class="dropdown-menu">
+                     <li *ngFor="let headvalue of headlist">
+                        <a data-dismiss="modal" (click)="changeHead(headvalue._id)">{{headvalue.head}}</a>
+                     </li>
+                  </ul>
                </div>
+               <hr/>
             </div>
-        </div>
- 
+         </div>
+      </div>
+   </div>
+</div>

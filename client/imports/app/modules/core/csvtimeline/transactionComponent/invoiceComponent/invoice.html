@@ -1,136 +1,132 @@
 <!--****** this block is for invoice info add *****-->
 <div class="invoicestyle1">
-    <a *ngIf="user && user.profile.role!='guest'" class="invoicelinkstyle text-u-c btn btn-lab"
-       data-toggle="modal" href="#{{Input_Transaction_ID}}">Invoice</a>
-    <!--this is the format for calling popup menu--> 
-    <!--    Modal when no value in invoice-->
-    <div *ngIf="input_invoice_no=='not_assigned'">
-        <div class="modal fade " id="{{Input_Transaction_ID}}" role="dialog">
-            <div class="modal-dialog modal-sm">
+   <a *ngIf="user && user.profile.role!='guest'" class="invoicelinkstyle text-u-c btn btn-lab"
+      data-toggle="modal" href="#{{Input_Transaction_ID}}">Invoice</a>
+   <!--this is the format for calling popup menu-->
+   <!--    Modal when no value in invoice-->
+   <div *ngIf="input_invoice_no=='not_assigned'">
+      <div class="modal fade " id="{{Input_Transaction_ID}}" role="dialog">
+         <div class="modal-dialog modal-sm">
             <!--     Modal content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                        <h5 class="modal-title">Enter details of Invoice</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form [formGroup]="addForm" class="box">
-                            <input type="text" placeholder="Enter Invoice No" value=" " formControlName="invoice_no"
-                                   class="form-control no-border no-bg box-shadow-z0 addproductinput" />
-                            <input type="text" placeholder="Enter File No" value=" " formControlName="file_no"
-                                   class="form-control no-border no-bg box-shadow-z0 addproductinput" />       
-                            <textarea rows="6" cols="10" placeholder="Description" value=" " formControlName="description"
-                                      class="form-control no-border no-bg box-shadow-z0 addproductinputtextarea">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                  <i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+                  <h5 class="modal-title">Enter details of Invoice</h5>
+               </div>
+               <div class="modal-body">
+                  <form [formGroup]="addForm" class="box">
+                     <input type="text" placeholder="Enter Invoice No" value=" " formControlName="invoice_no"
+                        class="form-control no-border no-bg box-shadow-z0 addproductinput" />
+                     <input type="text" placeholder="Enter File No" value=" " formControlName="file_no"
+                        class="form-control no-border no-bg box-shadow-z0 addproductinput" />
+                     <textarea rows="6" cols="10" placeholder="Description" value=" " formControlName="description"
+                        class="form-control no-border no-bg box-shadow-z0 addproductinputtextarea">
                             </textarea>
-                            <div formArrayName="linktodrive">
-                                <div *ngFor="let address of addForm.controls.linktodrive.controls; let i=index">
-                                    <div>
-                                        <span>Link {{i + 1}}</span>
-                                        <span *ngIf="addForm.controls.linktodrive.controls.length > 1" 
-                                            (click)="removeLink(i)">
-                                        </span>
-                                    </div>
-                                    <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
-                                    <div [formGroupName]="i">                                                                                                                                            
-                                        <input type="text" placeholder="Enter Link" formControlName="linkAddress"  class="form-control no-border no-bg box-shadow-z0 addproductinput">                                                                                 
-                                    </div>
-                                </div>
-                                <br/>
-                                <div>
-                                    <a (click)="addLink()" class="invoiceaddcruser">
-                                        Add More Link +
-                                    </a>
-                                </div>
-                            </div>
-                            <br/>
-                            <br/>
-                            <button type="submit" data-dismiss="modal" (click)="addInvoice(input_id)" class="btn btn-primary">
-                                <i class="fa fa-plus" aria-hidden="true"></i>  Add</button>
-                        </form>   
-                    </div>
-                </div>
-            </div>                              
-        </div>
-    </div>   
-    <!--    **** modal when invoice value is already assiged ****-->
-    <div *ngIf="input_invoice_no!=='not_assigned'">
-        <div class="modal fade " id="{{Input_Transaction_ID}}" role="dialog">
-            <div class="modal-dialog modal-sm">
-              <!--   Modal content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                        <h5 class="modal-title">Enter details of Invoice</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form [formGroup]="addForm" class="box">
-                            <input type="text" placeholder="Enter Invoice No" [value]="input_invoice_no" formControlName="invoice_no"
-                                   class="form-control no-border no-bg box-shadow-z0 addproductinput" 
-                                   />
-                            <input type="text" placeholder="Enter File No" [value]="input_file_no" formControlName="file_no"
-                                   class="form-control no-border no-bg box-shadow-z0 addproductinput" />          
-                            <textarea rows="6" cols="10" placeholder="Description" [value]="input_invoice_description" formControlName="description"
-                                      class="form-control no-border no-bg box-shadow-z0 addproductinputtextarea">
+                     <div formArrayName="linktodrive">
+                        <div *ngFor="let address of addForm.controls.linktodrive.controls; let i=index">
+                           <div>
+                              <span>Link {{i + 1}}</span>
+                              <span *ngIf="addForm.controls.linktodrive.controls.length > 1"
+                              (click)="removeLink(i)">
+                              </span>
+                           </div>
+                           <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                           <div [formGroupName]="i">
+                              <input type="text" placeholder="Enter Link" formControlName="linkAddress"  class="form-control no-border no-bg box-shadow-z0 addproductinput">
+                           </div>
+                        </div>
+                        <br/>
+                        <div>
+                           <a (click)="addLink()" class="invoiceaddcruser">
+                           Add More Link +
+                           </a>
+                        </div>
+                     </div>
+                     <br/>
+                     <br/>
+                     <button type="submit" data-dismiss="modal" (click)="addInvoice(input_id)" class="btn btn-primary">
+                     <i class="fa fa-plus" aria-hidden="true"></i>  Add</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--    **** modal when invoice value is already assiged ****-->
+   <div *ngIf="input_invoice_no!=='not_assigned'">
+      <div class="modal fade " id="{{Input_Transaction_ID}}" role="dialog">
+         <div class="modal-dialog modal-sm">
+            <!--   Modal content -->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                  <i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+                  <h5 class="modal-title">Enter details of Invoice</h5>
+               </div>
+               <div class="modal-body">
+                  <form [formGroup]="addForm" class="box">
+                     <input type="text" placeholder="Enter Invoice No" [value]="input_invoice_no" formControlName="invoice_no"
+                        class="form-control no-border no-bg box-shadow-z0 addproductinput"
+                        />
+                     <input type="text" placeholder="Enter File No" [value]="input_file_no" formControlName="file_no"
+                        class="form-control no-border no-bg box-shadow-z0 addproductinput" />
+                     <textarea rows="6" cols="10" placeholder="Description" [value]="input_invoice_description" formControlName="description"
+                        class="form-control no-border no-bg box-shadow-z0 addproductinputtextarea">
                             </textarea>
-                            <div formArrayName="linktodrive">
-                                <div *ngFor="let address of addForm.controls.linktodrive.controls; let i=index">
-                                    <div>
-                                        <span>Link {{i + 1}}</span>
-                                        <span *ngIf="addForm.controls.linktodrive.controls.length > 1" 
-                                            (click)="removeLink(i)">
-                                        </span>
-                                    </div>
-                                    <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
-                                    <div [formGroupName]="i">                                                                                                                                            
-                                        <input type="text" placeholder="Enter Link" formControlName="linkAddress" 
-                                               class="form-control no-border no-bg box-shadow-z0 addproductinput">                                                                                 
-                                    </div>
-                                </div>
-                                <div>
-                                    <a (click)="addLink()" class="invoiceaddcruser">
-                                        Add More Link +
-                                    </a>
-                                </div>
-                            </div>
-
-                            <br/>
-                            <br/>
-                            <button type="submit" data-dismiss="modal" (click)="updateInvoice(input_id,input_file_no,input_invoice_no,input_invoice_description,linktodrive)" class="btn btn-primary">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button>
-                            <button type="submit" data-dismiss="modal" (click)="deleteInvoice(input_id)" class="btn btn-primary">
-                                <i class="fa fa-trash" aria-hidden="true"></i> Delete Invoice </button>
-                        </form>   
-                    </div>
-                </div>
-            </div>                              
-        </div>
-    </div>
-    <!--    ****** end of invoice info add **** -->
+                     <div formArrayName="linktodrive">
+                        <div *ngFor="let address of addForm.controls.linktodrive.controls; let i=index">
+                           <div>
+                              <span>Link {{i + 1}}</span>
+                              <span *ngIf="addForm.controls.linktodrive.controls.length > 1"
+                              (click)="removeLink(i)">
+                              </span>
+                           </div>
+                           <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                           <div [formGroupName]="i">
+                              <input type="text" placeholder="Enter Link" formControlName="linkAddress"
+                                 class="form-control no-border no-bg box-shadow-z0 addproductinput">
+                           </div>
+                        </div>
+                        <div>
+                           <a (click)="addLink()" class="invoiceaddcruser">
+                           Add More Link +
+                           </a>
+                        </div>
+                     </div>
+                     <br/>
+                     <br/>
+                     <button type="submit" data-dismiss="modal" (click)="updateInvoice(input_id,input_file_no,input_invoice_no,input_invoice_description,linktodrive)" class="btn btn-primary">
+                     <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button>
+                     <button type="submit" data-dismiss="modal" (click)="deleteInvoice(input_id)" class="btn btn-primary">
+                     <i class="fa fa-trash" aria-hidden="true"></i> Delete Invoice </button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--    ****** end of invoice info add **** -->
 </div>
 <br/>
 <div *ngIf="input_invoice_no!=='not_assigned'" class="invoicestyle box-color primary p-a-sm">
-    <div class="text-lt">
-         <!-- <span>#</span>  -->
-         <span>#{{input_invoice_no}}</span> 
-         <span class="invoiceinputfileonesline">
-            {{input_file_no}}
-        </span>
-    </div>
-    <hr class="hrinvoice">
-    <div class="text-lt">
-        {{input_invoice_description}}
-    </div>
-    <ul>
-        <li *ngFor="let link of input_linktodrive" style="list-style: none;">
-            <p *ngIf="link.linkAddress!=''">
-             <a href="{{link.linkAddress}}" target="_blank" class="invoicelinkview"><span class="glyphicon glyphicon-pushpin"></a>
-        </a>
-            </p>
-        </li>
-    </ul>
+   <div class="text-lt">
+      <!-- <span>#</span>  -->
+      <span>#{{input_invoice_no}}</span>
+      <span class="invoiceinputfileonesline">
+      {{input_file_no}}
+      </span>
+   </div>
+   <hr class="hrinvoice">
+   <div class="text-lt">
+      {{input_invoice_description}}
+   </div>
+   <ul>
+      <li *ngFor="let link of input_linktodrive" style="list-style: none;">
+         <p *ngIf="link.linkAddress!=''">
+            <a href="{{link.linkAddress}}" target="_blank" class="invoicelinkview"><span class="glyphicon glyphicon-pushpin"></a>
+            </a>
+         </p>
+      </li>
+   </ul>
 </div>
-
-
-

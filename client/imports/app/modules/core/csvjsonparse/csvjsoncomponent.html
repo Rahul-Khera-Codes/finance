@@ -1,91 +1,89 @@
 <!-- timeline page head timeline bar -->
-
 <div *ngIf="uploadprocess" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
-<div class="progress-bar info" style="width: 125%;">  
-</div>
+   <div class="progress-bar info" style="width: 125%;"></div>
 </div>
 <div id="page-content-wrapper" >
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-               <!--    code to show message alert  
- -->            <div *ngIf="messageshow == true" class = "alert alert-success">{{successmessage}}</div>
-                <hr>
-                <div class="textinline">
-                    <form #uploadForm="ngForm" (ngSubmit)="handleFiles(uploadForm)">
-                        <label for="files">Upload File</label>
-                        <input type="file" id="files" name="files[]" style="display: inline;" accept=".csv" ngModel required />
-                        <label for="account">Select Account</label>
-                        <select name="account" ngModel required>
-                            <option *ngFor="let account of accountlistvalue" value="{{account ? account._id : 'No Category Found'}}">{{account.Account_no ? account.Account_no: 'No Category Found'}}</option>
-                        </select>
-                        <label for="DateFormat" style="margin-left: 35px;">Choose Date Format</label>
-                         <select name="DateFormat" ngModel required>
-                            <option value="MM-DD-YYYY h:mm:ss a">MM-DD-YYYY h:mm:ss a</option>
-                            <option value="DD-MM-YYYY h:mm:ss a">DD-MM-YYYY h:mm:ss a</option>
-                        </select>
-                        <br>
-                        <br>
-                        <button *ngIf="!filecontainduplicate" type="submit" class="md-btn md-raised m-b-sm w-xs indigo">
-                          <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
-                    </form>
-                </div>
-                <br>
-                <br>
-                <div *ngIf="messageshow == true">
-                     <!-- <div class ="alert alert-success">{{successmessage}}</div> -->
-                     <ul style="list-style-type: none;">
-                         <li class="alert alert-success" *ngFor="let added of uploadresult.addedstring">Added Rows  {{added.key}} : {{added.value}}
-                         </li>
-                      </ul>
-
-                      <ul style="list-style-type: none;">   
-                         <li class ="alert alert-success" *ngFor="let updated of uploadresult.updatedstring">Updated Rows {{updated.key}} : {{updated.value}}
-                         </li>
-                     </ul>
-                </div>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <!--    code to show message alert
+               -->
+            <div *ngIf="messageshow == true" class = "alert alert-success">{{successmessage}}</div>
+            <hr>
+            <div class="textinline">
+               <form #uploadForm="ngForm" (ngSubmit)="handleFiles(uploadForm)">
+               <label for="files">Upload File</label>
+               <input type="file" id="files" name="files[]" style="display: inline;" accept=".csv" ngModel required />
+               <label for="account">Select Account</label>
+               <select name="account" ngModel required>
+                  <option *ngFor="let account of accountlistvalue" value="{{account ? account._id : 'No Category Found'}}">{{account.Account_no ? account.Account_no: 'No Category Found'}}</option>
+               </select>
+               <label for="DateFormat" style="margin-left: 35px;">Choose Date Format</label>
+               <select name="DateFormat" ngModel required>
+                  <option value="MM-DD-YYYY h:mm:ss a">MM-DD-YYYY h:mm:ss a</option>
+                  <option value="DD-MM-YYYY h:mm:ss a">DD-MM-YYYY h:mm:ss a</option>
+               </select>
+               <br>
+               <br>
+               <button *ngIf="!filecontainduplicate" type="submit" class="md-btn md-raised m-b-sm w-xs indigo">
+               <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
+               </form>
             </div>
-        </div>
-    </div>
-    <div *ngIf="filecontainduplicate" class="container-fluid">
-        <div class="row">
-            <div class = "alert alert-success" style="margin-left: 18px;">
-                 <p style="text-align: center;">Some of your transactions have duplicate transaction id ( highlighted in red ). Plz uncheck transaction that you don't want to upload</p>
+            <br>
+            <br>
+            <div *ngIf="messageshow == true">
+               <!-- <div class ="alert alert-success">{{successmessage}}</div> -->
+               <ul style="list-style-type: none;">
+                  <li class="alert alert-success" *ngFor="let added of uploadresult.addedstring">Added Rows  {{added.key}} : {{added.value}}
+                  </li>
+               </ul>
+               <ul style="list-style-type: none;">
+                  <li class ="alert alert-success" *ngFor="let updated of uploadresult.updatedstring">Updated Rows {{updated.key}} : {{updated.value}}
+                  </li>
+               </ul>
             </div>
-            <div class="col-lg-12">
-                <div>
-                    <table>
-                        <tr>
-                            <th>Select</th>
-                            <th> No </th>
-                            <th>Transaction date</th>
-                            <th>Transaction Id</th>
-                            <th>Description</th>
-                            <th>ChequeNo</th> 
-                            <th>CR/DR</th>
-                            <th>Transaction Amount</th>
-                        </tr>
-                        <tr *ngFor="let data of originalarraylist" class="{{ matchtransaction(data['Transaction ID'],data['Cr/Dr'],data['ChequeNo.']) ? 'alertduplicaterow':''}}">
-                            <td>
-                                <input type="checkbox" name="array" (change)="transactionremoved($event,data)" checked>
-                            </td>
-                            <td>{{data["No."]}}</td>
-                            <td>{{data["Value Date"]}}</td>
-                            <td>{{data["Transaction ID"]}}</td>
-                            <td>{{data["Description"]}}</td>
-                            <td>{{data["ChequeNo."]}}</td>
-                            <td>{{data["Cr/Dr"]}}</td>
-                            <td>{{data["Transaction Amount(INR)"]}}</td>
-                        </tr> 
-                    </table>
-                </div>
+         </div>
+      </div>
+   </div>
+   <div *ngIf="filecontainduplicate" class="container-fluid">
+      <div class="row">
+         <div class = "alert alert-success" style="margin-left: 18px;">
+            <p style="text-align: center;">Some of your transactions have duplicate transaction id ( highlighted in red ). Plz uncheck transaction that you don't want to upload</p>
+         </div>
+         <div class="col-lg-12">
+            <div>
+               <table>
+                  <tr>
+                     <th>Select</th>
+                     <th> No </th>
+                     <th>Transaction date</th>
+                     <th>Transaction Id</th>
+                     <th>Description</th>
+                     <th>ChequeNo</th>
+                     <th>CR/DR</th>
+                     <th>Transaction Amount</th>
+                  </tr>
+                  <tr *ngFor="let data of originalarraylist" class="{{ matchtransaction(data['Transaction ID'],data['Cr/Dr'],data['ChequeNo.']) ? 'alertduplicaterow':''}}">
+                     <td>
+                        <input type="checkbox" name="array" (change)="transactionremoved($event,data)" checked>
+                     </td>
+                     <td>{{data["No."]}}</td>
+                     <td>{{data["Value Date"]}}</td>
+                     <td>{{data["Transaction ID"]}}</td>
+                     <td>{{data["Description"]}}</td>
+                     <td>{{data["ChequeNo."]}}</td>
+                     <td>{{data["Cr/Dr"]}}</td>
+                     <td>{{data["Transaction Amount(INR)"]}}</td>
+                  </tr>
+               </table>
             </div>
-        </div>
-    </div>
-    <div class="textinline">
-         <br>
-         <button *ngIf="filecontainduplicate" type="button" (click)="finalupload()" class="md-btn md-raised m-b-sm w-xs indigo">
-          <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
-    </div>
+         </div>
+      </div>
+   </div>
+   <div class="textinline">
+      <br>
+      <button *ngIf="filecontainduplicate" type="button" (click)="finalupload()" class="md-btn md-raised m-b-sm w-xs indigo">
+      <i class="fa fa-upload" aria-hidden="true"></i> upload</button>
+   </div>
 </div>
- <!-- (click)="transactionremoved(data)"  -->
+<!-- (click)="transactionremoved(data)"  -->

@@ -1,120 +1,116 @@
 <div class="categorymainbox" *ngIf="user && user.profile.role=='admin'">
-    <a  *ngIf="!show_category || show_category==''" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} " 
-       data-toggle="modal"  href="#{{id}}">
-       Assign Category
-    </a>
-    <!-- removed text-u-c from above <a> tag -->
-    <a  *ngIf="show_category && parent_category" class="categoryboxshadow  btn btn-lab {{Cr_Dr == 'DR' ? 'categoryassignedcolor' : 'category-color-for-blue'}} " data-toggle="modal"  href="#{{id}}">
-    {{parent_category[0] ? parent_category[0].category: 'Assign Category'}} 
-    <i class="fa fa-angle-right categoryformobile" aria-hidden="true"></i> 
-    {{show_category[0] ? show_category[0].category: ''}}
-    </a>
-
-<!-- this is the format for calling popup menu -->
-  <div class="modal fade " id="addcategory" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+   <a  *ngIf="!show_category || show_category==''" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} "
+      data-toggle="modal"  href="#{{id}}">
+   Assign Category
+   </a>
+   <!-- removed text-u-c from above <a> tag -->
+   <a  *ngIf="show_category && parent_category" class="categoryboxshadow  btn btn-lab {{Cr_Dr == 'DR' ? 'categoryassignedcolor' : 'category-color-for-blue'}} " data-toggle="modal"  href="#{{id}}">
+   {{parent_category[0] ? parent_category[0].category: 'Assign Category'}}
+   <i class="fa fa-angle-right categoryformobile" aria-hidden="true"></i>
+   {{show_category[0] ? show_category[0].category: ''}}
+   </a>
+   <!-- this is the format for calling popup menu -->
+   <div class="modal fade " id="addcategory" role="dialog">
+      <div class="modal-dialog modal-sm">
+         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                <h4 class="modal-title">Add New Category</h4>
+               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+               <h4 class="modal-title">Add New Category</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="addForm" class="box">
-                    <input type="text" placeholder="Enter here for new category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
-                    <br/>
-                    <br/>
-                    <button type="submit" data-dismiss="modal" (click)="addNewCategory()" class="btn btn-primary"> Add </button>
-                </form>
+               <form [formGroup]="addForm" class="box">
+                  <input type="text" placeholder="Enter here for new category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
+                  <br/>
+                  <br/>
+                  <button type="submit" data-dismiss="modal" (click)="addNewCategory()" class="btn btn-primary"> Add </button>
+               </form>
             </div>
             <div class="modal-footer">
             </div>
-        </div>
-    </div>
-</div>
-
- <div class="modal fade " id="addsubcategory" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+         </div>
+      </div>
+   </div>
+   <div class="modal fade " id="addsubcategory" role="dialog">
+      <div class="modal-dialog modal-sm">
+         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                <h4 class="modal-title">Add New Sub Category</h4>
+               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+               <h4 class="modal-title">Add New Sub Category</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="addForm" class="box">
-                    <input type="text" placeholder="Enter here for new category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
-                    <br/>
-                    <br/>
-                    <button type="submit" data-dismiss="modal" (click)="addNewsubCategory()" class="btn btn-primary"> Add </button>
-                </form>
+               <form [formGroup]="addForm" class="box">
+                  <input type="text" placeholder="Enter here for new category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
+                  <br/>
+                  <br/>
+                  <button type="submit" data-dismiss="modal" (click)="addNewsubCategory()" class="btn btn-primary"> Add </button>
+               </form>
             </div>
             <div class="modal-footer">
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-    <div class="modal fade " id="{{id}}" role="dialog">
-        <div class="modal-dialog modal-sm">
-   <!--          Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <i class="fa fa-times fa-2x" aria-hidden="true">
-                        </i>
-                    </button>
-                    <h5 class="modal-title">Choose from options for category </h5>
-                </div>
-                <div class="modal-body">
-                    <div class="dropdown">
-                   <!--  *** parent category select *** -->
-                    <div>
-                        <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
-                            {{Choose_Cateogry}}
-                            <span class="caret"></span>
-                        </button>
-                        <ul *ngIf="parent_category_list" class="dropdown-menu">
-                            <li>
-                                <a data-toggle="modal" href="#addcategory"  style="color: blueviolet;">
-                                      <span data-dismiss="modal"> Add New Category </span>
-                                </a>
-                           </li>
-                            <hr style="margin: auto;">
-                            <li *ngFor="let category of parent_category_list">
-                                <a  (click)="ParentSelected(category)">{{category.category ? category.category: 'No Category Found'}}</a>
-                            </li>
-                        </ul> 
-                     </div>
-                     <hr/>
-                     <div *ngIf="!select_parent">   
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Choose SubCategory
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a data-toggle="modal" href="#addsubcategory" style="color: blueviolet;">
-                                     <span data-dismiss="modal">Add Sub Category</span>
-                                </a>
-                            </li>
-                            <hr style="margin: auto;">
-                            <li *ngFor="let category1 of child_list">
-                                <a data-dismiss="modal" (click)="changeCategory(id,category1._id)">{{category1.category ? category1.category : 'No Category Found'}}</a>
-                            </li>
-                        </ul> 
-                      </div>
-                    </div>                              
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+   <div class="modal fade " id="{{id}}" role="dialog">
+      <div class="modal-dialog modal-sm">
+         <!--          Modal content -->
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">
+               <i class="fa fa-times fa-2x" aria-hidden="true">
+               </i>
+               </button>
+               <h5 class="modal-title">Choose from options for category </h5>
+            </div>
+            <div class="modal-body">
+               <div class="dropdown">
+                  <!--  *** parent category select *** -->
+                  <div>
+                     <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
+                     {{Choose_Cateogry}}
+                     <span class="caret"></span>
+                     </button>
+                     <ul *ngIf="parent_category_list" class="dropdown-menu">
+                        <li>
+                           <a data-toggle="modal" href="#addcategory"  style="color: blueviolet;">
+                           <span data-dismiss="modal"> Add New Category </span>
+                           </a>
+                        </li>
+                        <hr style="margin: auto;">
+                        <li *ngFor="let category of parent_category_list">
+                           <a  (click)="ParentSelected(category)">{{category.category ? category.category: 'No Category Found'}}</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <hr/>
+                  <div *ngIf="!select_parent">
+                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                     Choose SubCategory
+                     <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                        <li>
+                           <a data-toggle="modal" href="#addsubcategory" style="color: blueviolet;">
+                           <span data-dismiss="modal">Add Sub Category</span>
+                           </a>
+                        </li>
+                        <hr style="margin: auto;">
+                        <li *ngFor="let category1 of child_list">
+                           <a data-dismiss="modal" (click)="changeCategory(id,category1._id)">{{category1.category ? category1.category : 'No Category Found'}}</a>
+                        </li>
+                     </ul>
                   </div>
                </div>
             </div>
-        </div>
+         </div>
+      </div>
    </div>
-   <div class="categorymainbox" *ngIf="user && user.profile.role=='CA'">
-           <!--  <a  *ngIf="!show_category || show_category==''" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} "  data-toggle="modal"  href="#{{id}}">
-              Not Assigned
-             </a> -->
-             <a  *ngIf="show_category && parent_category" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'categoryassignedcolor' : 'category-color-for-blue'}} " data-toggle="modal"  href="#{{id}}">
-              {{parent_category[0] ? parent_category[0].category: 'Assign Category'}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{show_category[0] ? show_category[0].category: ''}}
-             </a>
-    </div>
- 
+</div>
+<div class="categorymainbox" *ngIf="user && user.profile.role=='CA'">
+   <!--  <a  *ngIf="!show_category || show_category==''" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'info' : 'category-color-for-blue'}} "  data-toggle="modal"  href="#{{id}}">
+      Not Assigned
+      </a> -->
+   <a  *ngIf="show_category && parent_category" class="categoryboxshadow btn btn-lab {{Cr_Dr == 'DR' ? 'categoryassignedcolor' : 'category-color-for-blue'}} " data-toggle="modal"  href="#{{id}}">
+   {{parent_category[0] ? parent_category[0].category: 'Assign Category'}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{show_category[0] ? show_category[0].category: ''}}
+   </a>
+</div>

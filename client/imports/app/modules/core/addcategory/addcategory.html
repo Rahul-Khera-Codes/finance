@@ -1,64 +1,62 @@
 <div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 centerdiv">
-                <hr>
-                <div>
-                     <!-- **** code block run when any category is not selected**** -->
-                    <div *ngIf="!selectedCategory">
-                        <form [formGroup]="addForm" (ngSubmit)="addCategory()" class="box">
-                            <input type="text" placeholder="Add category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductliststyle" />
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12 centerdiv">
+            <hr>
+            <div>
+               <!-- **** code block run when any category is not selected**** -->
+               <div *ngIf="!selectedCategory">
+                  <form [formGroup]="addForm" (ngSubmit)="addCategory()" class="box">
+                  <input type="text" placeholder="Add category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductliststyle" />
+                  </form>
+               </div>
+               <!--   **** code block run when category is selected**** -->
+               <div *ngIf="selectedCategory">
+                  <form [formGroup]="addForm" (submit)="updateCategory()" class="box">
+                  <input [value]="selectedCategory.category" placeholder="Add category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductinput" />
+                  </form>
+               </div>
+               <br>
+               <br>
+               <div class="box">
+                  <div id="parentcategory" class="activechildcat">
+                     <a *ngFor="let data of productlist | async" class="box m-b-xs list-group-item addproductliststyle" (click)="onSelect(data)">
+                     <span>
+                     <span >
+                     {{data.category}}
+                     </span>
+                     <span class="dropdown box-tool addmarignleft">
+                     <i class="fa fa-trash-o" aria-hidden="true"
+                        (click)="removeCategory(data._id)">
+                     </i>
+                     </span>
+                     </span>
+                     </a>
+                  </div>
+                  <div *ngIf="activateChild" id="childcategory" class="activechildcat">
+                     <div>
+                        <form [formGroup]="addFormsubcategory" (submit)="addSubCategory(selectedCategory._id)" class="box ">
+                        <input placeholder="Add Sub-category" formControlName="subcategory" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
                         </form>
-                    </div>
-                    <!--   **** code block run when category is selected**** -->
-                    <div *ngIf="selectedCategory">
-                        <form [formGroup]="addForm" (submit)="updateCategory()" class="box">
-                            <input [value]="selectedCategory.category" placeholder="Add category" formControlName="category" class="form-control no-border no-bg box-shadow-z0 addproductinput" />
-                        </form>
-                    </div>
-
-                    <br>
-                    <br>
-
-                    <div class="box">
-                        <div id="parentcategory" class="activechildcat">
-                            <a *ngFor="let data of productlist | async" class="box m-b-xs list-group-item addproductliststyle" (click)="onSelect(data)">
-                                <span>
-                                    <span >
-                                        {{data.category}}
-                                    </span>
-                                <span class="dropdown box-tool addmarignleft">
-                                        <i class="fa fa-trash-o" aria-hidden="true" 
-                                           (click)="removeCategory(data._id)">
-                                        </i>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-                        <div *ngIf="activateChild" id="childcategory" class="activechildcat">
-                            <div>
-                                <form [formGroup]="addFormsubcategory" (submit)="addSubCategory(selectedCategory._id)" class="box ">
-                                    <input placeholder="Add Sub-category" formControlName="subcategory" class="form-control no-border no-bg box-shadow-z0 addproductsubcat" />
-                                </form>
-                            </div>
-                            <div>
-                            <a *ngFor="let data1 of subcategory | async" class="box m-b-xs list-group-item addproductliststyle">
-                                <span>
-                                    <span>
-                                        {{data1.category}}
-                                    </span>
-                                <span class="dropdown box-tool addmarignleft">
-                                        <i class="fa fa-trash-o" aria-hidden="true" 
-                                           (click)="removeSubCategory(data1._id)">
-                                        </i>
-                                    </span>
-                                </span>
-                             </a>
-                           </div>
-                        </div>
-                    </div>
-                </div>
+                     </div>
+                     <div>
+                        <a *ngFor="let data1 of subcategory | async" class="box m-b-xs list-group-item addproductliststyle">
+                        <span>
+                        <span>
+                        {{data1.category}}
+                        </span>
+                        <span class="dropdown box-tool addmarignleft">
+                        <i class="fa fa-trash-o" aria-hidden="true"
+                           (click)="removeSubCategory(data1._id)">
+                        </i>
+                        </span>
+                        </span>
+                        </a>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>

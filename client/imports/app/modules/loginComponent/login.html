@@ -1,43 +1,42 @@
 <div class="container">
-    <div class="fade-in-right-big smooth pos-rlt ng-scope">
-        <div class="center-block w-xxl w-auto-xs p-y-md ng-scope">
-            <div class="navbar navstyle">
-                <div class="pullcenterstyle">
-                    <img src="images/logo.png" alt=".">
-                </div>
-                <br/>
-                <br/>
+   <div class="fade-in-right-big smooth pos-rlt ng-scope">
+      <div class="center-block w-xxl w-auto-xs p-y-md ng-scope">
+         <div class="navbar navstyle">
+            <div class="pullcenterstyle">
+               <img src="images/logo.png" alt=".">
             </div>
             <br/>
-            <div *ngIf="showmessage" class="alert alert-success">{{message}}</div>
-            <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
-                <div class="fntsize-16">
-                    Sign in with your Account
-                </div>
-                <form [formGroup]="addForm" (ngSubmit)="login()">
-                    <div class="md-form-group float-label">
-                        <input type="email" name="Email" class="md-input" formControlName="email">
-                        <label>Email</label>
-                    </div>
-                    <div class="md-form-group float-label">
-                        <input type="password" name="Password" class="md-input" formControlName="password">
-                        <label>Password</label>
-                    </div>
-                    <div class="md-form-group">
-                         <select class="form-control c-select" style="width: 90% !important;" formControlName="FYYear" name="FYYear">
-                                 <option> Select Financial Year </option>
-                                 <option *ngFor="let year of years" [value]="year">{{year}} - {{year + 1}}</option>
-                         </select>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-block p-x-md loginsubmitbutton">
-                        <img *ngIf="loginprocess==true" class="buttonimage" src="images/login.gif">   <i class="fa fa-user" aria-hidden="true"></i>  Sign in
-                    </button>
-                </form>
+            <br/>
+         </div>
+         <br/>
+         <div *ngIf="showmessage" class="alert alert-success">{{message}}</div>
+         <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+            <div class="fntsize-16">
+               Sign in with your Account
             </div>
-            <div class="p-v-lg text-center">
-                <p style="color: #00BCD4;">Version 0.0.93</p>
+            <form [formGroup]="addForm" (ngSubmit)="login()">
+            <div class="md-form-group float-label">
+               <input type="email" name="Email" class="md-input" formControlName="email">
+               <label>Email</label>
             </div>
-        </div>
-    </div>
+            <div class="md-form-group float-label">
+               <input type="password" name="Password" class="md-input" formControlName="password">
+               <label>Password</label>
+            </div>
+            <div class="md-form-group">
+               <select class="form-control c-select" style="width: 90% !important;" formControlName="FYYear" name="FYYear">
+                  <option> Select Financial Year </option>
+                  <option *ngFor="let year of years" [value]="year">{{year}} - {{year + 1}}</option>
+               </select>
+            </div>
+            <button type="submit" class="btn btn-block p-x-md loginsubmitbutton">
+            <img *ngIf="loginprocess==true" class="buttonimage" src="images/login.gif">   <i class="fa fa-user" aria-hidden="true"></i>  Sign in
+            </button>
+            </form>
+         </div>
+         <div class="p-v-lg text-center">
+            <p style="color: #00BCD4;">Version 0.0.93</p>
+         </div>
+      </div>
+   </div>
 </div>

@@ -1,208 +1,205 @@
 <div *ngIf="loading || accountlistloading || headarrayloading || parentcategoryloading || subcategoryloading" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
-<div class="progress-bar info" style="width: 125%;">  
-</div>
+   <div class="progress-bar info" style="width: 125%;">  </div>
 </div>
 <div class="divtopcsvtimelinebarwidth white r box-shadow-z0 m-b navbar-md">
-    <div class="navbar ng-scope" style="margin-left: 18px;">
+   <div class="navbar ng-scope" style="margin-left: 18px;">
       <!--   <a class="navbar-item pull-left hidden-lg-up">
-        <i class="fa fa-bars" aria-hidden="true" (click)="navclick()"></i>
-        </a> -->
-        <!-- <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up"></a> -->
-        <div class="navbar-item pull-left ng-binding"  id="pageTitle"><h3>Timeline</h3></div>
-       <div class="nav-item">
-           <div class="nav-link">
+         <i class="fa fa-bars" aria-hidden="true" (click)="navclick()"></i>
+         </a> -->
+      <!-- <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up"></a> -->
+      <div class="navbar-item pull-left ng-binding"  id="pageTitle">
+         <h3>Timeline</h3>
+      </div>
+      <div class="nav-item">
+         <div class="nav-link">
             <div class="form-group row topcsvtimelinemargin">
                <form #signupForm="ngForm" (ngSubmit)="searchbox(signupForm)">
-                  <div class="col-xs-12 col-sm-3 col-md-3">
-                     <input type="text" name="searchvalue" class="form-control max-width-87" placeholder="Search Here" ngModel required>
-                  </div>
-                  <div class="col-xs-12 col-sm-3 col-md-3">
-                      <select class="form-control c-select max-width-87" name="optionForSearch" ngModel>
-                            <option value="Id">Transaction Id</option>
-                            <option value="Amount"> Amount </option>
-                            <option value="Desc" selected> Description </option>
-                      </select>
-                  </div>
-                  <div class="col-xs-12 col-sm-3 col-md-3">
-                        <button type="submit" class="btn primary centerbuttoninsmallscreen" style="padding: 1.4375rem 3rem;"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                  </div>
-
+               <div class="col-xs-12 col-sm-3 col-md-3">
+                  <input type="text" name="searchvalue" class="form-control max-width-87" placeholder="Search Here" ngModel required>
+               </div>
+               <div class="col-xs-12 col-sm-3 col-md-3">
+                  <select class="form-control c-select max-width-87" name="optionForSearch" ngModel>
+                     <option value="Id">Transaction Id</option>
+                     <option value="Amount"> Amount </option>
+                     <option value="Desc" selected> Description </option>
+                  </select>
+               </div>
+               <div class="col-xs-12 col-sm-3 col-md-3">
+                  <button type="submit" class="btn primary centerbuttoninsmallscreen" style="padding: 1.4375rem 3rem;"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+               </div>
                </form>
-
             </div>
-           </div>  
-        </div>
-        <ul class="nav navbar-nav pull-right m-l">
-            <li class="nav-item dropdown">
-            </li>      
-        </ul>
-    </div>
+         </div>
+      </div>
+      <ul class="nav navbar-nav pull-right m-l">
+         <li class="nav-item dropdown">
+         </li>
+      </ul>
+   </div>
 </div>
 <div *ngIf="loading || accountlistloading || headarrayloading || parentcategoryloading || subcategoryloading">
-       <div class="p-a-md dker _600" style="text-align: center;"><i class="fa fa-spinner" aria-hidden="true"></i> Loading</div>
+   <div class="p-a-md dker _600" style="text-align: center;"><i class="fa fa-spinner" aria-hidden="true"></i> Loading</div>
 </div>
 <!-- timeline page calander -->
 <div *ngIf="!loading && !searchActive && !accountlistloading && !headarrayloading && !parentcategoryloading && !subcategoryloading && !apply_category_filter && !apply_filter_unassign_year" class="pos-rlt">
-    <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
-        <div class="fc-toolbar">
-            <div class="fc-left">
-                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvDataMonthlyMinus()">
-                    <span class="fc-icon fc-icon-left-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-right">
-                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvDataMonthlyPlus()">
-                    <span class="fc-icon fc-icon-right-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-center">
-                <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
-                <h2>{{ month_in_headbar }}</h2>
-            </div>
-        </div>
-    </div>
+   <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
+      <div class="fc-toolbar">
+         <div class="fc-left">
+            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvDataMonthlyMinus()">
+            <span class="fc-icon fc-icon-left-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-right">
+            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvDataMonthlyPlus()">
+            <span class="fc-icon fc-icon-right-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-center">
+            <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
+            <h2>{{ month_in_headbar }}</h2>
+         </div>
+      </div>
+   </div>
 </div>
 <!-- timeline page calender ends here -->
-
- <!-- timeline bar for category year list start-->
+<!-- timeline bar for category year list start-->
 <div *ngIf="apply_category_filter || apply_filter_unassign_year" class="pos-rlt">
-    <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
-        <div class="fc-toolbar">
-            <div class="fc-left">
-                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvYearMinus()">
-                    <span class="fc-icon fc-icon-left-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-right">
-                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvYearPlus()">
-                    <span class="fc-icon fc-icon-right-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-center">
-                <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
-                <h2>{{ currentYearNumber }}</h2>
-            </div>
-        </div>
-    </div>
+   <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
+      <div class="fc-toolbar">
+         <div class="fc-left">
+            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvYearMinus()">
+            <span class="fc-icon fc-icon-left-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-right">
+            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="csvYearPlus()">
+            <span class="fc-icon fc-icon-right-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-center">
+            <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
+            <h2>{{ currentYearNumber }}</h2>
+         </div>
+      </div>
+   </div>
 </div>
- <!-- timeline bar for category year list end -->
-
+<!-- timeline bar for category year list end -->
 <!-- ***************** add amount notification here for wrong transaction amoutn ****************** -->
 <div *ngIf="detectirregular.length > 0" class="alert alert-success" style="margin-left: 5.5%;">There is something wrong in this month transactions</div>
-
 <div *ngIf="flagclosingopenbalance" class="alert alert-success" style="margin-left: 5.5%;">There is something wrong with last month closing balance and this month opening balance</div>
- <!-- Account selection code should come here -->
+<!-- Account selection code should come here -->
 <div *ngIf="!loading && !searchActive" class="btn-group accountselectcsvtimeposition">
-     <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
-        {{Select_account ? Selected_account_name:'Select Account'}}
-     </button>
-  <ul *ngIf="accountlist" class="dropdown-menu">
-    <li *ngFor="let account of accountlist | async">
-      <a  (click)="AccountSelected(account)">Account No : {{account ? account.Account_no: 'Account Not Found'}}</a>
-    </li>
-    <li>
-      <a (click)="selectallaccount()"> Select All Accounts </a>
-    </li>
-  </ul> 
+   <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
+   {{Select_account ? Selected_account_name:'Select Account'}}
+   </button>
+   <ul *ngIf="accountlist" class="dropdown-menu">
+      <li *ngFor="let account of accountlist | async">
+         <a  (click)="AccountSelected(account)">Account No : {{account ? account.Account_no: 'Account Not Found'}}</a>
+      </li>
+      <li>
+         <a (click)="selectallaccount()"> Select All Accounts </a>
+      </li>
+   </ul>
 </div>
-
 <!-- Page Content -->
 <div *ngIf="!loading && !parentcategoryloading && !subcategoryloading" id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div>
-                <div class="padding">
-                    <ul class="timeline timeline-center">
-                        <li class="tl-header">
-                            <div class="btn white active" (click)="showExTransaction()"><span *ngIf="searchActive">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back To </span>Transaction List</div>
-                        </li>
-                        <li  *ngFor="let transaction_note of csvdata; let i=index; let hide_more=last" class="{{transaction_note['Cr/Dr'] === 'DR' ? 'tl-item' : 'tl-item tl-left'}}"> 
-                            <!-- **** start from this ****-->
-                            <div *ngIf="i<limit && IsInErrorList(transaction_note['_id'])" 
-                                class = "alert alert-success" style="margin-bottom: 0px;">
-                                Available Balance don't match here
-                            </div>
-                            <div *ngIf="i<limit" transaction  [transaction_data]="transaction_note" [sub_category_array]="subcategoryarray" [parent_category_array]="parentcategoryarray" [head_array_transaction_list]="headarraylist" [income]="income_id" [assets]="assets_id" [expense]="expense_id" [listofaccounts]="accountlistdata" [alluserlist]="userlists" [emailpatternlists]="emailpatternlist">
-                            <span *ngIf="!!hide_more">{{hide_more_button(hide_more)}}</span>
-                           </div>  
-                        </li>
-                        <li *ngIf="!hideit" class="tl-header">
-                           <div class="btn btn-sm white btn-rounded" (click)="incrementlimit()">more</div>
-                        </li>
-                    </ul>
-                </div>             
+   <div class="container-fluid">
+      <div class="row">
+         <div>
+            <div class="padding">
+               <ul class="timeline timeline-center">
+                  <li class="tl-header">
+                     <div class="btn white active" (click)="showExTransaction()"><span *ngIf="searchActive">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back To </span>Transaction List
+                     </div>
+                  </li>
+                  <li  *ngFor="let transaction_note of csvdata; let i=index; let hide_more=last" class="{{transaction_note['Cr/Dr'] === 'DR' ? 'tl-item' : 'tl-item tl-left'}}">
+                     <!-- **** start from this ****-->
+                     <div *ngIf="i<limit && IsInErrorList(transaction_note['_id'])"
+                        class = "alert alert-success" style="margin-bottom: 0px;">
+                        Available Balance don't match here
+                     </div>
+                     <div *ngIf="i<limit" transaction  [transaction_data]="transaction_note" [sub_category_array]="subcategoryarray" [parent_category_array]="parentcategoryarray" [head_array_transaction_list]="headarraylist" [income]="income_id" [assets]="assets_id" [expense]="expense_id" [listofaccounts]="accountlistdata" [alluserlist]="userlists" [emailpatternlists]="emailpatternlist">
+                     <span *ngIf="!!hide_more">{{hide_more_button(hide_more)}}</span>
             </div>
-        </div>
-    </div>
+            </li>
+            <li *ngIf="!hideit" class="tl-header">
+            <div class="btn btn-sm white btn-rounded" (click)="incrementlimit()">more</div>
+            </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
 </div>
 <div class="switcher box-color dark-white text-color ng-scope" id="sw-theme">
-     <a data-toggle="modal"  href="#filterdata" class="box-color dark-white text-color sw-btn" style="top: 14px;">
-     <i class="fa fa-gear"></i>
-     </a>
-</div>  
- <div class="modal fade " id="filterdata" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                <h4 class="modal-title">Timeline Filter Options</h4>
+   <a data-toggle="modal"  href="#filterdata" class="box-color dark-white text-color sw-btn" style="top: 14px;">
+   <i class="fa fa-gear"></i>
+   </a>
+</div>
+<div class="modal fade " id="filterdata" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+            <h4 class="modal-title">Timeline Filter Options</h4>
+         </div>
+         <div class="modal-body">
+            <label class="md-switch ">
+            <input type="checkbox" [(ngModel)]="apply_filter" (click)="filter()"><i class="blue"></i> Unassigned Transactions</label>
+            <span> Month </span>
+            <label class="ui-switch info m-t-xs m-r" style="position: inherit;top: 5px;left: 5px;">
+            <input type="checkbox" [(ngModel)]="apply_filter_unassign_year" (click)="yearFilterUnassignedCalled()"><i></i></label>
+            <span> year</span>
+            <hr/>
+            <label class="md-switch ">
+            <input type="checkbox" [(ngModel)]="apply_cr_filter" (click)="filterDataCR()"><i class="blue"></i> Only Credit</label>
+            <hr/>
+            <label class="md-switch ">
+            <input type="checkbox"  [(ngModel)]="apply_dr_filter" (click)="filterDataDR()"><i class="blue"></i> Only Debit</label>
+            <hr/>
+            <label class="md-switch ">
+            <input type="checkbox"  [(ngModel)]="invoice_filter"  (click)="invoice_filters()"><i class="blue"></i> Invoice Filter</label>
+            <hr/>
+            <label class="md-switch">
+            <input type="checkbox" [(ngModel)]="apply_category_filter" (click)="CategoryFilter()">
+            <i class="blue"></i> Category </label>
+            <div style="display: inline;">
+               <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
+               {{selectedCategory_id ? 'Category : '+selectedCategoryName:'Select Category'}}
+               <span class="caret"></span>
+               </button>
+               <ul *ngIf="parentcategoryarray" class="dropdown-menu" style="top: 70%;">
+                  <hr style="margin: auto;">
+                  <li *ngFor="let category of parentcategoryarray">
+                     <a  (click)="categorySelected(category)">Category Name : {{category.category}}</a>
+                  </li>
+               </ul>
             </div>
-            <div class="modal-body">
-                <label class="md-switch ">
-                  <input type="checkbox" [(ngModel)]="apply_filter" (click)="filter()"><i class="blue"></i> Unassigned Transactions</label>
-                  <span> Month </span>
-                     <label class="ui-switch info m-t-xs m-r" style="position: inherit;top: 5px;left: 5px;">
-                     <input type="checkbox" [(ngModel)]="apply_filter_unassign_year" (click)="yearFilterUnassignedCalled()"><i></i></label> 
-                  <span> year</span>
-                  <hr/>
-                <label class="md-switch ">
-                     <input type="checkbox" [(ngModel)]="apply_cr_filter" (click)="filterDataCR()"><i class="blue"></i> Only Credit</label>
-                   <hr/>   
-               <label class="md-switch ">
-                     <input type="checkbox"  [(ngModel)]="apply_dr_filter" (click)="filterDataDR()"><i class="blue"></i> Only Debit</label>
-                   <hr/>
-               <label class="md-switch ">
-                     <input type="checkbox"  [(ngModel)]="invoice_filter"  (click)="invoice_filters()"><i class="blue"></i> Invoice Filter</label>
-                   <hr/>   
-               <label class="md-switch">
-                    <input type="checkbox" [(ngModel)]="apply_category_filter" (click)="CategoryFilter()">
-                    <i class="blue"></i> Category </label>    
-              <div style="display: inline;">
-              <button class="btn btn-primary dropdown-toggle dropdown-center" type="button" data-toggle="dropdown">
-                 {{selectedCategory_id ? 'Category : '+selectedCategoryName:'Select Category'}}
-              <span class="caret"></span>
-              </button>
-              <ul *ngIf="parentcategoryarray" class="dropdown-menu" style="top: 70%;">
-                    <hr style="margin: auto;">
-                    <li *ngFor="let category of parentcategoryarray">
-                       <a  (click)="categorySelected(category)">Category Name : {{category.category}}</a>
-                    </li>
-             </ul> 
-              </div>
-              <hr/>
-              <div>
-                <span>
-                      <i class="fa fa-cloud-upload fa-2x" aria-hidden="true"></i> <h3 style="display: inline;">Uploaded Files</h3>
-                </span>
-                <br/>  
-                <br/>  
-                <span *ngFor="let file of filecontent">
-                    <span  class="btn btn-default">
-                      <span style="float: right;margin-left: 10px;" (click)="removesalaryfile(file)">&nbsp;×</span> 
-                      <a href="{{file.url}}" target="_blank">{{file.name}}</a>
-                    </span>
-                    <br/>
-                    <!-- <br/> -->
-                </span>    
-              </div>
+            <hr/>
+            <div>
+               <span>
+                  <i class="fa fa-cloud-upload fa-2x" aria-hidden="true"></i>
+                  <h3 style="display: inline;">Uploaded Files</h3>
+               </span>
+               <br/>
+               <br/>
+               <span *ngFor="let file of filecontent">
+                  <span  class="btn btn-default">
+                  <span style="float: right;margin-left: 10px;" (click)="removesalaryfile(file)">&nbsp;×</span>
+                  <a href="{{file.url}}" target="_blank">{{file.name}}</a>
+                  </span>
+                  <br/>
+                  <!-- <br/> -->
+               </span>
             </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>   
+         </div>
+         <div class="modal-footer">
+         </div>
+      </div>
+   </div>
+</div>

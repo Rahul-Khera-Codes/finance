@@ -1,11 +1,11 @@
 import {
-    Component
+	Component
 } from '@angular/core';
 
 @Component({
-    selector: 'app',
-    template: '<router-outlet></router-outlet>',
-    styleUrls: ['style.css']
+	selector: 'app',
+	template: '<router-outlet></router-outlet>',
+	styleUrls: ['style.css']
 })
 
 export class AppComponent {}

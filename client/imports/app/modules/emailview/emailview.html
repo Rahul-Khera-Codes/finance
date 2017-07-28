@@ -1,45 +1,44 @@
 <!-- <div class="progress progress-striped active">
    <div class="progress-bar info"></div>
-</div> -->
+   </div> -->
 <div *ngIf="loading" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
-<div class="progress-bar info" style="width: 125%;">  
-</div>
+   <div class="progress-bar info" style="width: 125%;">  </div>
 </div>
 <br>
 <div *ngIf="emaillistraw">
-     <div class="padding fade-in ng-scope" style="">
-                    <div class="ng-scope">
-                        <!-- header -->
-                        <div class="m-b">
-                            <a class="btn btn-sm white w-xxs m-r-sm" bs-tooltip="" data-placement="bottom" title="Back to app" [routerLink]="['/csvtemplate/csvtimeline',current_month,current_year]">
-                                 <i class="fa fa-long-arrow-left"></i>
-                            </a>
-                            <div class="btn-group pos-stc m-r-sm">
-                                <button class="btn btn-sm white w-xxs w-auto-xs" bs-tooltip="" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
-                            </div>
-                        </div>
-                        <!-- / header -->
-                        <div class="b-b">
-                            <h2 *ngIf="emaillistraw && emaillistraw[0]" class="_300 ng-binding">{{emaillistraw[0].subject}}</h2>
-                        </div>
-                        <div class="p-y">
-                            <!-- <img ng-src="../assets/images/a2.jpg" class="img-circle w-32 m-r-sm" src="../assets/images/a2.jpg"> -->
-                             from <a *ngIf="emaillistraw && emaillistraw[0]" href="" class="ng-binding">{{emaillistraw[0].from}}</a> 
-                               <span *ngIf="emaillistraw && emaillistraw[0]" class="text ng-binding">on {{emaillistraw[0].date}}</span>
-                        </div>
-                        <div *ngIf="emaillistraw && emaillistraw[0]" class="p-y ng-binding" [innerHTML]="emaillistraw[0].body | safeHtml">
-                        </div>
-                        <!-- <div *ngIf="emaillistraw && emaillistraw[0]" class="p-y ng-binding" #emailbody>
-                        </div> -->
-                        <div class="p-y">
-                         <!--    <div ng-repeat="attach in item.attach" class="panel b-a inline m-r-sm m-b-sm bg-light ng-scope">
-                                <div class="p-a-xs b-b ng-binding">
-                                     <i class="fa fa-paperclip"></i> c0.jpg
-                                </div>
-                                <div class="p-a-xs w-sm lt">
-                                    <a ng-href="../assets/images/c0.jpg" href="../assets/images/c0.jpg"><img ng-src="../assets/images/c0.jpg" class="w-full" src="../assets/images/c0.jpg"></a>
-                                </div>
-                            </div> -->
+   <div class="padding fade-in ng-scope" style="">
+      <div class="ng-scope">
+         <!-- header -->
+         <div class="m-b">
+            <a class="btn btn-sm white w-xxs m-r-sm" bs-tooltip="" data-placement="bottom" title="Back to app" [routerLink]="['/csvtemplate/csvtimeline',current_month,current_year]">
+            <i class="fa fa-long-arrow-left"></i>
+            </a>
+            <div class="btn-group pos-stc m-r-sm">
+               <button class="btn btn-sm white w-xxs w-auto-xs" bs-tooltip="" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
             </div>
+         </div>
+         <!-- / header -->
+         <div class="b-b">
+            <h2 *ngIf="emaillistraw && emaillistraw[0]" class="_300 ng-binding">{{emaillistraw[0].subject}}</h2>
+         </div>
+         <div class="p-y">
+            <!-- <img ng-src="../assets/images/a2.jpg" class="img-circle w-32 m-r-sm" src="../assets/images/a2.jpg"> -->
+            from <a *ngIf="emaillistraw && emaillistraw[0]" href="" class="ng-binding">{{emaillistraw[0].from}}</a>
+            <span *ngIf="emaillistraw && emaillistraw[0]" class="text ng-binding">on {{emaillistraw[0].date}}</span>
+         </div>
+         <div *ngIf="emaillistraw && emaillistraw[0]" class="p-y ng-binding" [innerHTML]="emaillistraw[0].body | safeHtml">
       </div>
- </div>
+      <!-- <div *ngIf="emaillistraw && emaillistraw[0]" class="p-y ng-binding" #emailbody>
+         </div> -->
+      <div class="p-y">
+         <!--    <div ng-repeat="attach in item.attach" class="panel b-a inline m-r-sm m-b-sm bg-light ng-scope">
+            <div class="p-a-xs b-b ng-binding">
+                 <i class="fa fa-paperclip"></i> c0.jpg
+            </div>
+            <div class="p-a-xs w-sm lt">
+                <a ng-href="../assets/images/c0.jpg" href="../assets/images/c0.jpg"><img ng-src="../assets/images/c0.jpg" class="w-full" src="../assets/images/c0.jpg"></a>
+            </div>
+            </div> -->
+      </div>
+   </div>
+</div>

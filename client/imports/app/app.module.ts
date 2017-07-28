@@ -1,59 +1,59 @@
 import {
-    NgModule
+	NgModule
 } from '@angular/core';
 import {
-    BrowserModule
+	BrowserModule
 } from '@angular/platform-browser';
 import {
-    FormsModule,
-    ReactiveFormsModule
+	FormsModule,
+	ReactiveFormsModule
 } from '@angular/forms';
 import {
-    RouterModule
+	RouterModule
 } from '@angular/router';
 import {
-    AccountsModule
+	AccountsModule
 } from 'angular2-meteor-accounts-ui';
 import {
-    ChartsModule
+	ChartsModule
 } from 'ng2-charts/ng2-charts';
 import {
-    AppComponent
+	AppComponent
 } from './app.component';
 import {
-    SafeHtmlPipe
+	SafeHtmlPipe
 } from './modules/pipes/domsanitizer.pipe';
 import {
-    routes,
-    ROUTES_PROVIDERS
+	routes,
+	ROUTES_PROVIDERS
 } from './app.routes';
 import {
-    ALL_DECLARATIONS
+	ALL_DECLARATIONS
 } from './modules';
 import {
-    SharedNavigationService
+	SharedNavigationService
 } from './modules/services/navigationbar.service';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule.forRoot(routes),
-        AccountsModule,
-        ChartsModule
-    ],
-    declarations: [
-        AppComponent,
-        SafeHtmlPipe,
-        ...ALL_DECLARATIONS
-    ],
-    providers: [
-        ...ROUTES_PROVIDERS,
-        SharedNavigationService
-    ],
-    bootstrap: [
-        AppComponent
-    ]
+	imports: [
+		BrowserModule,
+		FormsModule,
+		ReactiveFormsModule,
+		RouterModule.forRoot(routes),
+		AccountsModule,
+		ChartsModule
+	],
+	declarations: [
+		AppComponent,
+		SafeHtmlPipe,
+		...ALL_DECLARATIONS
+	],
+	providers: [
+		...ROUTES_PROVIDERS,
+		SharedNavigationService
+	],
+	bootstrap: [
+		AppComponent
+	]
 })
 export class AppModule {}

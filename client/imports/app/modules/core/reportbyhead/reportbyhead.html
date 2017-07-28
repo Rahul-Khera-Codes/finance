@@ -1,139 +1,138 @@
 <div *ngIf="loading" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
-<div class="progress-bar info" style="width: 125%;">  
-</div>
+   <div class="progress-bar info" style="width: 125%;">  </div>
 </div>
 <div class="white r box-shadow-z0 m-b navbar-md" style="max-width: 106%;">
-    <div class="navbar ng-scope" style="margin-left: 18px;">
-        <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
-        </a>
-        <div class="navbar-item pull-left ng-binding" id="pageTitle">
-            <h3>Report by Head</h3>
-        </div>
-        <div class="nav-item">
-        </div>
-        <button class="md-btn md-raised m-b-sm w-xs white" style="float: right;top: 15px;" (click)="printfunction()"><i class="fa fa-print" aria-hidden="true"></i>
-        </button>
-    </div>
+   <div class="navbar ng-scope" style="margin-left: 18px;">
+      <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
+      </a>
+      <div class="navbar-item pull-left ng-binding" id="pageTitle">
+         <h3>Report by Head</h3>
+      </div>
+      <div class="nav-item">
+      </div>
+      <button class="md-btn md-raised m-b-sm w-xs white" style="float: right;top: 15px;" (click)="printfunction()"><i class="fa fa-print" aria-hidden="true"></i>
+      </button>
+   </div>
 </div>
 <div *ngIf="!toggleyearmonth" class="pos-rlt">
-    <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
-        <div class="fc-toolbar">
-            <div class="fc-left">
-                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="YearMinus()">
-                    <span class="fc-icon fc-icon-left-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-right">
-                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="YearPlus()">
-                    <span class="fc-icon fc-icon-right-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div (click)="toggleMonthYear()" class="fc-center" style="cursor: pointer;" >
-                <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
-                <h2>FY {{currentyear % 100 }}-{{nextyear % 100}}</h2>
-            </div>
-        </div>
-    </div>
+   <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
+      <div class="fc-toolbar">
+         <div class="fc-left">
+            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="YearMinus()">
+            <span class="fc-icon fc-icon-left-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-right">
+            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="YearPlus()">
+            <span class="fc-icon fc-icon-right-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div (click)="toggleMonthYear()" class="fc-center" style="cursor: pointer;" >
+            <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
+            <h2>FY {{currentyear % 100 }}-{{nextyear % 100}}</h2>
+         </div>
+      </div>
+   </div>
 </div>
 <div *ngIf="toggleyearmonth" class="pos-rlt">
-    <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
-        <div class="fc-toolbar">
-            <div class="fc-left">
-                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="monthMinus()">
-                    <span class="fc-icon fc-icon-left-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-right">
-                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="monthPlus()">
-                    <span class="fc-icon fc-icon-right-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div (click)="toggleMonthYear()" class="fc-center" style="cursor: pointer;" >
-                <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
-                <h2>{{displaymonthyear}}</h2>
-            </div>
-        </div>
-    </div>
+   <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
+      <div class="fc-toolbar">
+         <div class="fc-left">
+            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="monthMinus()">
+            <span class="fc-icon fc-icon-left-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-right">
+            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="monthPlus()">
+            <span class="fc-icon fc-icon-right-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div (click)="toggleMonthYear()" class="fc-center" style="cursor: pointer;" >
+            <!--***** for format use {{ data_month | date :'MMMM y'}} ****-->
+            <h2>{{displaymonthyear}}</h2>
+         </div>
+      </div>
+   </div>
 </div>
 <br/>
 <br/>
 <div class="btn-group left-position-48-formobile">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    {{selectedhead? selectedhead.head: "Select Head"}} <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu">
-     <li *ngFor="let list of headlist">
-          <a (click)="searchhead(list)">{{list.head}}</a>
-     </li>
-    </ul>
+   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+   {{selectedhead? selectedhead.head: "Select Head"}} <span class="caret"></span></button>
+   <ul class="dropdown-menu" role="menu">
+      <li *ngFor="let list of headlist">
+         <a (click)="searchhead(list)">{{list.head}}</a>
+      </li>
+   </ul>
 </div>
 <!-- Page Content -->
 <div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive" *ngFor="let csvda of monthwiselist">
-                        <h3><i>{{csvda.key}}</i></h3>
-                    <table>
-                        <tr>
-                            <th>Transaction date</th>
-                            <th>Transaction Id</th>
-                            <th>Description</th>
-                            <th>Assigned Category</th>
-                            <th>Assigned Subcategory</th>
-                            <th>Account Number</th>
-                            <th>CR/DR</th> 
-                            <th>Transaction Amount</th>
-                        </tr>
-                        <tr *ngFor="let data of csvda.value">
-                            <td>{{data["Txn_Posted_Date"] | date:'d MMM y'}}</td>
-                            <td>
-                                <a [routerLink]="['/csvtemplate/csvtimeline',monthvalue,yearvalue]" [queryParams]="{comment_id: data._id}">{{data["Transaction_ID"]}}</a>
-                            </td>
-                            <td>{{data["Description"]}}</td>
-                            <td>{{data["Assigned_Category"]}}</td>
-                            <td>{{data["Assigned_subcategory"]}}</td>
-                            <td>******{{accountprint(data["AssignedAccountNo"])}}</td>
-                            <td>{{data["Cr/Dr"]}}</td>
-                            <td>{{data["Transaction_Amount(INR)"]}}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> Total </td>
-                            <td>{{monthtotalformat(csvda.key)}}</td>
-                        </tr>    
-                    </table>
-                </div>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="table-responsive" *ngFor="let csvda of monthwiselist">
+               <h3><i>{{csvda.key}}</i></h3>
+               <table>
+                  <tr>
+                     <th>Transaction date</th>
+                     <th>Transaction Id</th>
+                     <th>Description</th>
+                     <th>Assigned Category</th>
+                     <th>Assigned Subcategory</th>
+                     <th>Account Number</th>
+                     <th>CR/DR</th>
+                     <th>Transaction Amount</th>
+                  </tr>
+                  <tr *ngFor="let data of csvda.value">
+                     <td>{{data["Txn_Posted_Date"] | date:'d MMM y'}}</td>
+                     <td>
+                        <a [routerLink]="['/csvtemplate/csvtimeline',monthvalue,yearvalue]" [queryParams]="{comment_id: data._id}">{{data["Transaction_ID"]}}</a>
+                     </td>
+                     <td>{{data["Description"]}}</td>
+                     <td>{{data["Assigned_Category"]}}</td>
+                     <td>{{data["Assigned_subcategory"]}}</td>
+                     <td>******{{accountprint(data["AssignedAccountNo"])}}</td>
+                     <td>{{data["Cr/Dr"]}}</td>
+                     <td>{{data["Transaction_Amount(INR)"]}}</td>
+                  </tr>
+                  <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td> Total </td>
+                     <td>{{monthtotalformat(csvda.key)}}</td>
+                  </tr>
+               </table>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
 <div class="switcher box-color dark-white text-color ng-scope" id="sw-theme">
-     <a data-toggle="modal"  href="#filterdata" class="box-color dark-white text-color sw-btn">
-     <i class="fa fa-gear"></i>
-     </a>
-</div>  
- <div class="modal fade bs-example-modal-sm" id="filterdata" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                <h4 class="modal-title">Filter Unassigned Options</h4>
-            </div>
-            <div class="modal-body">
-                <label class="md-switch ">
-                  <input type="checkbox" [(ngModel)]="filterunassignedboolean" (click)="filterunassigned()"><i class="blue"></i> Unassigned Transactions</label>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>   
+   <a data-toggle="modal"  href="#filterdata" class="box-color dark-white text-color sw-btn">
+   <i class="fa fa-gear"></i>
+   </a>
+</div>
+<div class="modal fade bs-example-modal-sm" id="filterdata" role="dialog">
+   <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+            <h4 class="modal-title">Filter Unassigned Options</h4>
+         </div>
+         <div class="modal-body">
+            <label class="md-switch ">
+            <input type="checkbox" [(ngModel)]="filterunassignedboolean" (click)="filterunassigned()"><i class="blue"></i> Unassigned Transactions</label>
+         </div>
+         <div class="modal-footer">
+         </div>
+      </div>
+   </div>
+</div>

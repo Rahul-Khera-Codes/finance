@@ -1,59 +1,58 @@
 <div *ngIf="loading" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
-<div class="progress-bar info" style="width: 125%;">  
-</div>
+   <div class="progress-bar info" style="width: 125%;">  </div>
 </div>
 <div class="white r box-shadow-z0 m-b navbar-md" style="max-width: 106%">
-    <div class="navbar ng-scope" style="margin-left: 18px;">
-        <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
-        </a>
-        <div class="navbar-item pull-left ng-binding" id="pageTitle">
-            <h3>Expense Report</h3>
-        </div>
-        <div class="nav-item">
-        </div>
-              <button class="md-btn md-raised m-b-sm w-xs white" style="float: right;top: 15px;" (click)="printfunction()"><i class="fa fa-print" aria-hidden="true"></i></button>
-    </div>
+   <div class="navbar ng-scope" style="margin-left: 18px;">
+      <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
+      </a>
+      <div class="navbar-item pull-left ng-binding" id="pageTitle">
+         <h3>Expense Report</h3>
+      </div>
+      <div class="nav-item">
+      </div>
+      <button class="md-btn md-raised m-b-sm w-xs white" style="float: right;top: 15px;" (click)="printfunction()"><i class="fa fa-print" aria-hidden="true"></i></button>
+   </div>
 </div>
 <!-- Page Content -->
 <div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive" *ngFor="let csvda of monthwiselist">
-                        <h3><i>{{csvda.key}}</i></h3>
-                    <table>
-                        <tr>
-                            <th>Transaction date</th>
-                            <th>Transaction Id</th>
-                            <th>Description</th>
-                            <th>Assigned Category</th>
-                            <th>Assigned Subcategory</th>
-                            <th>ChequeNo</th> 
-                            <th>Transaction Amount</th>
-                        </tr>
-                        <tr *ngFor="let data of csvda.value">
-                            <td>{{data["Value_Date"]}}</td>
-                            <td> 
-                                <a [routerLink]="['/csvtemplate/csvtimeline',monthvalue,yearvalue]" [queryParams]="{comment_id: data._id}">{{data["Transaction_ID"]}}</a>
-                            </td>
-                            <td>{{data["Description"]}}</td>
-                            <td>{{data["Assigned_Category"]}}</td>
-                            <td>{{data["Assigned_subcategory"]}}</td>
-                            <td>{{data["ChequeNo"]}}</td>
-                            <td>{{data["Transaction_Amount(INR)"]}}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> Total </td>
-                            <td>{{monthtotalformat(csvda.key)}}</td>
-                        </tr>    
-                    </table>
-                </div>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="table-responsive" *ngFor="let csvda of monthwiselist">
+               <h3><i>{{csvda.key}}</i></h3>
+               <table>
+                  <tr>
+                     <th>Transaction date</th>
+                     <th>Transaction Id</th>
+                     <th>Description</th>
+                     <th>Assigned Category</th>
+                     <th>Assigned Subcategory</th>
+                     <th>ChequeNo</th>
+                     <th>Transaction Amount</th>
+                  </tr>
+                  <tr *ngFor="let data of csvda.value">
+                     <td>{{data["Value_Date"]}}</td>
+                     <td>
+                        <a [routerLink]="['/csvtemplate/csvtimeline',monthvalue,yearvalue]" [queryParams]="{comment_id: data._id}">{{data["Transaction_ID"]}}</a>
+                     </td>
+                     <td>{{data["Description"]}}</td>
+                     <td>{{data["Assigned_Category"]}}</td>
+                     <td>{{data["Assigned_subcategory"]}}</td>
+                     <td>{{data["ChequeNo"]}}</td>
+                     <td>{{data["Transaction_Amount(INR)"]}}</td>
+                  </tr>
+                  <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td> Total </td>
+                     <td>{{monthtotalformat(csvda.key)}}</td>
+                  </tr>
+               </table>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>

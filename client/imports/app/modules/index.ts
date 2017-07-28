@@ -1,119 +1,117 @@
 // this is list of all our component we use in our app.
 import {
-    CsvTimelineComponent
+	CsvTimelineComponent
 } from './core/csvtimeline/csvtimeline.component';
 import {
-    TransactionComponent
+	TransactionComponent
 } from './core/csvtimeline/transactionComponent/transaction.component';
 import {
-    UserComponent
+	UserComponent
 } from './core/csvtimeline/transactionComponent/userComponent/user.component';
 import {
-    InvoiceComponent
+	InvoiceComponent
 } from './core/csvtimeline/transactionComponent/invoiceComponent/invoice.component';
 import {
-    suggestionComponent
+	suggestionComponent
 } from './core/csvtimeline/transactionComponent/suggestoptionComponent/suggestoption.component';
 import {
-    CategoryComponent
+	CategoryComponent
 } from './core/csvtimeline/transactionComponent/categoryComponent/category.component';
 import {
-    ChangeHeadComponent
+	ChangeHeadComponent
 } from './core/csvtimeline/transactionComponent/changeheadComponent/changehead.component';
 import {
-    EmailPatternDetect
+	EmailPatternDetect
 } from './core/csvtimeline/transactionComponent/emailpatterndetect/emailpattern';
 import {
-    CsvJsonComponent
+	CsvJsonComponent
 } from './core/csvjsonparse/csvjson.component';
 import {
-    CsvAddCategoryComponent
+	CsvAddCategoryComponent
 } from './core/addcategory/addcategory.component';
 import {
-    LoginComponent
+	LoginComponent
 } from './loginComponent/login.component';
 import {
-    adduserComponent
+	adduserComponent
 } from './core/adduserComponent/adduser.component';
 import {
-    TemplateComponent
+	TemplateComponent
 } from './core/template.component';
 import {
-    DashboardComponent
+	DashboardComponent
 } from './core/dashboard/dashboard';
 import {
-   HeadComponent
+	HeadComponent
 } from './core/headComponent/head.component';
 import {
-    ExpenseReportComponent
+	ExpenseReportComponent
 } from './core/expensereport/expenseReport';
 import {
-    ReportByHeadComponent
+	ReportByHeadComponent
 } from './core/reportbyhead/reportbyhead';
 import {
-    ReportByCategoryComponent
+	ReportByCategoryComponent
 } from './core/reportbycategory/reportbycategory';
 import {
-    IncomeReportComponent
+	IncomeReportComponent
 } from './core/incomereport/incomereport';
 import {
-    GraphShowComponent
+	GraphShowComponent
 } from './core/dashboard/graphShow/graphShow';
 import {
-    CategoryGraphComponent
+	CategoryGraphComponent
 } from './core/dashboard/categorylinegraph/categorylinegraph';
 import {
-   AccountComponent
+	AccountComponent
 } from './core/accounts/accounts';
 import {
-   EmailPatternComponent
+	EmailPatternComponent
 } from './core/emailpattern/emailpattern';
 import {
-    PendingInvoices
+	PendingInvoices
 } from './core/Pendinginvoices/pendinginvoices';
 import {
-    CompleteInvoices
+	CompleteInvoices
 } from './core/completeinvoice/completeinvoices';
 import {
-    SuspenseTransComponent
+	SuspenseTransComponent
 } from './core/suspensetransaction/suspensetransaction';
 import {
-    SalaryDetailsUploadComponent
+	SalaryDetailsUploadComponent
 } from './core/salarydetails/salarydetails';
 import {
-    ViewEmailComponent
+	ViewEmailComponent
 } from './emailview/emailview';
 
 
 export const ALL_DECLARATIONS = [
-    ViewEmailComponent,
-    EmailPatternDetect,
-    SalaryDetailsUploadComponent,
-    EmailPatternComponent,
-    SuspenseTransComponent,
-    CompleteInvoices,
-    PendingInvoices,
-    ReportByHeadComponent,
-    DashboardComponent,
-    GraphShowComponent,
-    IncomeReportComponent,
-    CategoryGraphComponent,
-    suggestionComponent,
-    CsvTimelineComponent,
-    TransactionComponent,
-    UserComponent,
-    InvoiceComponent,
-    CategoryComponent,
-    CsvJsonComponent,
-    ExpenseReportComponent,
-    CsvAddCategoryComponent,
-    LoginComponent,
-    adduserComponent,
-    TemplateComponent,
-    HeadComponent,
-    ReportByCategoryComponent,
-    ChangeHeadComponent,
-    AccountComponent
+	ViewEmailComponent,
+	EmailPatternDetect,
+	SalaryDetailsUploadComponent,
+	EmailPatternComponent,
+	SuspenseTransComponent,
+	CompleteInvoices,
+	PendingInvoices,
+	ReportByHeadComponent,
+	DashboardComponent,
+	GraphShowComponent,
+	IncomeReportComponent,
+	CategoryGraphComponent,
+	suggestionComponent,
+	CsvTimelineComponent,
+	TransactionComponent,
+	UserComponent,
+	InvoiceComponent,
+	CategoryComponent,
+	CsvJsonComponent,
+	ExpenseReportComponent,
+	CsvAddCategoryComponent,
+	LoginComponent,
+	adduserComponent,
+	TemplateComponent,
+	HeadComponent,
+	ReportByCategoryComponent,
+	ChangeHeadComponent,
+	AccountComponent
 ];
-
-

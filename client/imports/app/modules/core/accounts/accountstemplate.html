@@ -1,43 +1,41 @@
 <div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 centerdiv">
-                <hr>
-                <div>
-                     <!-- **** code block run when any category is not selected**** -->
-                    <div *ngIf="!selectedAccount">
-                        <form [formGroup]="addForm" (ngSubmit)="addAccount()" class="box">
-                            <input type="text" placeholder="Add Account" formControlName="Account_no" class="form-control no-border no-bg box-shadow-z0 addproductliststyle" />
-                        </form>
-                    </div>
-                    <!--   **** code block run when category is selected**** -->
-                    <div *ngIf="selectedAccount">
-                        <form [formGroup]="addForm" (ngSubmit)="updateAccount()" class="box">
-                            <input [value]="selectedAccount.Account_no" placeholder="Add Account" formControlName="Account_no" class="form-control no-border no-bg box-shadow-z0 addproductinput" />
-                        </form>
-                    </div>
-
-                    <br>
-                    <br>
-
-                    <div class="box">
-                        <div id="parentcategory" class="activechildcat">
-                            <a *ngFor="let data of accountlistvalue" class="box m-b-xs list-group-item addproductliststyle" >
-                                <div>
-                                    <span class="clickdesign" (click)="onSelect(data)">
-                                        {{data.Account_no}}
-                                    </span>
-                                    <div class="dropdown box-tool addmarignleft">
-                                        <i class="fa fa-trash-o" aria-hidden="true" 
-                                           (click)="removeAccount(data._id)">
-                                        </i>
-                                    </div>
-                                </div>
-                            </a>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12 centerdiv">
+            <hr>
+            <div>
+               <!-- **** code block run when any category is not selected**** -->
+               <div *ngIf="!selectedAccount">
+                  <form [formGroup]="addForm" (ngSubmit)="addAccount()" class="box">
+                  <input type="text" placeholder="Add Account" formControlName="Account_no" class="form-control no-border no-bg box-shadow-z0 addproductliststyle" />
+                  </form>
+               </div>
+               <!--   **** code block run when category is selected**** -->
+               <div *ngIf="selectedAccount">
+                  <form [formGroup]="addForm" (ngSubmit)="updateAccount()" class="box">
+                  <input [value]="selectedAccount.Account_no" placeholder="Add Account" formControlName="Account_no" class="form-control no-border no-bg box-shadow-z0 addproductinput" />
+                  </form>
+               </div>
+               <br>
+               <br>
+               <div class="box">
+                  <div id="parentcategory" class="activechildcat">
+                     <a *ngFor="let data of accountlistvalue" class="box m-b-xs list-group-item addproductliststyle" >
+                        <div>
+                           <span class="clickdesign" (click)="onSelect(data)">
+                           {{data.Account_no}}
+                           </span>
+                           <div class="dropdown box-tool addmarignleft">
+                              <i class="fa fa-trash-o" aria-hidden="true"
+                                 (click)="removeAccount(data._id)">
+                              </i>
+                           </div>
                         </div>
-                    </div>
-                </div>
+                     </a>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>

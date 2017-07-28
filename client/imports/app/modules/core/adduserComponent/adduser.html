@@ -1,240 +1,230 @@
 <div *ngIf="user && user.roles && user.roles[0]=='admin'" style="display: inline;">
-    <a class="adduserbuttons text-u-c" style="display: inline-block;" data-toggle="modal" href="#adduser">
-        <span>
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-        </span> Add User</a>
-
-    <!--// this is the format for calling popup menu 
-    <!-- Modal -->
-    <div class="modal fade " id="adduser" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-                    <h5 class="modal-title">Add New User</h5>
-                </div>
-                <div class="modal-body">
-                    <form [formGroup]="addForm" class="box">
-                        <input type="text" placeholder="Enter username" formControlName="username" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput " />
-                        <input type="text" placeholder="Enter Email Address" formControlName="email" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
-                        <input type="password" placeholder="Enter Password" formControlName="password" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
-                        <input type="password" placeholder="Confirm Password" name="password2" formControlName="password2" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
-                        <div class='error' *ngIf="addForm.controls.password2.touched">
-                            <div class="alert-danger errormessageadduser" *ngIf="addForm.hasError('mismatchedPasswords')">
-                                Passwords do not match
-                            </div>
-                        </div>
-                        <select name="Role" formControlName="role" class=" fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" required>
-                            <option value="admin" class="optiondesign">Admin</option>
-                            <option value="Accounts" class="optiondesign">Accounts</option>
-                            <option value="CA" class="optiondesign" selected>CA</option>
-                        </select>
-
-                        <br/>
-                        <br/>
-                        <button type="submit" data-dismiss="modal" (click)="addUser()" class="btn btn-primary" style="margin: auto;display: inherit;"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add User </button>
-                    </form>
-                </div>
+   <a class="adduserbuttons text-u-c" style="display: inline-block;" data-toggle="modal" href="#adduser">
+   <span>
+   <i class="fa fa-user-plus" aria-hidden="true"></i>
+   </span> Add User</a>
+   <!--// this is the format for calling popup menu
+      <!-- Modal -->
+   <div class="modal fade " id="adduser" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+               <h5 class="modal-title">Add New User</h5>
             </div>
-        </div>
-    </div>
+            <div class="modal-body">
+               <form [formGroup]="addForm" class="box">
+                  <input type="text" placeholder="Enter username" formControlName="username" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput " />
+                  <input type="text" placeholder="Enter Email Address" formControlName="email" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
+                  <input type="password" placeholder="Enter Password" formControlName="password" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
+                  <input type="password" placeholder="Confirm Password" name="password2" formControlName="password2" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
+                  <div class='error' *ngIf="addForm.controls.password2.touched">
+                     <div class="alert-danger errormessageadduser" *ngIf="addForm.hasError('mismatchedPasswords')">
+                        Passwords do not match
+                     </div>
+                  </div>
+                  <select name="Role" formControlName="role" class=" fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" required>
+                     <option value="admin" class="optiondesign">Admin</option>
+                     <option value="Accounts" class="optiondesign">Accounts</option>
+                     <option value="CA" class="optiondesign" selected>CA</option>
+                  </select>
+                  <br/>
+                  <br/>
+                  <button type="submit" data-dismiss="modal" (click)="addUser()" class="btn btn-primary" style="margin: auto;display: inherit;"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add User </button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 <br/>
 <br/>
 <br/>
 <!-- ****************** code for admin user ************************** -->
 <div *ngIf="user && user.roles && user.roles[0]=='admin'" class="box boxstyle1">
-    <div class="box-header boxheader1">
-        <h3 class="fntsize-18">List Of Users</h3>
-    </div>
-    <div class="box-divider m-a-0">
-
-    </div>
-    <ul class="list no-border p-b">
-        <li class="list-item" *ngFor="let user of userlist | async">
-            <a herf="" class="list-left" data-toggle="modal" href="#{{user._id}}">
-                <span class="w-40 circle green avatar">{{user.username}} 
-                    <i class="away b-white bottom"></i>
-                </span>
+   <div class="box-header boxheader1">
+      <h3 class="fntsize-18">List Of Users</h3>
+   </div>
+   <div class="box-divider m-a-0">
+   </div>
+   <ul class="list no-border p-b">
+      <li class="list-item" *ngFor="let user of userlist | async">
+         <a herf="" class="list-left" data-toggle="modal" href="#{{user._id}}">
+         <span class="w-40 circle green avatar">{{user.username}}
+         <i class="away b-white bottom"></i>
+         </span>
+         </a>
+         <div class="list-body">
+            <div>
+               <a data-toggle="modal" href="#{{user._id}}">{{user.username}}</a>
+               <a>
+               <i class="fa fa-pencil" aria-hidden="true" style="margin-left:10px;" (click)="edituser(user)"></i>
+               </a>
+               <small class="text-muted text-ellipsis">{{user.roles? user.roles[0] : ''}}</small>
+            </div>
+            <small *ngIf="user.status && user.status.online" class="block text-muted">
+            <i class="fa fa-circle text-success m-r-sm">
+            </i>online
+            </small>
+            <small *ngIf="user.status && !user.status.online" class="block text-muted">
+            <i class="fa fa-circle text-success m-r-sm">
+            </i><span *ngIf="user.status.lastLogin">Last Seen: {{ user.status.lastLogin.date | date :'yMMMdjms'}}</span>
+            </small>
+            <!--                 <span class="dropdown">
+               <i class="fa fa-pencil" aria-hidden="true" (click)="edit(user)"></i>
+               </span> -->
+            <span class="dropdown box-tool margin-5">
+            <a data-toggle="modal" href="#remove{{user._id}}">
+            <i class="fa fa-times fa-2x removeuserfontawsome" aria-hidden="true"></i>
             </a>
-            <div class="list-body">
-                <div>
-                    <a data-toggle="modal" href="#{{user._id}}">{{user.username}}</a>
-                    <a>
-                      <i class="fa fa-pencil" aria-hidden="true" style="margin-left:10px;" (click)="edituser(user)"></i>
-                    </a>
-                     <small class="text-muted text-ellipsis">{{user.roles? user.roles[0] : ''}}</small>
-                </div>
-                <small *ngIf="user.status && user.status.online" class="block text-muted">
-                    <i class="fa fa-circle text-success m-r-sm">
-                    </i>online
-                </small>
-                 <small *ngIf="user.status && !user.status.online" class="block text-muted">
-                    <i class="fa fa-circle text-success m-r-sm">
-                    </i><span *ngIf="user.status.lastLogin">Last Seen: {{ user.status.lastLogin.date | date :'yMMMdjms'}}</span>
-                </small>
-
-<!--                 <span class="dropdown">
-                    <i class="fa fa-pencil" aria-hidden="true" (click)="edit(user)"></i>
-                </span> -->
-
-                <span class="dropdown box-tool margin-5">
-                  <a data-toggle="modal" href="#remove{{user._id}}">
-                    <i class="fa fa-times fa-2x removeuserfontawsome" aria-hidden="true"></i>
-                  </a>
-                </span>
-            </div>
-            <!-- Modal for change password -->
-            <div id="{{user._id}}" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <i class="fa fa-times fa-2x" aria-hidden="true"></i>
-                            </button>
-                            <h4 class="modal-title">Enter New Password for {{user.username}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form [formGroup]="changePassword">
-                                <input type="password" placeholder="Enter New Password" formControlName="newPasswords" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
-                                <br>
-                                <button type="submit" data-dismiss="modal" (click)="changePasswords(user._id)" class="btn btn-primary changepasswordbutton">
-                                    Submit </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <!-- Modal for remove user -->
-            <div id="remove{{user._id}}" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                        <h4 style="text-align: center;" class="modal-title">Are you sure you want to delete user {{user.username}} ?</h4>
-                          <button type="submit" data-dismiss="modal" (click)="removeUser(user)" class="btn btn-primary deleteuserbutton"> Delete </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
-    </div>
-    <!-- *********** user edit form ************** -->
-    <div *ngIf="user && user.roles && user.roles[0]=='admin'">
-    <div *ngIf="userselected && selectedUser" class="box boxstyle1">
-     <div class="box-header boxheader1">
-       <h3 class="fntsize-18">Edit User Details</h3>
-       <span style="float: right;margin-top: -23px;">
-          <i class="fa fa-times fa-2x" aria-hidden="true" (click)="hideselected()"></i>
-       </span>
-     </div>
-      
-    <div class="box-divider m-a-0"></div>
-     <form #updateForm="ngForm" (ngSubmit)="updateUser(updateForm)" class="list no-border p-b">
-     <div class="form-group row">
-       <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>
-         <div class="col-sm-10">
-         <input type="email" name="email" [(ngModel)]="selectedUser.emails[0].address" class="form-control max-width-87" placeholder="Email" ngModel>
+            </span>
          </div>
-     </div>
-     <div class="form-group row">
-       <label for="Username" class="col-sm-2 form-control-label">Username</label>
-         <div class="col-sm-10">
-         <input type="text" name="username" [(ngModel)]="selectedUser.username" class="form-control max-width-87" placeholder="Username" ngModel>
+         <!-- Modal for change password -->
+         <div id="{{user._id}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">
+                     <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                     </button>
+                     <h4 class="modal-title">Enter New Password for {{user.username}}</h4>
+                  </div>
+                  <div class="modal-body">
+                     <form [formGroup]="changePassword">
+                        <input type="password" placeholder="Enter New Password" formControlName="newPasswords" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput" />
+                        <br>
+                        <button type="submit" data-dismiss="modal" (click)="changePasswords(user._id)" class="btn btn-primary changepasswordbutton">
+                        Submit </button>
+                     </form>
+                  </div>
+               </div>
+            </div>
          </div>
-     </div>    
-     <div class="form-group row">
-       <label class="col-sm-3 form-control-label">Select Role</label>
+         <!-- Modal for remove user -->
+         <div id="remove{{user._id}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">
+                     <i class="fa fa-times" aria-hidden="true"></i>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <h4 style="text-align: center;" class="modal-title">Are you sure you want to delete user {{user.username}} ?</h4>
+                     <button type="submit" data-dismiss="modal" (click)="removeUser(user)" class="btn btn-primary deleteuserbutton"> Delete </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </li>
+   </ul>
+</div>
+<!-- *********** user edit form ************** -->
+<div *ngIf="user && user.roles && user.roles[0]=='admin'">
+   <div *ngIf="userselected && selectedUser" class="box boxstyle1">
+      <div class="box-header boxheader1">
+         <h3 class="fntsize-18">Edit User Details</h3>
+         <span style="float: right;margin-top: -23px;">
+         <i class="fa fa-times fa-2x" aria-hidden="true" (click)="hideselected()"></i>
+         </span>
+      </div>
+      <div class="box-divider m-a-0"></div>
+      <form #updateForm="ngForm" (ngSubmit)="updateUser(updateForm)" class="list no-border p-b">
+      <div class="form-group row">
+         <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>
          <div class="col-sm-10">
-           <select name="role" [(ngModel)]="selectedUser.roles[0]" class="form-control c-select max-width-87" ngModel>
-             <option value="admin" class="optiondesign">Admin</option>
-             <option value="Accounts" class="optiondesign">Accounts</option>
-             <option value="CA" class="optiondesign" selected>CA</option>
-           </select>
-     </div>
-     </div>
-     <div class="form-group row m-t-md">
+            <input type="email" name="email" [(ngModel)]="selectedUser.emails[0].address" class="form-control max-width-87" placeholder="Email" ngModel>
+         </div>
+      </div>
+      <div class="form-group row">
+         <label for="Username" class="col-sm-2 form-control-label">Username</label>
+         <div class="col-sm-10">
+            <input type="text" name="username" [(ngModel)]="selectedUser.username" class="form-control max-width-87" placeholder="Username" ngModel>
+         </div>
+      </div>
+      <div class="form-group row">
+         <label class="col-sm-3 form-control-label">Select Role</label>
+         <div class="col-sm-10">
+            <select name="role" [(ngModel)]="selectedUser.roles[0]" class="form-control c-select max-width-87" ngModel>
+            <option value="admin" class="optiondesign">Admin</option>
+            <option value="Accounts" class="optiondesign">Accounts</option>
+            <option value="CA" class="optiondesign" selected>CA</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-group row m-t-md">
          <div style="margin-left: 30%;">
-           <button type="submit" class="btn btn-fw dark">Update Profile</button></div>
-     </div>
-     </form>
-    </div> 
-    </div>
-
+            <button type="submit" class="btn btn-fw dark">Update Profile</button>
+         </div>
+      </div>
+      </form>
+   </div>
+</div>
 <!--**** this code is for all other user except admin user **** -->
 <div *ngIf="user && user.roles && user.roles[0]!=='admin'" class="box boxstyle1">
-
-    <div class="box-header boxheader1">
-        <h3 class="fntsize-18">User Detail</h3>
-    </div>
-    <div class="box-divider m-a-0">
-
-    </div>
-    <ul class="list no-border p-b">
-        <li class="list-item" *ngFor="let users of userlist | async">
-          <div *ngIf="user._id==users._id">
+   <div class="box-header boxheader1">
+      <h3 class="fntsize-18">User Detail</h3>
+   </div>
+   <div class="box-divider m-a-0">
+   </div>
+   <ul class="list no-border p-b">
+      <li class="list-item" *ngFor="let users of userlist | async">
+         <div *ngIf="user._id==users._id">
             <a herf="" class="list-left" data-toggle="modal" href="#{{user._id}}">
-                <span class="w-40 circle green avatar">{{users.username}} 
-                    <i class="away b-white bottom"></i>
-                </span>
+            <span class="w-40 circle green avatar">{{users.username}}
+            <i class="away b-white bottom"></i>
+            </span>
             </a>
             <div class="list-body">
-                <div>
-                    <a data-toggle="modal" href="#{{user._id}}">{{users.username}}</a>
-            <!--********* use this commented code only if you want to give option to users to edit there info *********-->
-                   <!--  <a>
-                      <i class="fa fa-pencil" aria-hidden="true" style="margin-left:10px;" (click)="edituser(users)"></i>
-                    </a> -->
-                     <small class="text-muted text-ellipsis">{{user.roles? user.roles[0] : ''}}</small>
-                </div>
-                <small *ngIf="users.status && users.status.online" class="block text-muted">
-                    <i class="fa fa-circle text-success m-r-sm">
-                    </i>online
-                </small>
-                 <small *ngIf="users.status && !users.status.online" class="block text-muted">
-                    <i class="fa fa-circle text-success m-r-sm">
-                    </i><span *ngIf="users.status.lastLogin">Last Seen: {{ users.status.lastLogin.date | date :'yMMMdjms'}}</span>
-                </small>
-                <span class="dropdown box-tool margin-5">
-                    <i class="fa fa-times fa-2x removeuserfontawsome" aria-hidden="true" 
-                       (click)="removeUser(users)">
-                    </i>
-                </span>
+               <div>
+                  <a data-toggle="modal" href="#{{user._id}}">{{users.username}}</a>
+                  <!--********* use this commented code only if you want to give option to users to edit there info *********-->
+                  <!--  <a>
+                     <i class="fa fa-pencil" aria-hidden="true" style="margin-left:10px;" (click)="edituser(users)"></i>
+                     </a> -->
+                  <small class="text-muted text-ellipsis">{{user.roles? user.roles[0] : ''}}</small>
+               </div>
+               <small *ngIf="users.status && users.status.online" class="block text-muted">
+               <i class="fa fa-circle text-success m-r-sm">
+               </i>online
+               </small>
+               <small *ngIf="users.status && !users.status.online" class="block text-muted">
+               <i class="fa fa-circle text-success m-r-sm">
+               </i><span *ngIf="users.status.lastLogin">Last Seen: {{ users.status.lastLogin.date | date :'yMMMdjms'}}</span>
+               </small>
+               <span class="dropdown box-tool margin-5">
+               <i class="fa fa-times fa-2x removeuserfontawsome" aria-hidden="true"
+                  (click)="removeUser(users)">
+               </i>
+               </span>
             </div>
             <!-- Modal -->
             <div id="{{user._id}}" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <i class="fa fa-times fa-2x" aria-hidden="true"></i>
-                            </button>
-                            <h4 class="modal-title">Enter New Password for {{users.username}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form [formGroup]="changePassword">
-                                <input type="password" placeholder="Enter New Password" formControlName="newPasswords" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput max-width-87" />
-                                <br>
-                                <button type="submit" data-dismiss="modal" (click)="changePasswords(users._id)" class="btn btn-primary changepasswordbutton">
-                                    Submit </button>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
+               <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                        </button>
+                        <h4 class="modal-title">Enter New Password for {{users.username}}</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form [formGroup]="changePassword">
+                           <input type="password" placeholder="Enter New Password" formControlName="newPasswords" class="fntsize-18 form-control no-border no-bg box-shadow-z0 addproductinput max-width-87" />
+                           <br>
+                           <button type="submit" data-dismiss="modal" (click)="changePasswords(users._id)" class="btn btn-primary changepasswordbutton">
+                           Submit </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
             </div>
-           </div><!-- user list loop end here -->
-        </li>
-    </ul>
+         </div>
+         <!-- user list loop end here -->
+      </li>
+   </ul>
 </div>

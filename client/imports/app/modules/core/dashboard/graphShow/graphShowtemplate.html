@@ -1,38 +1,37 @@
-
 <div class="panel panel-primary margin-for-graph">
 <div class="panel-heading">Graph Name : {{InputGraph ? InputGraph.graph_name: ''}}</div>
 <br>
- <div class="pos-rlt">
-    <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
-        <div class="fc-toolbar" style="margin-left: 0px; height: 45px;border-radius: 0px;">
-            <div class="fc-left">
-                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="yearMinus()">
-                    <span class="fc-icon fc-icon-left-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-right">
-                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="yearPlus()">
-                    <span class="fc-icon fc-icon-right-single-arrow" >
-                    </span>
-                </button>
-            </div>
-            <div class="fc-center">
-               <h2>{{ current_year }} - {{ current_year + 1 }}</h2>
-            </div>
-        </div>
-    </div>
+<div class="pos-rlt">
+   <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
+      <div class="fc-toolbar" style="margin-left: 0px; height: 45px;border-radius: 0px;">
+         <div class="fc-left">
+            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="yearMinus()">
+            <span class="fc-icon fc-icon-left-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-right">
+            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="yearPlus()">
+            <span class="fc-icon fc-icon-right-single-arrow" >
+            </span>
+            </button>
+         </div>
+         <div class="fc-center">
+            <h2>{{ current_year }} - {{ current_year + 1 }}</h2>
+         </div>
+      </div>
+   </div>
 </div>
 <br>
-  <div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="fiscalMonths"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-           ></canvas>
-  </div>
-  <br>
-  <br>
-<div> 
+<div style="display: block">
+   <canvas baseChart
+   [datasets]="barChartData"
+   [labels]="fiscalMonths"
+   [options]="barChartOptions"
+   [legend]="barChartLegend"
+   [chartType]="barChartType"
+   ></canvas>
+</div>
+<br>
+<br>
+<div>
