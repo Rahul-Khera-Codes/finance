@@ -1,79 +1,105 @@
 // this is our main routing file
 import {
 	Route
-} from '@angular/router';
+}
+from '@angular/router';
 import {
 	Meteor
-} from 'meteor/meteor';
+}
+from 'meteor/meteor';
 import {
 	CsvTimelineComponent
-} from './modules/core/csvtimeline/csvtimeline.component';
+}
+from './modules/core/csvtimeline/csvtimeline.component';
 import {
 	CsvJsonComponent
-} from './modules/core/csvjsonparse/csvjson.component';
+}
+from './modules/core/csvjsonparse/csvjson.component';
 import {
 	CsvAddCategoryComponent
-} from './modules/core/addcategory/addcategory.component';
+}
+from './modules/core/addcategory/addcategory.component';
 import {
 	LoginComponent
-} from './modules/loginComponent/login.component';
+}
+from './modules/loginComponent/login.component';
+import {
+	ResetPasswordComponent
+}
+from './modules/reset/resetpass.component';
 import {
 	adduserComponent
-} from './modules/core/adduserComponent/adduser.component';
+}
+from './modules/core/adduserComponent/adduser.component';
 import {
 	TemplateComponent
-} from './modules/core/template.component';
+}
+from './modules/core/template.component';
 import {
 	DashboardComponent
-} from './modules/core/dashboard/dashboard';
+}
+from './modules/core/dashboard/dashboard';
 import {
 	HeadComponent
-} from './modules/core/headComponent/head.component';
+}
+from './modules/core/headComponent/head.component';
 import {
 	ExpenseReportComponent
-} from './modules/core/expensereport/expenseReport';
+}
+from './modules/core/expensereport/expenseReport';
 import {
 	ReportByHeadComponent
-} from './modules/core/reportbyhead/reportbyhead';
+}
+from './modules/core/reportbyhead/reportbyhead';
 import {
 	ReportByCategoryComponent
-} from './modules/core/reportbycategory/reportbycategory';
+}
+from './modules/core/reportbycategory/reportbycategory';
 import {
 	IncomeReportComponent
-} from './modules/core/incomereport/incomereport';
+}
+from './modules/core/incomereport/incomereport';
 import {
 	AccountComponent
-} from './modules/core/accounts/accounts';
+}
+from './modules/core/accounts/accounts';
 import {
 	EmailPatternComponent
-} from './modules/core/emailpattern/emailpattern';
+}
+from './modules/core/emailpattern/emailpattern';
 import {
 	PendingInvoices
-} from './modules/core/Pendinginvoices/pendinginvoices';
+}
+from './modules/core/Pendinginvoices/pendinginvoices';
 import {
 	CompleteInvoices
-} from './modules/core/completeinvoice/completeinvoices';
+}
+from './modules/core/completeinvoice/completeinvoices';
 import {
 	SuspenseTransComponent
-} from './modules/core/suspensetransaction/suspensetransaction';
+}
+from './modules/core/suspensetransaction/suspensetransaction';
 import {
 	SalaryDetailsUploadComponent
-} from './modules/core/salarydetails/salarydetails';
+}
+from './modules/core/salarydetails/salarydetails';
 import {
 	ViewEmailComponent
-} from './modules/emailview/emailview';
+}
+from './modules/emailview/emailview';
 
 
 export const routes: Route[] = [{
 		path: '',
 		redirectTo: "login",
 		pathMatch: "full"
-	},
-	{
+	}, {
 		path: 'login',
 		component: LoginComponent
-	},
-	{
+	}, {
+		path: 'reset-password/:token',
+		component: ResetPasswordComponent
+	}, {
 		path: 'csvtemplate',
 		component: TemplateComponent,
 		canActivate: ['canActivateForLoggedIn'],
@@ -85,8 +111,7 @@ export const routes: Route[] = [{
 			{
 				path: 'dashboard',
 				component: DashboardComponent
-			},
-			{
+			}, {
 				path: 'csvtimeline/:month/:year',
 				component: CsvTimelineComponent
 			}, {
@@ -152,9 +177,7 @@ export const routes: Route[] = [{
 		component: ViewEmailComponent,
 		canActivate: ['canActivateForLoggedIn']
 	}
-
 ];
-
 
 export const ROUTES_PROVIDERS = [{
 	provide: 'canActivateForLoggedIn',

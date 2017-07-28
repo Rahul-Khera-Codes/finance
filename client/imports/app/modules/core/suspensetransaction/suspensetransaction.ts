@@ -35,6 +35,7 @@ import {
 	accounting
 } from 'meteor/iain:accounting';
 import template from './suspensetransaction.html';
+import * as AppConst from '../../../app.constant';
 
 @Component({
 	selector: 'suspensetrans',
@@ -50,6 +51,10 @@ export class SuspenseTransComponent implements OnInit, OnDestroy {
 	monthvalue: any;
 	yearvalue: any;
 
+	selectedFinYear: any;
+	current_year: any;
+	next_year: any;
+
 	categoryfound: any;
 	categoryobservable: Observable < any[] > ;
 	categorylist: any;
@@ -62,7 +67,9 @@ export class SuspenseTransComponent implements OnInit, OnDestroy {
 	expense_id: any;
 	// expense: Observable < any[] > ;
 	// headSub: Subscription;
-	constructor(private _router: Router) {}
+	constructor(private _router: Router) {
+
+	}
 
 	ngOnInit() {
 		// this.loading = true;
@@ -142,13 +149,19 @@ export class SuspenseTransComponent implements OnInit, OnDestroy {
 				});
 				item["Assigned_Category"] = this.categoryfound[0] ? this.categoryfound[0].category : 'Not Assigned';
 				var key = month[month_value] + '-' + year;
-				if (!monthlist[key]) {
-					monthlist[key] = [];
+				//	only show current financial year data*************
+				var selectedFinYear = new Date(localStorage.getItem('Selected_financial_year'));
+				var current_year = selectedFinYear.getFullYear();
+				var next_year = selectedFinYear.getFullYear() + 1;
+				if ((year == current_year && month_value >= AppConst.startingMonth) || (year == next_year && month_value <= AppConst.endingMonth)) {
+					if (!monthlist[key]) {
+						monthlist[key] = [];
+					}
+					// if(!monthtotal[key]){
+					//   monthtotal[key]=0;
+					// }
+					monthlist[key].push(item);
 				}
-				// if(!monthtotal[key]){
-				//   monthtotal[key]=0;
-				// }
-				monthlist[key].push(item);
 				// monthtotal[key]+= Math.round(accounting.unformat(item["Transaction_Amount(INR)"])*100)/100;
 			}
 			var list = [];

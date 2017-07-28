@@ -3,32 +3,40 @@ import {
 	Component,
 	OnInit,
 	NgZone
-} from '@angular/core';
+}
+from '@angular/core';
 import {
 	Router
-} from '@angular/router';
+}
+from '@angular/router';
 import {
 	Mongo
-} from 'meteor/mongo';
+}
+from 'meteor/mongo';
 import {
 	Meteor
-} from 'meteor/meteor';
+}
+from 'meteor/meteor';
 
 import {
 	FormGroup,
 	FormBuilder,
 	Validators
-} from '@angular/forms';
+}
+from '@angular/forms';
 import template from './login.html';
 
-@Component({
+@
+Component({
 	selector: 'login',
 	template
 })
 
 export class LoginComponent implements OnInit {
 	addForm: FormGroup;
+	resetEmailForm: FormGroup;
 	email: string;
+	resetEmail: string;
 	password: string;
 	message: string;
 	showmessage: boolean = false;
@@ -57,6 +65,9 @@ export class LoginComponent implements OnInit {
 			email: ['', Validators.required],
 			password: ['', Validators.required],
 			FYYear: ['Select Financial Year', Validators.required] // option to select financial year
+		});
+		this.resetEmailForm = this.formBuilder.group({ // this is the form used to take email to reset password
+			email: ['', Validators.required]
 		});
 
 		this.loginprocess = false;
@@ -102,5 +113,26 @@ export class LoginComponent implements OnInit {
 				});
 			}
 		}
+	}
+
+	//function called when click to forgot password
+	forgotUserPassword() {
+		var self = this;
+		this.resetEmail = this.resetEmailForm.controls['email'].value; // taking out email value
+		Accounts.forgotPassword({
+			email: this.resetEmail
+		}, function (res) {
+			if (res) {
+				if (res.message === 'User not found [403]') {
+					alert('This email does not exist.');
+				} else {
+					alert('We are sorry but something went wrong.');
+					console.log(res)
+				}
+			} else {
+				alert('Email Sent. Check your mailbox.');
+				this.location.reload();
+			}
+		});
 	}
 }

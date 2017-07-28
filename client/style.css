@@ -216,6 +216,22 @@
 	font-size: 16px;
 }
 
+.link {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.forgotPass:hover,
+.forgotPass:focus {
+	color: #00BCD4;
+	background-color: #ddd;
+}
+
+.forgotPass {
+	color: #00BCD4;
+	font-size: 14px;
+}
+
 .fntsize-18 {
 	font-size: 18px;
 }
@@ -251,6 +267,12 @@
 }
 
 .loginsubmitbutton {
+	height: 44px;
+	background-color: #00BCD4;
+	color: white;
+}
+
+.resetbutton {
 	height: 44px;
 	background-color: #00BCD4;
 	color: white;
