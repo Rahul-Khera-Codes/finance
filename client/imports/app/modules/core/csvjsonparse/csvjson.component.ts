@@ -73,6 +73,11 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 	duplicatearraylist: any[];
 	originalarraylist: any[];
 	foundelement: any;
+	csvData:Observable <any[]>;
+ 	csvSub:Subscription;
+ 	latestdata:any;
+ 	lastUpdate:boolean=false;
+ 	filename:any;
 
 	constructor(private ngZone: NgZone, private _router: Router) {}
 
@@ -128,10 +133,12 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 				this.Expensevalue = data;
 			});
 		});
+		this.lastupdateddata();
 	}
 
 	// code to handle csv file upload in our system
 	handleFiles(form: NgForm) {
+		// this.lastUpdate=false;
 		// Check for the various File API support.
 		this.accountselected = form.value.account;
 		this.DateFormatselected = form.value.DateFormat;
@@ -144,6 +151,7 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 		self.filecontainduplicate = false;
 		var files = document.getElementById('files').files;
 		console.log(files);
+		self.filename=files[0].name;
 		//for using papa-parse type " meteor add harrison:papa-parse " in console
 		Papa.parse(files[0], {
 			header: true,
@@ -210,6 +218,7 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 	}
 
 	finalupload() { // main function to upload csv file if there is no issue
+		this.lastUpdate=false;
 		console.log("finalupload is called");
 		for (let i = 0; i < this.repeateidarray.length; i++) {
 			console.log("executing loop");
@@ -229,19 +238,23 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 		}
 		console.log("finalvalue that we will upload");
 		console.log(this.duplicatearraylist);
+		 this.uploadprocess = true;
 
 		var self = this;
 		self.uploadprocess = true;
+		 self.messageshow = false;
 		self.filecontainduplicate = false;
 		// Meteor method to upload csv file here we are passing our csv array list, income id, expense id, date format in which we want our data to store
-		Meteor.call('parseUpload', self.duplicatearraylist, self.Incomevalue[0]._id, self.Expensevalue[0]._id, self.accountselected, self.DateFormatselected, (error, response) => {
-			if (error) {
+		Meteor.call('parseUpload', self.duplicatearraylist, self.Incomevalue[0]._id, self.Expensevalue[0]._id, self.accountselected, self.DateFormatselected,self.filename , (error, response) => {
+			if (!response) {
 				console.log(error);
 				// this.uploadfail();
 				self.ngZone.run(() => { // show error when data not uploaded successfully
 					self.messageshow = true;
 					self.successmessage = "Document not uploaded ";
 					self.uploadprocess = false;
+					self.lastUpdate = true;
+					self.lastupdateddata();
 				});
 			} else {
 				self.ngZone.run(() => { // show success message with formatted data if upload is successfull
@@ -255,6 +268,8 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 					self.duplicatearraylist.length = 0;
 					self.originalarraylist.length = 0;
 					self.filecontainduplicate = false;
+					self.lastUpdate = true;
+					self.lastupdateddata();
 				});
 			}
 		});
@@ -304,8 +319,25 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 		});
 		this.uploadresult["updatedstring"] = dummyfeed;
 	}
+	lastupdateddata() {
+ this.csvData = Csvdata.find({}, {
+ 		sort: {
+ 		"lastUpdated": -1
+		}
+ 	})
+ 	this.csvSub = MeteorObservable.subscribe('csvdata').subscribe();
+ 	this.csvData.subscribe((data) => {
+ 
+ 
+ 	this.lastUpdate = true;
+ 		this.latestdata = [data[0]];
+ 
+ 
+ 	}); //extracting latest data
+ }
 	ngOnDestroy() {
 		this.headSub.unsubscribe();
 		this.accountSub.unsubscribe();
+		this.csvSub.unsubscribe();
 	}
 }

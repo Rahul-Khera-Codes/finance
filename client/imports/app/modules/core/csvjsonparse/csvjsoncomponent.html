@@ -45,6 +45,27 @@
          </div>
       </div>
    </div>
+    <div *ngIf="lastUpdate" class="container-fluid">
+   <div class="row">
+      <div class = "alert alert-success" style="margin-left: 18px;">
+        <p>Last Csv Uploaded Details</p>
+      </div>
+      <div class="col-lg-12">
+         <div>
+            <table>
+               <tr>
+                   <th> File Name</th>
+                   <th>Last Uploaded</th>
+               </tr>
+               <tr *ngFor="let data of latestdata">
+                   <td>{{data.filename}}</td>
+                   <td>{{data.lastUpdated | date:'medium'}}</td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
    <div *ngIf="filecontainduplicate" class="container-fluid">
       <div class="row">
          <div class = "alert alert-success" style="margin-left: 18px;">

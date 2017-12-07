@@ -257,7 +257,7 @@ export class TransactionComponent implements OnInit, OnChanges {
 	// here we are downloading csv timeline data in csv format.
 	download(accno, assignhead, csvDetails, cat, subCat) {
 		if(csvDetails.linktodrive!=undefined){
-		var Invoice_link=csvDetails.linktodrive[0].linkAddress ? csvDetails.linktodrive[0].linkAddress : 'not_assigned',
+		var Invoice_link=csvDetails.linktodrive[0].linkAddress ? csvDetails.linktodrive[0].linkAddress : 'not_assigned'
 		}
 		else{
 			Invoice_link= 'not_assigned'
