@@ -59,8 +59,6 @@ export const Salaryfiles = new MongoObservable.Collection('Salaryfiles');
 // ******* collection to store all our regex pattern for finding mail matching ******
 export const emailpatterncollection = new MongoObservable.Collection('emailpatternlist');
 
-export const uploadcsvcollection = new MongoObservable.Collection('uploadcsvlist');
-
 declare var process: any;
 
 function loggedIn(userId) {
@@ -474,17 +472,10 @@ Meteor.methods({
 						"Transaction_Amount(INR)": accounting.unformat(item["Transaction Amount(INR)"]),
 						"Available_Balance(INR)": accounting.unformat(item["Available Balance(INR)"]),
 						"AssignedAccountNo": Account_no,
-						// "lastUpdated":new Date(),
-						// "filename":filename
-					},
+						"lastUpdated":new Date(),
+						"filename":filename
+					}
 
-
-				});
-				// inserting  the document in collection for given transaction note
-				uploadcsvcollection.insert({
-					"Transaction_ID": item["Transaction ID"],
-					"filename":filename,
-					"lastUpdated":new Date(),
 				});
 				return report;
 			} 
@@ -518,15 +509,9 @@ Meteor.methods({
 						"Transaction_Amount(INR)": accounting.unformat(item["Transaction Amount(INR)"]),
 						"Available_Balance(INR)": accounting.unformat(item["Available Balance(INR)"]),
 						"AssignedAccountNo": Account_no,
-						// "lastUpdated":new Date(),
-						// "filename":filename
+						"lastUpdated":new Date(),
+						"filename":filename
 					}
-				});
-				// inserting  the document in collection for given transaction note
-				uploadcsvcollection.insert({
-					"Transaction_ID": item["Transaction ID"],
-					"filename":filename,
-					"lastUpdated":new Date(),
 				});
 				return report;
 			} else {
@@ -555,19 +540,12 @@ Meteor.methods({
 					"Assigned_user_id": "not_assigned",
 					"Assigned_username": "not_assigned",
 					"AssignedAccountNo": Account_no,
-					// "lastUpdated":new Date(),
-					// "filename":filename
-				});
-				// inserting  the document in collection for given transaction note
-				uploadcsvcollection.insert({
-					"Transaction_ID": item["Transaction ID"],
-					"filename":filename,
 					"lastUpdated":new Date(),
+					"filename":filename
 				});
-				
+				return report;
 			}
 		}
-		return report;
 		 // return error;
 	},
 	// this is the code to refresh category graph list with latest data
