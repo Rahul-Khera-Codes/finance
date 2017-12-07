@@ -198,7 +198,7 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 			'ChequeNo.': id['ChequeNo.']
 		});
 		if (!this.foundelement) {
-			this.repeateidarray.push(id);
+			 this.repeateidarray.push(id);
 		} else {
 			console.log(this.foundelement);
 		}
