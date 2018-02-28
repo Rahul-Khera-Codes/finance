@@ -36,3 +36,4 @@ jalik:ufs-gridfs
 jalik:ufs-local
 webapp
 session
+angular2-csv
