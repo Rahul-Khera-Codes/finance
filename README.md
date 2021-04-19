@@ -23,17 +23,22 @@ On your server clone the finance app and deploy it using below commands.
 
     ./deploy.sh
 
+    export MONGO_URL="mongodb+srv://<username>:<password>@cluster0.ui0nb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+ 
+    export ROOT_URL=http://176.9.137.77
+
+    export PORT=3000
 
 Note: 
 
-1. If you are deploying for first time then run below command after completing above steps
-     
-     cd ../output
-
+1. If you are deploying for first time then run below command after completing above steps 
+   
      pm2 start main.js --name finance
 
-2. If you are using this method and want to update the mongo atlas url, root url or port number then after cloning 
-   update it in deploy.sh before deploying.
+2. Else restart it
+
+    pm2 restart finance
+
 
 
 
