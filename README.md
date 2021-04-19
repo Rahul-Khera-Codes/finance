@@ -109,6 +109,19 @@ Step 7: Move to bundle root folder and start it with pm2 if deploying for the fi
      
            pm2 restart finance
 
+pm2 process env settings:
+
+To check the current process environment variables:
+
+    pm2 env <processId>
+
+To update the process environment variables:
+
+    ENV_VAR=somethingnew pm2 restart app --update-env
+
+    example:
+     
+        MONGO_URL="mongodb+srv://<user>:<password>@cluster0.ui0nb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" pm2 restart finance --update-env
 
 
 
