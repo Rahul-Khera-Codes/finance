@@ -21,9 +21,3 @@ meteor npm install
 npm uninstall fibers
 npm install fibers
 cd ../../
-
-export MONGO_URL="mongodb+srv://sachin:qLwN5GtUF1NEar3G@cluster0.ui0nb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-export ROOT_URL=http://176.9.137.77
-export PORT=3000
-
-pm2 restart finance
