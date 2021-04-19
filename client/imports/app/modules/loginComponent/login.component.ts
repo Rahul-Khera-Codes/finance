@@ -19,11 +19,15 @@ import {
 	FormBuilder,
 	Validators
 } from '@angular/forms';
-import template from './login.html';
+import { MeteorObservable } from 'meteor-rxjs';
+import { Users } from '../../../../../both/collections/csvdata.collection';
+import { Observable } from 'rxjs';
+import { User } from '../../../../../both/models/user.model';
+
 
 @Component({
 	selector: 'login',
-	templateUrl:'./login.html',
+	templateUrl: './login.html',
 	moduleId: module.id
 })
 
@@ -37,6 +41,7 @@ export class LoginComponent implements OnInit {
 	showmessage: boolean = false;
 	loginprocess: boolean;
 	logintime: any;
+	userlist: Observable<User[]>;
 
 	current_date: any;
 	current_month: any;
@@ -66,6 +71,15 @@ export class LoginComponent implements OnInit {
 		});
 
 		this.loginprocess = false;
+         MeteorObservable.subscribe('userData').subscribe(() => {
+            var self = this;
+            self.ngZone.run(() => {
+                self.userlist = Users.find({}).zone();
+				self.userlist.subscribe(user => {
+					console.log(user);
+				});
+			});
+        });
 	}
 	// code to get list of years in years variable
 	getYears(offset: number, range: number) {
