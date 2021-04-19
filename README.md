@@ -7,6 +7,31 @@ To manage bank statments and daily financial operations for a company
 DEPLOY
 meteor angular 2 project to server
 
+
+You can deploy it using 2 methods either manually or using deploy.sh as mentioned below:
+
+METHOD 1: Using deploy.sh
+
+
+On your server clone the finance app and deploy it using below commands.
+
+    git clone https://github.com/upexcel/finance.git 
+
+    cd finance
+
+    chomod 777 ./deploy.sh
+
+    ./deploy.sh
+
+
+Note: If you are using this method and want to update the mongo atlas url, root url or port number then after cloning 
+update it in deploy.sh before deploying.
+
+
+
+METHOD 2: Manually by following below steps 
+
+
 Step 1: On your server clone the finance app and install below packages using below commands.
 
         git clone https://github.com/upexcel/finance.git 
@@ -16,7 +41,8 @@ Step 1: On your server clone the finance app and install below packages using be
         meteor npm install
 
 
-Step 2: Run below command into your root folder of our app, this will generate a zip folder in output folder
+Step 2: Run below command into your root folder of our app, this will generate a zip folder in output folder 
+        (if there is already an output folder then delete it before hitting below command).
 
         meteor build ./../output
 
@@ -58,6 +84,19 @@ Step 6: Now export detail of mongo atlas by typing command
 Step 7: Move to bundle root folder and start it with pm2
 
           pm2 start main.js --name finance
+
+Note: If there is already running process with same name then delete it or use other name while pm2 start
+
+  To check all pm2 processs 
+          
+        run pm2 list
+  
+  To delete pm2 process
+
+        pm2 delete <processId> OR <process name>
+
+
+
 
 
 Mongo Atlas settings: 
