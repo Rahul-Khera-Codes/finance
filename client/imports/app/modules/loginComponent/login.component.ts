@@ -117,6 +117,7 @@ export class LoginComponent implements OnInit {
 							self.loginprocess = false;
 							self.showmessage = true;
 							self.message = error.reason;
+							console.log(error);
 						});
 					}
 				});
