@@ -24,8 +24,16 @@ On your server clone the finance app and deploy it using below commands.
     ./deploy.sh
 
 
-Note: If you are using this method and want to update the mongo atlas url, root url or port number then after cloning 
-update it in deploy.sh before deploying.
+Note: 
+
+1. If you are deploying for first time then run below command after completing above steps
+     
+     cd ../output
+
+     pm2 start main.js --name finance
+
+2. If you are using this method and want to update the mongo atlas url, root url or port number then after cloning 
+   update it in deploy.sh before deploying.
 
 
 
@@ -81,20 +89,20 @@ Step 6: Now export detail of mongo atlas by typing command
           export PORT=3000 
 
 
-Step 7: Move to bundle root folder and start it with pm2
+Step 7: Move to bundle root folder and start it with pm2 if deploying for the first time or restart it if the process is 
+        already there
 
-          pm2 start main.js --name finance
+    a) To start new process
 
-Note: If there is already running process with same name then delete it or use other name while pm2 start
+           pm2 start main.js --name finance
 
-  To check all pm2 processs 
-          
-        run pm2 list
-  
-  To delete pm2 process
+    b) To check all process
 
-        pm2 delete <processId> OR <process name>
+           pm2 list
 
+    c) To restart process
+     
+           pm2 restart finance
 
 
 
