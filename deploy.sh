@@ -26,5 +26,4 @@ export MONGO_URL="mongodb+srv://sachin:qLwN5GtUF1NEar3G@cluster0.ui0nb.mongodb.n
 export ROOT_URL=http://176.9.137.77
 export PORT=3000
 
-pm2 delete finance
-pm2 start main.js --name finance
+pm2 restart finance
