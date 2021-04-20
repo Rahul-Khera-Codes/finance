@@ -93,13 +93,9 @@ export class GraphShowComponent implements OnInit, OnDestroy {
 		} else {
 			this.current_year = parseInt(this.current_year_header) - 1;
 		}
+		this.graphviewcreate();
 	}
 
-	ngAfterViewInit() {
-		setTimeout(() => {
-			this.graphviewcreate();
-		}, 1000);
-	}
 
 	// code to format data that we can use in ng 2 chart component.
 	graphviewcreate() {
@@ -111,7 +107,7 @@ export class GraphShowComponent implements OnInit, OnDestroy {
 				this.filtervalue = _.filter(this.Head_List, {
 					"_id": this.InputGraph.graph_head_list[i]
 				});
-				if (this.filtervalue) {
+				if (this.filtervalue.length > 0) {
 					this.labelfordata.push(this.filtervalue[0].head);
 				}
 
