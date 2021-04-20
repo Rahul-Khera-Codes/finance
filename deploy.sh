@@ -1,5 +1,6 @@
 #bin/bash
 
+nvm use 14
 meteor npm install
 DIR=../output
 if [ -d "$DIR" ]; then
