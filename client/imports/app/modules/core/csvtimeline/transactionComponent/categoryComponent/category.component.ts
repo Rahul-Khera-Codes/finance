@@ -128,9 +128,6 @@ export class CategoryComponent implements OnInit, OnDestroy, OnChanges {
 				console.log(response);
 			}
 		});
-		this.select_parent = true;
-		this.selectedparent_id = undefined;
-		this.Choose_Cateogry = "Choose Cateogry";
 	}
 	// code to add new category into system from csvtimeline category dropdown list
 	addNewCategory() {
