@@ -8,9 +8,6 @@ import {
 	Router
 } from '@angular/router';
 import {
-	Mongo
-} from 'meteor/mongo';
-import {
 	Meteor
 } from 'meteor/meteor';
 
@@ -19,11 +16,6 @@ import {
 	FormBuilder,
 	Validators
 } from '@angular/forms';
-import { MeteorObservable } from 'meteor-rxjs';
-import { Users } from '../../../../../both/collections/csvdata.collection';
-import { Observable } from 'rxjs';
-import { User } from '../../../../../both/models/user.model';
-
 
 @Component({
 	selector: 'login',
@@ -41,7 +33,6 @@ export class LoginComponent implements OnInit {
 	showmessage: boolean = false;
 	loginprocess: boolean;
 	logintime: any;
-	userlist: Observable<User[]>;
 
 	current_date: any;
 	current_month: any;
@@ -71,15 +62,7 @@ export class LoginComponent implements OnInit {
 		});
 
 		this.loginprocess = false;
-         MeteorObservable.subscribe('userData').subscribe(() => {
-            var self = this;
-            self.ngZone.run(() => {
-                self.userlist = Users.find({}).zone();
-				self.userlist.subscribe(user => {
-					console.log(user);
-				});
-			});
-        });
+
 	}
 	// code to get list of years in years variable
 	getYears(offset: number, range: number) {
@@ -111,7 +94,9 @@ export class LoginComponent implements OnInit {
 						localStorage.setItem("Selected_financial_year", new Date('04-04-' + self.addForm.controls['FYYear'].value).toString());
 						console.log('04-04-' + self.addForm.controls['FYYear'].value);
 						// After successfull login redirect to csvtimeline component.
-						self._router.navigate(['csvtemplate/csvtimeline', self.current_month, self.current_year]);
+						self.ngZone.run(() => {
+							self._router.navigateByUrl(`csvtemplate/csvtimeline/${self.current_month}/${self.current_year}`);
+						  });
 					} else {
 						self.ngZone.run(() => { // if there is error at login time show error message
 							self.loginprocess = false;
