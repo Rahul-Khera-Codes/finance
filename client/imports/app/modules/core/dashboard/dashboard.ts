@@ -133,14 +133,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             var diff = (current_time.getTime() - login_time.getTime()) / 1000;
             if (diff > 3600) {
                 console.log("Your session has expired. Please log in again");
+                var self = this;
                 this._remove.removeData();
                 Meteor.logout(function (error) {
                     if (error) {
                         console.log("ERROR: " + error.reason);
                     } else {
-                        console.log(self)
-                        console.log(this);
-                        this._router.navigate(['/login']); // we are naviagating user back to login page.
+                        self._router.navigate(['/login']); // we are naviagating user back to login page.
                     }
                 });
             } else {
