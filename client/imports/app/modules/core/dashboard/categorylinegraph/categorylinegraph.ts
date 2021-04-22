@@ -11,10 +11,9 @@ import {
 } from '@angular/forms';
 import {
 	Observable
-} from 'rxjs/Observable';
-import {
+, 
 	Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
 	MeteorObservable
 } from 'meteor-rxjs';

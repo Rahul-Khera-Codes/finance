@@ -29,7 +29,7 @@ import template from './resetPassword.html';
 
 import {
 	Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
 	MeteorObservable
 } from 'meteor-rxjs';

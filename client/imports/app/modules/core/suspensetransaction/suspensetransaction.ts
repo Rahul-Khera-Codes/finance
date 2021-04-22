@@ -17,10 +17,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -116,9 +115,9 @@ export class SuspenseTransComponent implements OnInit, OnDestroy {
             }
         }
 
-        this.categoryobservable = Productcategory.find({}).zone();
+        this.categoryobservable = Productcategory.find({});
         this.categorySub = MeteorObservable.subscribe('Productcategory').subscribe();
-        this.categoryobservable.debounceTime(1000).subscribe((data) => {
+        this.categoryobservable.subscribe((data) => {
             this.categorylist = data;
         });
 
@@ -134,8 +133,8 @@ export class SuspenseTransComponent implements OnInit, OnDestroy {
             "suspensetransaction": true
         }, {
             sort: sort_order
-        }).zone();
-        this.csvdata1.debounceTime(1000).subscribe((data1) => {
+        });
+        this.csvdata1.subscribe((data1) => {
             this.csvdata = data1;
             var monthlist = {};
             // var monthtotal = {};

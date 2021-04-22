@@ -29,10 +29,9 @@ import {
 } from '../../../../../../both/collections/csvdata.collection';
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -107,9 +106,9 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
             }
         }
         // code to load account list in csv json component
-        this.accountlist = Accounts_no.find({}).zone();
+        this.accountlist = Accounts_no.find({});
         this.accountSub = MeteorObservable.subscribe('Accounts_no').subscribe();
-        this.accountlist.debounceTime(1000).subscribe((data) => {
+        this.accountlist.subscribe((data) => {
             this.ngZone.run(() => {
                 this.accountlistvalue = data;
             });
@@ -117,17 +116,17 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
 
         this.Income = Head.find({ //extracting Income head id
             "head": "Income"
-        }).zone();
+        });
         this.Expense = Head.find({ // extracting Expense head id
             "head": "Expense"
-        }).zone();
+        });
         this.headSub = MeteorObservable.subscribe('headlist').subscribe();
-        this.Income.debounceTime(1000).subscribe((data) => {
+        this.Income.subscribe((data) => {
             this.ngZone.run(() => {
                 this.Incomevalue = data;
             });
         });
-        this.Expense.debounceTime(1000).subscribe((data) => {
+        this.Expense.subscribe((data) => {
             this.ngZone.run(() => {
                 this.Expensevalue = data;
             });
@@ -328,7 +327,7 @@ export class CsvJsonComponent implements OnInit, OnDestroy {
             }
         })
         this.csvUploadSub = MeteorObservable.subscribe('csvuploadfiles').subscribe();
-        this.csvuploadData.debounceTime(1000).subscribe((data) => {
+        this.csvuploadData.subscribe((data) => {
 
             this.lastUpdate = true;
             this.latestdata = [data[0]];

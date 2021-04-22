@@ -18,10 +18,9 @@ import {
 // *** new pattern***
 import {
 	Observable
-} from 'rxjs/Observable';
-import {
+, 
 	Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
 	MeteorObservable
 } from 'meteor-rxjs';
@@ -83,15 +82,15 @@ export class CsvAddCategoryComponent implements OnInit, OnDestroy {
 			}
 		}
 		// *** code to get list of parent category list
-		this.productlist = Productcategory.find({}).zone();
+		this.productlist = Productcategory.find({});
 		this.categorySub = MeteorObservable.subscribe('Productcategory').subscribe();
-		this.productlist.debounceTime(1000).subscribe((data) => {
+		this.productlist.subscribe((data) => {
 			this.ngZone.run(() => {
 				this.productlistvalue = data;
 			});
 		});
 
-		// this.subcategory = Subcategory.find({}).zone();
+		// this.subcategory = Subcategory.find({});
 		// *** code to get list of subcategory category list
 		this.subcategorySub = MeteorObservable.subscribe('Subcategory').subscribe();
 
@@ -110,12 +109,12 @@ export class CsvAddCategoryComponent implements OnInit, OnDestroy {
 		this.activateChild = true;
 		this.subcategory = Subcategory.find({
 			parent_id: category._id
-		}).zone();
+		});
 	}
 
 	addCategory() { // add new category to our system
 		if (this.addForm.valid) {
-			Productcategory.insert(this.addForm.value).zone();
+			Productcategory.insert(this.addForm.value);
 			this.addForm.reset();
 		}
 	}
@@ -140,7 +139,7 @@ export class CsvAddCategoryComponent implements OnInit, OnDestroy {
 				$set: {
 					"category": this.changevalue
 				}
-			}).zone();
+			});
 			this.addForm.reset(); // resetting form
 			this.selectedCategory = undefined; // unselecting selected category
 			this.activateChild = false;

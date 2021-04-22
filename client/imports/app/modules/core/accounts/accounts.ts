@@ -18,10 +18,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -80,9 +79,9 @@ export class AccountComponent implements OnInit, OnDestroy {
             }
         }
 
-        this.accountlist = Accounts_no.find({}).zone();
+        this.accountlist = Accounts_no.find({});
         this.accountSub = MeteorObservable.subscribe('Accounts_no').subscribe(); // subscribing account no collection.
-        this.accountlist.debounceTime(1000).subscribe((data) => { // getting account list in data params
+        this.accountlist.subscribe((data) => { // getting account list in data params
             this.ngZone.run(() => {
                 this.accountlistvalue = data;
             });
@@ -95,7 +94,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
     addAccount() { // add account fucntion is used to insert new account in system
         if (this.addForm.valid) {
-            Accounts_no.insert(this.addForm.value).zone();
+            Accounts_no.insert(this.addForm.value);
             this.addForm.reset();
         }
     }
@@ -110,7 +109,7 @@ export class AccountComponent implements OnInit, OnDestroy {
                 $set: {
                     "Account_no": this.changevalue
                 }
-            }).zone();
+            });
             this.addForm.reset();
             this.selectedAccount = undefined;
         } else {

@@ -30,10 +30,9 @@ import {
 } from '../../../../../../both/methods/fileuploadmethods';
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -82,7 +81,7 @@ export class SalaryDetailsUploadComponent implements OnInit, OnDestroy {
             }
         }
 
-        this.filecontentobs = Salaryfiles.find({}).zone();
+        this.filecontentobs = Salaryfiles.find({});
         this.filecontentSub = MeteorObservable.subscribe('Salaryfiles').subscribe();
         this.filecontentobs.subscribe((data) => {
             this.ngZone.run(() => {

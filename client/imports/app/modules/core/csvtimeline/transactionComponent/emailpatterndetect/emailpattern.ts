@@ -22,10 +22,9 @@ import {
 } from 'meteor/meteor';
 import {
 	Observable
-} from 'rxjs/Observable';
-import {
+, 
 	Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
 	MeteorObservable
 } from 'meteor-rxjs';
@@ -85,7 +84,7 @@ export class EmailPatternDetect implements OnInit, OnDestroy {
 						"subject": 1
 					}
 				});
-				self.emailobser.debounceTime(1000).subscribe((data) => {
+				self.emailobser.subscribe((data) => {
 					self.ngZone.run(() => {
 						self.emaillistraw = data;
 						// console.log(self.emaillistraw);

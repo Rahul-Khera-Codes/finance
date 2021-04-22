@@ -19,10 +19,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -150,25 +149,25 @@ export class ReportByCategoryComponent implements OnInit, OnDestroy {
             }
         }
         // loading head report collection.
-        this.headreport = Head.find({}).zone();
-        this.headreport.debounceTime(1000).subscribe((data) => {
+        this.headreport = Head.find({});
+        this.headreport.subscribe((data) => {
             this.ngZone.run(() => {
                 this.headlist = data;
             });
         });
         // code to load all account details.
-        this.accountlist = Accounts_no.find({}).zone();
-        this.accountlist.debounceTime(1000).subscribe((data) => {
+        this.accountlist = Accounts_no.find({});
+        this.accountlist.subscribe((data) => {
             this.accountlistdata = data;
         });
         // code to load all categories into our system.
-        this.categoryobservable = Productcategory.find({}).zone();
-        this.categoryobservable.debounceTime(1000).subscribe((data) => {
+        this.categoryobservable = Productcategory.find({});
+        this.categoryobservable.subscribe((data) => {
             this.categorylist = data;
         });
         // code to load all subcategory into our system.
-        this.subcategoryobservable = Subcategory.find({}).zone();
-        this.subcategoryobservable.debounceTime(1000).subscribe((data) => {
+        this.subcategoryobservable = Subcategory.find({});
+        this.subcategoryobservable.subscribe((data) => {
             this.subcategorylist = data;
         });
     }
@@ -217,7 +216,7 @@ export class ReportByCategoryComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         } else if (this.selectedsubcategory) { // only if subcategory is also selected.
             // mongdb query to search based on subcategory id and year limit.
             this.csvdata1 = Csvdata.find({
@@ -231,11 +230,11 @@ export class ReportByCategoryComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         }
 
         this.monthwiselist = null;
-        this.csvdata1.debounceTime(1000).subscribe((data1) => { // code to get get from above mongo queries.
+        this.csvdata1.subscribe((data1) => { // code to get get from above mongo queries.
             this.csvdata = data1;
             var monthlist = {}; // this will store month wise transaction list
             var monthtotal = {}; // this will store month wise total
@@ -306,7 +305,7 @@ export class ReportByCategoryComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         } else if (this.selectedsubcategory) {
             // mongodb query to serach for subcategory and month limit.
             this.csvdata1 = Csvdata.find({
@@ -320,11 +319,11 @@ export class ReportByCategoryComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         }
 
         this.monthwiselist = null;
-        this.csvdata1.debounceTime(1000).subscribe((data1) => {
+        this.csvdata1.subscribe((data1) => {
             // converting data into showable format from above query.
             this.csvdata = data1;
             var monthlist = {};

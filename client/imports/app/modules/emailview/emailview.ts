@@ -18,10 +18,9 @@ import {
 // *** new pattern***
 import {
 	Observable
-} from 'rxjs/Observable';
-import {
+, 
 	Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
 	MeteorObservable
 } from 'meteor-rxjs';
@@ -64,10 +63,10 @@ export class ViewEmailComponent implements OnInit, OnDestroy {
 				// extracting email content from unique email collection by passing id
 				this.emaillistSub = MeteorObservable.subscribe('uniqueemail', this.id).subscribe();
 				console.log(this.id);
-				this.emailobser = Emaillist.find().zone(); // calling email list collection
+				this.emailobser = Emaillist.find(); // calling email list collection
 			});
 		});
-		this.emailobser.debounceTime(1000).subscribe(data => {
+		this.emailobser.subscribe(data => {
 			this.ngZone.run(() => {
 				this.emaillistraw = data; // storing emaillist into email list raw variable
 				this.loading = false;

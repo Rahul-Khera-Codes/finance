@@ -19,10 +19,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -37,7 +36,7 @@ import {
     accounting
 } from 'meteor/iain:accounting';
 import template from './gstReport.html';
-import 'rxjs/add/operator/toPromise';
+
 import { StorageService } from './../../services/storage';
 import { RemoveStorageService } from './../../services/removeStorage';
 
@@ -116,9 +115,9 @@ export class GstReportComponent implements OnInit, OnDestroy {
                     $gte: new Date(`04-01-${this.yearvalue}`),
                     $lt: new Date(`04-01-${((this.yearvalue) * 1) + 1}`)
                 }
-            }).zone();
+            });
 
-            this.csvdata1.debounceTime(1000).subscribe((csvdata) => {
+            this.csvdata1.subscribe((csvdata) => {
                 this.csvdata = JSON.parse(JSON.stringify(csvdata));
                 var monthlist = {};
                 var monthtotal = {};

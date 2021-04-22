@@ -16,10 +16,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -76,7 +75,7 @@ export class EmailPatternComponent implements OnInit, OnDestroy {
         //     }
         // }
 
-        // this.patternlist = emailpatterncollection.find({}).zone();
+        // this.patternlist = emailpatterncollection.find({});
         // this.patternSub = MeteorObservable.subscribe('emailpattern').subscribe();
         // this.patternlist.debounceTime(1000).subscribe((data) => {
         //     this.ngZone.run(() => {
@@ -102,7 +101,7 @@ export class EmailPatternComponent implements OnInit, OnDestroy {
                 "string": this.addForm.controls['patterninput'].value,
                 "regex": this.escape(this.addForm.controls['patterninput'].value)
             }
-            emailpatterncollection.insert(pattern).zone();
+            emailpatterncollection.insert(pattern);
             this.addForm.reset();
         }
     }
@@ -118,7 +117,7 @@ export class EmailPatternComponent implements OnInit, OnDestroy {
                     "string": this.changevalue,
                     "regex": this.escape(this.changevalue)
                 }
-            }).zone();
+            });
             this.addForm.reset();
             this.selectedpattern = undefined;
         } else {
