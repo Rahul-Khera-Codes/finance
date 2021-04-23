@@ -4,10 +4,7 @@
 import {
     Component,
     OnInit,
-    Input,
     OnDestroy,
-    EventEmitter,
-    Output,
     NgZone,
     AfterContentInit
 } from '@angular/core';
@@ -15,9 +12,6 @@ import {
     Router,
     ActivatedRoute
 } from '@angular/router';
-import {
-    Mongo
-} from 'meteor/mongo';
 import {
     Meteor
 } from 'meteor/meteor';
@@ -30,9 +24,6 @@ import {
 import {
     MeteorObservable
 } from 'meteor-rxjs';
-import {
-    TransactionComponent
-} from './transactionComponent/transaction.component';
 import {
     NgForm
 } from '@angular/forms';
@@ -55,11 +46,10 @@ import {
 import {
     User
 } from '../../../../../../both/models/user.model';
-import template from './csvtimeline.html';
 import { CommonService } from './../../services/common.service';
 import { RemoveStorageService } from './../../services/removeStorage';
 import * as _ from 'lodash';
-import { forEach } from '@angular/router/src/utils/collection';
+
 declare let $: any;
 @Component({
     selector: 'csvtimeline',
