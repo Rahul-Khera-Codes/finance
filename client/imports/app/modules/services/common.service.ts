@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { Console } from '@angular/core/src/console';
+
 @Injectable()
 export class CommonService {
     constructor() { }

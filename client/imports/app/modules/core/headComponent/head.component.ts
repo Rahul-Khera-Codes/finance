@@ -18,10 +18,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -78,9 +77,9 @@ export class HeadComponent implements OnInit, OnDestroy {
             }
         }
 
-        this.headlist = Head.find({}).zone();
+        this.headlist = Head.find({});
         this.headSub = MeteorObservable.subscribe('headlist').subscribe();
-        this.headlist.debounceTime(1000).subscribe((data) => {
+        this.headlist.subscribe((data) => {
             this.ngZone.run(() => {
                 this.headlistvalue = data;
             });
@@ -93,7 +92,7 @@ export class HeadComponent implements OnInit, OnDestroy {
 
     addCategory() {
         if (this.addForm.valid) {
-            Head.insert(this.addForm.value).zone();
+            Head.insert(this.addForm.value);
             this.addForm.reset();
         }
     }
@@ -108,7 +107,7 @@ export class HeadComponent implements OnInit, OnDestroy {
                 $set: {
                     "head": this.changevalue
                 }
-            }).zone();
+            });
             this.addForm.reset();
             this.selectedCategory = undefined;
         } else {

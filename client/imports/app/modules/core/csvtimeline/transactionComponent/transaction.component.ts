@@ -32,10 +32,9 @@ import {
 } from 'angular2-meteor-accounts-ui';
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -124,7 +123,7 @@ export class TransactionComponent implements OnInit, OnChanges {
         this.dateforemailyear = this.dateforemail.getFullYear();
         this.locationurl = window.location.origin;
         this.loadcommentdata(this.transaction_data['_id']);
-        // this.commentlist = Comments.find({"transactionid":this.transaction_data['_id']}).zone();
+        // this.commentlist = Comments.find({"transactionid":this.transaction_data['_id']});
         // this.commentSub = MeteorObservable.subscribe('Commentslist', this.transaction_data['_id']).subscribe();
     }
     // ng change here is used to save system from issue when there is delay in loading data from parent component
@@ -211,9 +210,9 @@ export class TransactionComponent implements OnInit, OnChanges {
     loadcommentdata(id: string) {
         this.commentlist = Comments.find({
             "transactionid": id
-        }).zone();
+        });
         this.commentSub = MeteorObservable.subscribe('Commentslist', id).subscribe();
-        this.commentlist.debounceTime(1000).subscribe((data) => {
+        this.commentlist.subscribe((data) => {
             this.ngZone.run(() => {
                 this.commentlistdata = data;
                 this.havesomecomment = true;

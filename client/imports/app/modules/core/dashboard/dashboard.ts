@@ -11,10 +11,9 @@ import {
 } from '@angular/forms';
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -148,25 +147,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
             }
         }
         // *** code to get list of all head collection data
-        this.headCompleteList = Head.find({}).zone();
+        this.headCompleteList = Head.find({});
         this.headSub = MeteorObservable.subscribe('headlist').subscribe();
-        this.headCompleteList.debounceTime(1000).subscribe((data) => {
+        this.headCompleteList.subscribe((data) => {
             this.head_list = data;
         });
         // *** cod to get list of all main category collection data
-        this.productcategory = Productcategory.find({}).zone();
+        this.productcategory = Productcategory.find({});
         this.productSub = MeteorObservable.subscribe('Productcategory').subscribe();
-        this.productcategory.debounceTime(1000).subscribe((data) => {
+        this.productcategory.subscribe((data) => {
             this.parentcategoryarray = data;
         });
         // *** code to get list of all subcategory collection data
-        this.subcategory = Subcategory.find({}).zone();
+        this.subcategory = Subcategory.find({});
         this.subcategorySub = MeteorObservable.subscribe('Subcategory').subscribe();
-        this.subcategory.debounceTime(1000).subscribe((data) => {
+        this.subcategory.subscribe((data) => {
             this.subcategoryarray = data;
         });
         // *** code to get all graphlist collection data
-        this.newGraph = Graphlist.find({}).zone();
+        this.newGraph = Graphlist.find({});
         this.newGraphSub = MeteorObservable.subscribe('graphlist').subscribe();
         this.newGraph.subscribe((data) => {
             this.newGraphdata = data;
@@ -174,9 +173,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.processingStart = false;
         });
         // *** code to get all catgory graph list collection data
-        this.newCategory = CategoryGraphList.find({}).zone();
+        this.newCategory = CategoryGraphList.find({});
         this.newCategoryGraphSub = MeteorObservable.subscribe('categorygraphlist').subscribe();
-        this.newCategory.debounceTime(1000).subscribe((data) => {
+        this.newCategory.subscribe((data) => {
             this.ngZone.run(() => {
                 this.newCategorydata = data;
                 this.processingStart = false;
@@ -188,9 +187,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         sort_order["Txn_Posted_Date"] = 1;
         this.complete_csvdata = Csvdata.find({}, {
             sort: sort_order
-        }).zone();
+        });
         this.complete_csvSub = MeteorObservable.subscribe('csvdata').subscribe();
-        this.complete_csvdata.debounceTime(1000).subscribe((data) => {
+        this.complete_csvdata.subscribe((data) => {
             this.ngZone.run(() => {
                 this.all_csvdata = data;
             });
@@ -285,7 +284,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             CategoryGraphList.insert({
                 "graph_name": form.value.graphname,
                 "graph_head_list": this.categoryAdd // categoryAdd have all id of either category list or head list
-            }).zone();
+            });
             this.showSucessMessageForNewGraph = true;
             setTimeout(() => { // code to remove successfully added new graph after 3 sec
                 this.showSucessMessageForNewGraph = false;
@@ -309,7 +308,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (this.selectedheadgraph) {
             Graphlist.remove({
                 _id: this.selectedheadgraph._id
-            }).zone();
+            });
             this.selectedheadgraph = '';
             this.graphdeletedmessage = true;
             setTimeout(() => {
@@ -322,7 +321,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (this.selectedcategorygraph) {
             CategoryGraphList.remove({
                 _id: this.selectedcategorygraph._id
-            }).zone();
+            });
             this.selectedcategorygraph = '';
             this.graphdeletedmessage = true;
             setTimeout(() => {
@@ -356,7 +355,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             Graphlist.insert({
                 "graph_name": form.value.graphname,
                 "graph_head_list": this.headAdd
-            }).zone();
+            });
             this.showSucessMessageForNewGraph = true;
             setTimeout(() => {
                 this.showSucessMessageForNewGraph = false;

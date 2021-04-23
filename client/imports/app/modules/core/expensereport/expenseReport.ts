@@ -17,10 +17,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -118,14 +117,14 @@ export class ExpenseReportComponent implements OnInit, OnDestroy {
                 this._local.setLocalData("login_time", current_time.toString());
             }
         }
-        this.categoryobservable = Productcategory.find({}).zone();
+        this.categoryobservable = Productcategory.find({});
         this.categorySub = MeteorObservable.subscribe('Productcategory').subscribe();
-        this.categoryobservable.debounceTime(1000).subscribe((data) => {
+        this.categoryobservable.subscribe((data) => {
             this.categorylist = data;
         });
 
-        this.subcategoryobservable = Subcategory.find({}).zone();
-        this.subcategoryobservable.debounceTime(1000).subscribe((data) => {
+        this.subcategoryobservable = Subcategory.find({});
+        this.subcategoryobservable.subscribe((data) => {
             this.subcategorylist = data;
         });
 
@@ -133,15 +132,15 @@ export class ExpenseReportComponent implements OnInit, OnDestroy {
             "head": "Expense"
         });
         this.headSub = MeteorObservable.subscribe('headlist').subscribe();
-        this.expense.debounceTime(1000).subscribe((data) => {
+        this.expense.subscribe((data) => {
             this.expense_id = data[0] ? data[0]._id : '';
             if (this.expense_id) {
                 this.csvdata1 = Csvdata.find({
                     "Assigned_head_id": this.expense_id
                 }, {
                     sort: sort_order
-                }).zone();
-                this.csvdata1.debounceTime(1000).subscribe((data1) => {
+                });
+                this.csvdata1.subscribe((data1) => {
                     this.csvdata = data1;
                     var monthlist = {};
                     var monthtotal = {};

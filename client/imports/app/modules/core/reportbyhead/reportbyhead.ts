@@ -18,10 +18,9 @@ import {
 // *** new pattern***
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -103,8 +102,8 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
         this.csvSub = MeteorObservable.subscribe('csvdata').subscribe();
         this.headSub = MeteorObservable.subscribe('headlist').subscribe();
         this.subcategorySub = MeteorObservable.subscribe('Subcategory').subscribe();
-        this.headreport = Head.find({}).zone();
-        this.headreport.debounceTime(1000).subscribe((data) => {
+        this.headreport = Head.find({});
+        this.headreport.subscribe((data) => {
             this.ngZone.run(() => {
                 this.headlist = data;
             });
@@ -148,7 +147,7 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
             }
         }
         // code to subscribe to category collections
-        this.categoryobservable = Productcategory.find({}).zone();
+        this.categoryobservable = Productcategory.find({});
         this.categorySub = MeteorObservable.subscribe('Productcategory').subscribe();
         this.categoryobservable.subscribe((data) => {
             this.ngZone.run(() => {
@@ -156,14 +155,14 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
             });
         });
         // code to subscribe to subcategory collections
-        this.subcategoryobservable = Subcategory.find({}).zone();
-        this.subcategoryobservable.debounceTime(1000).subscribe((data) => {
+        this.subcategoryobservable = Subcategory.find({});
+        this.subcategoryobservable.subscribe((data) => {
             this.subcategorylist = data;
         });
         // code to subscribe to account collections
-        this.accountlist = Accounts_no.find({}).zone();
+        this.accountlist = Accounts_no.find({});
         this.accountSub = MeteorObservable.subscribe('Accounts_no').subscribe();
-        this.accountlist.debounceTime(1000).subscribe((data) => {
+        this.accountlist.subscribe((data) => {
             this.ngZone.run(() => {
                 this.accountlistdata = data;
             });
@@ -198,7 +197,7 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         } else {
             // mongod query search based on selected head and year limit.
             this.csvdata1 = Csvdata.find({
@@ -212,10 +211,10 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         }
         // code to format retrieved data to show in tabluar form.
-        this.csvdata1.debounceTime(1000).subscribe((data1) => {
+        this.csvdata1.subscribe((data1) => {
             this.csvdata = data1;
             var monthlist = {};
             var monthtotal = {};
@@ -284,7 +283,7 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         } else {
             // mongod query search based on selected head and month limit.
             this.csvdata1 = Csvdata.find({
@@ -298,10 +297,10 @@ export class ReportByHeadComponent implements OnInit, OnDestroy {
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         }
 
-        this.csvdata1.debounceTime(1000).subscribe((data1) => {
+        this.csvdata1.subscribe((data1) => {
             this.csvdata = data1;
             var monthlist = {};
             var monthtotal = {};

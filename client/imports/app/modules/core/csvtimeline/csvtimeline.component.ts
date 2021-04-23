@@ -4,10 +4,7 @@
 import {
     Component,
     OnInit,
-    Input,
     OnDestroy,
-    EventEmitter,
-    Output,
     NgZone,
     AfterContentInit
 } from '@angular/core';
@@ -16,24 +13,17 @@ import {
     ActivatedRoute
 } from '@angular/router';
 import {
-    Mongo
-} from 'meteor/mongo';
-import {
     Meteor
 } from 'meteor/meteor';
 import * as moment from 'moment';
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
-import {
-    TransactionComponent
-} from './transactionComponent/transaction.component';
 import {
     NgForm
 } from '@angular/forms';
@@ -56,11 +46,10 @@ import {
 import {
     User
 } from '../../../../../../both/models/user.model';
-import template from './csvtimeline.html';
 import { CommonService } from './../../services/common.service';
 import { RemoveStorageService } from './../../services/removeStorage';
 import * as _ from 'lodash';
-import { forEach } from '@angular/router/src/utils/collection';
+
 declare let $: any;
 @Component({
     selector: 'csvtimeline',
@@ -292,14 +281,14 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 $gte: new Date(this.lowerlimitstring),
                 $lt: new Date(this.upperlimitstring)
             }
-        }).startWith([]).subscribe((data) => {
+        }).subscribe((data) => {
             this.ngZone.run(() => {
                 this.filecontent = data;
             });
         });
         // ****** this is used to load all user list in csvtimeline component *****
         this.usersData = MeteorObservable.subscribe('userData').subscribe(() => {
-            this.userlist = Users.find({}).zone();
+            this.userlist = Users.find({});
             this.userlist.subscribe((data) => {
                 this.ngZone.run(() => {
                     this.userlists = data;
@@ -307,25 +296,25 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
             });
         });
         // **** this is used to load all email pattern list ****
-        this.emailpatternlistraw = emailpatterncollection.find({}).zone();
-        this.emailpatternlistraw.debounceTime(1000).subscribe((data) => {
+        this.emailpatternlistraw = emailpatterncollection.find({});
+        this.emailpatternlistraw.subscribe((data) => {
             this.ngZone.run(() => {
                 this.emailpatternlist = data;
             });
         });
         // **** this is used to load all account list in csvtimeline component ****
-        this.accountlist = Accounts_no.find({}).zone();
+        this.accountlist = Accounts_no.find({});
         this.accountSub = MeteorObservable.subscribe('Accounts_no').subscribe();
-        this.accountlist.debounceTime(1000).subscribe((data) => {
+        this.accountlist.subscribe((data) => {
             this.ngZone.run(() => {
                 this.accountlistdata = data;
                 this.accountlistloading = false;
             });
         });
         // **** this code is used to load all head list in CsvTimelineComponent ****
-        this.headarrayobservable = Head.find({}).zone();
+        this.headarrayobservable = Head.find({});
         this.headarraySub = MeteorObservable.subscribe('headlist').subscribe();
-        this.headarrayobservable.debounceTime(1000).subscribe((data) => {
+        this.headarrayobservable.subscribe((data) => {
             this.ngZone.run(() => {
                 this.generateReport();
                 this.headarraylist = data;
@@ -344,9 +333,9 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
         });
 
         // *** we are passing parent category and child category object as input to csvtimeline component child transaction ***
-        this.productcategory = Productcategory.find({}).zone();
+        this.productcategory = Productcategory.find({});
         this.productSub = MeteorObservable.subscribe('Productcategory').subscribe();
-        this.productcategory.debounceTime(1000).subscribe((data) => {
+        this.productcategory.subscribe((data) => {
             this.ngZone.run(() => {
                 this.parentcategoryarray = data;
                 console.log("list", this.parentcategoryarray)
@@ -354,28 +343,28 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
             });
         });
         // **** code to get list of all subcategory in CsvTimelineComponent ****
-        this.subcategory = Subcategory.find({}).zone();
+        this.subcategory = Subcategory.find({});
         this.subcategorySub = MeteorObservable.subscribe('Subcategory').subscribe();
-        this.subcategory.debounceTime(1000).subscribe((data) => {
+        this.subcategory.subscribe((data) => {
             this.ngZone.run(() => {
                 this.subcategoryarray = data;
                 this.subcategoryloading = false;
             });
         });
         // *** here we are assigning income id in income_id variable ***
-        this.income.debounceTime(1000).subscribe((data) => {
+        this.income.subscribe((data) => {
             this.ngZone.run(() => {
                 this.income_id = data[0] ? data[0]._id : '';
             });
         });
         // *** assigning expense id in CsvTimelineComponent ***
-        this.expense.debounceTime(1000).subscribe((data) => {
+        this.expense.subscribe((data) => {
             this.ngZone.run(() => {
                 this.expense_id = data[0] ? data[0]._id : '';
             });
         });
         // *** assigning asset id in assets_id in csv timel line component
-        this.assets.debounceTime(1000).subscribe((data) => {
+        this.assets.subscribe((data) => {
             this.ngZone.run(() => {
                 this.assets_id = data[0] ? data[0]._id : '';
             });
@@ -609,7 +598,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         } else if (form.value.optionForSearch == "Amount") { // search for a perticular amount in our csv transaction note.
             this.csvdata1 = Csvdata.find({
                 $and: [{
@@ -622,7 +611,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         } else if (form.value.optionForSearch == "Desc") { // serching for a description in our csv transaction note collection
             this.csvdata1 = Csvdata.find({
                 $and: [{
@@ -637,11 +626,11 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
         }
 
         var self = this;
-        this.csvdata1.debounceTime(1000).subscribe((data) => {
+        this.csvdata1.subscribe((data) => {
             this.ngZone.run(() => {
                 this.generateReport();
                 this.csvFullData = data;
@@ -679,9 +668,9 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
             // }]
         }, {
             sort: sort_order
-        }).zone();
+        });
         var self = this;
-        this.csvdata1.debounceTime(1000).subscribe((data) => {
+        this.csvdata1.subscribe((data) => {
             this.ngZone.run(() => {
                 this.generateReport();
                 this.csvFullData = data;
@@ -781,7 +770,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     // *** mongodb query to filter transaction note based on Credit transaction
                     this.csvdata1 = Csvdata.find({
@@ -795,7 +784,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             } else if (!this.apply_cr_filter && this.apply_dr_filter) {
                 if (this.accountfilter && this.Select_account) {
@@ -813,7 +802,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     // query to filter csv transction note based on DR & Date limit
                     this.csvdata1 = Csvdata.find({
@@ -827,7 +816,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
 
             } else {
@@ -844,7 +833,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     // filter based on only date limit
                     this.csvdata1 = Csvdata.find({
@@ -854,7 +843,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
 
             }
@@ -877,7 +866,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     // *** mongodb query filter based on category id "not assigned" & CR & date
                     this.csvdata1 = Csvdata.find({
@@ -893,7 +882,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             } else if (!this.apply_cr_filter && this.apply_dr_filter) {
                 if (this.accountfilter && this.Select_account) {
@@ -913,7 +902,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     // mongodb query filter based on DR & whose category not assigned & date limit
                     this.csvdata1 = Csvdata.find({
@@ -929,7 +918,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             } else {
                 if (this.accountfilter && this.Select_account) {
@@ -946,7 +935,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         $and: [{
@@ -959,7 +948,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             }
         }
@@ -967,7 +956,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
             this.loading = false;
         }, 3000);
         var self = this;
-        this.csvdata1.debounceTime(1000).subscribe((data) => {
+        this.csvdata1.subscribe((data) => {
             this.ngZone.run(() => {
                 this.generateReport();
                 this.csvFullData = data;
@@ -1112,10 +1101,10 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
             var self = this;
             self.csvdata = null;
-            this.csvdata1.debounceTime(1000).subscribe((data) => {
+            this.csvdata1.subscribe((data) => {
                 this.ngZone.run(() => {
                     this.generateReport();
                     this.csvFullData = data;
@@ -1166,7 +1155,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                     }]
                 }, {
                     sort: sort_order
-                }).zone();
+                });
             } else if (!this.apply_cr_filter && this.apply_dr_filter) {
                 // *** mongodb query to filter all DR tranasction whose category is not assigned
                 this.csvdata1 = Csvdata.find({
@@ -1182,7 +1171,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                     }]
                 }, {
                     sort: sort_order
-                }).zone();
+                });
             } else {
                 this.csvdata1 = Csvdata.find({
                     $and: [{
@@ -1195,11 +1184,11 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                     }]
                 }, {
                     sort: sort_order
-                }).zone();
+                });
             }
             var self = this;
             self.csvdata = null;
-            this.csvdata1.debounceTime(1000).subscribe((data) => {
+            this.csvdata1.subscribe((data) => {
                 this.ngZone.run(() => {
                     this.generateReport();
                     this.csvFullData = data;
@@ -1293,10 +1282,10 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 }]
             }, {
                 sort: sort_order
-            }).zone();
+            });
             var self = this;
             self.csvdata = null;
-            this.csvdata1.debounceTime(1000).subscribe((data) => {
+            this.csvdata1.subscribe((data) => {
                 this.ngZone.run(() => {
                     this.generateReport();
                     this.csvFullData = data;
@@ -1341,7 +1330,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         $and: [{
@@ -1354,7 +1343,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             } else if (!this.apply_cr_filter && this.apply_dr_filter) {
                 if (this.accountfilter && this.Select_account) {
@@ -1371,7 +1360,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         $and: [{
@@ -1384,7 +1373,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
 
             } else {
@@ -1400,7 +1389,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         "Txn_Posted_Date": {
@@ -1409,7 +1398,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
 
             }
@@ -1432,7 +1421,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         $and: [{
@@ -1447,7 +1436,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             } else if (!this.apply_cr_filter && this.apply_dr_filter) {
                 if (this.accountfilter && this.Select_account) {
@@ -1466,7 +1455,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         $and: [{
@@ -1481,7 +1470,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             } else {
                 if (this.accountfilter && this.Select_account) {
@@ -1498,7 +1487,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 } else {
                     this.csvdata1 = Csvdata.find({
                         $and: [{
@@ -1511,13 +1500,13 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                         }]
                     }, {
                         sort: sort_order
-                    }).zone();
+                    });
                 }
             }
         }
         var self = this; Csvdata
         self.csvdata = null;
-        this.csvdata1.debounceTime(1000).subscribe((data) => {
+        this.csvdata1.subscribe((data) => {
             this.ngZone.run(() => {
                 this.generateReport();
                 this.csvFullData = data;
@@ -1527,7 +1516,7 @@ export class CsvTimelineComponent implements OnInit, AfterContentInit, OnDestroy
                 self.loading = false;
             });
         });
-        this.csvdata1.debounceTime(1000).subscribe((data) => {
+        this.csvdata1.subscribe((data) => {
             this.ngZone.run(() => {
                 this.generateReport();
                 this.csvFullData = data;

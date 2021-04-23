@@ -8,10 +8,9 @@ import {
 } from '@angular/core';
 import {
     Observable
-} from 'rxjs/Observable';
-import {
+, 
     Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 import {
     MeteorObservable
 } from 'meteor-rxjs';
@@ -90,7 +89,7 @@ export class adduserComponent implements OnInit, OnDestroy {
         this.usersData = MeteorObservable.subscribe('userData').subscribe(() => {
             var self = this;
             self.ngZone.run(() => {
-                self.userlist = Users.find({}).zone();
+                self.userlist = Users.find({});
             });
         });
         // angular form to change password
