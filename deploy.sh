@@ -1,6 +1,7 @@
 #bin/bash
 
 nvm use 14
+rm -rf node_modules
 meteor npm install
 DIR=../output
 if [ -d "$DIR" ]; then
@@ -22,3 +23,4 @@ meteor npm install
 npm uninstall fibers
 npm install fibers
 cd ../../
+pm2 restart finance
