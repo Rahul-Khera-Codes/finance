@@ -3,8 +3,8 @@
 nvm use 14
 rm -rf node_modules
 rm package-lock.json
-git stash
 meteor npm install
+git stash
 DIR=../output
 if [ -d "$DIR" ]; then
     printf '%s\n' "Removing old bundle ($DIR)"
