@@ -1,0 +1,77 @@
+<div>
+   <img *ngIf="logoutprocess==true" src="images/500.gif" class="hometemplate">
+   <span (click)="openMobileMenu()" class="mobileMenuButton" [ngStyle]="{'left': leftvalues}">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+   </span>
+   <div class="container">
+      <!--  <div> -->
+      <!-- this is for mobile testing -->
+      <div id="wrapper">
+         <div id="sidebar-wrapper" [ngStyle]="{'width': widthvalues}">
+            <ul class="sidebar-nav">
+               <li class="sidebar-brand">
+                  <img src="images/logo.png" alt="Excellence technologies" width="80%">
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]=='admin'" (click)="closeMobileMenu()">
+                  <a routerLink="dashboard">Dashboard</a>
+               </li>
+               <li (click)="closeMobileMenu()">
+                  <a [routerLink]="['csvtimeline',current_month,current_year]">CSV Timeline </a>
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]=='admin'" (click)="closeMobileMenu()">
+                  <a routerLink="pendinginvoice">Pending Invoices</a>
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]=='admin'" (click)="closeMobileMenu()">
+                  <a routerLink="completeinvoice">Complete Invoices</a>
+               </li>
+               <li *ngIf="user" (click)="closeMobileMenu()">
+                  <a routerLink="suspensetrans">Suspense Transactions</a>
+               </li>
+               <li class="hide_for_mobile" *ngIf="user && user.roles && user.roles[0]=='admin'"
+                  (click)="closeMobileMenu()">
+                  <a routerLink="csvjson">Upload CSV File</a>
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]=='admin'" (click)="closeMobileMenu()">
+                  <a routerLink="addcategory">Add Category</a>
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]=='admin'" (click)="closeMobileMenu()">
+                  <a routerLink="heads">Add Head</a>
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]=='admin'" (click)="closeMobileMenu()">
+                  <a routerLink="accounts">Add Account</a>
+               </li>
+               <!-- <li *ngIf="user && user.roles && user.roles[0]!='CA'" (click)="closeMobileMenu()">
+               <a routerLink="emailpattern">Email Pattern List</a>
+               </li> -->
+               <li class="hide_for_mobile" *ngIf="user && user.roles && user.roles[0]=='admin'"
+                  (click)="closeMobileMenu()">
+                  <a routerLink="salaryuploaddetails">Salary Details</a>
+               </li>
+               <li (click)="closeMobileMenu()">
+                  <a routerLink="adduser">Manage Users</a>
+               </li>
+               <li *ngIf="user && user.roles && user.roles[0]!='Accounts'">
+                  <a (click)="expend()">Report</a>
+                  <ul *ngIf="open" style="list-style-type: none;">
+                     <li (click)="closeMobileMenu()"><a routerLink="expensereport">Expense Report</a></li>
+                     <li (click)="closeMobileMenu()"><a routerLink="incomereport">Income Report</a></li>
+                     <li (click)="closeMobileMenu()"><a routerLink="byreporthead">Report By Head</a></li>
+                     <li (click)="closeMobileMenu()"><a routerLink="reportbycategory">Report By Category</a></li>
+                     <!-- <li (click)="closeMobileMenu()"><a routerLink="gstreport">GST Report</a></li> -->
+                  </ul>
+               </li>
+               <li>
+                  <a (click)="logout()">Logout</a>
+               </li>
+               <li>
+                  <p style="color: #00BCD4;">Version 0.0.94</p>
+               </li>
+            </ul>
+         </div>
+         <!-- /#sidebar-wrapper -->
+         <div class="contents">
+            <router-outlet></router-outlet>
+         </div>
+      </div>
+   </div>
+</div>

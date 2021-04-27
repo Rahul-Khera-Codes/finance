@@ -1,0 +1,97 @@
+<div *ngIf="loading" class="progress progress-striped active" style="overflow: visible;height: 10px;margin-bottom: 0px;">
+    <div class="progress-bar info" style="width: 100%;">  </div>
+</div>
+<div class="white r box-shadow-z0 m-b navbar-md" style="max-width: 106%">
+    <div class="navbar ng-scope" style="margin-left: 18px;">
+        <a data-toggle="collapse" data-target="#navbar-0" class="navbar-item pull-left hidden-md-up">
+        </a>
+        <div class="navbar-item pull-left ng-binding" id="pageTitle">
+            <h3 id="head">GST Report</h3>
+        </div>
+        <div class="nav-item">
+        </div>
+        <button class="md-btn md-raised m-b-sm w-xs white printbtn" style="float: right;top: 15px;" (click)="printfunction()"><i class="fa fa-print" aria-hidden="true"></i></button>
+    </div>
+</div>
+<div  class="pos-rlt">
+    <div class="calender ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty fc fc-ltr fc-unthemed">
+        <div class="fc-toolbar">
+            <div class="fc-left">
+                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="YearMinus()">
+                    <span class="fc-icon fc-icon-left-single-arrow" >
+                    </span>
+                </button>
+            </div>
+            <div class="fc-right">
+                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right" (click)="YearPlus()">
+                    <span class="fc-icon fc-icon-right-single-arrow" >
+                    </span>
+                </button>
+            </div>
+            <div (click)="toggleMonthYear()" class="fc-center" style="cursor: pointer;" >
+                <h2>FY {{this.yearvalue}} - {{((this.yearvalue)*1) +1}}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Content -->
+<div id="page-content-wrapper" class="pageContentWidth">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div *ngFor="let csvda of monthwiselist ; trackBy: trackByFn;">
+                    <h3><i>{{csvda.key}}</i></h3>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+                                <th>Transaction date</th>
+                                <th>Transaction Id</th>
+                                <th>Description</th>
+                                <th>CA/DA</th>
+                                <th>CGST(%)</th>
+                                <th>SGST(%)</th>
+                                <th>IGST(%)</th>
+                                <th>UTGST(%)</th>
+                                <th>GST Number</th>
+                                <th>Transaction Amount</th>
+                            </tr>
+                            <tr *ngFor="let data of csvda.value ; trackBy: trackByFn;">
+                                <td>{{data["Value_Date"]}}</td>
+                                <td>
+                                    <a [routerLink]="['/csvtemplate/csvtimeline',monthvalue,yearvalue]" [queryParams]="{comment_id: data._id}">{{data["Transaction_ID"]}}</a>
+                                </td>
+                                <td>{{data["Description"]}}</td>
+                                <td>{{data["Cr/Dr"]}}</td>
+                                <td>{{data["CGST"]}}</td>
+                                <td>{{data["SGST"]}}</td>
+                                <td>{{data["IGST"]}}</td>
+                                <td>{{data["UTGST"]}}</td>
+                                <td>{{data["gstNumber"]}}</td>
+                                <td>{{data["Transaction_Amount(INR)"]}}</td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td> Total </td>
+                                <td>{{monthtotalformat(csvda.key)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-results"
+             infinite-scroll
+             [infiniteScrollDistance]="2"
+             [infiniteScrollThrottle]="300"
+             (scrolled)="onScroll()">
+    </div>
+</div>
+</div>
