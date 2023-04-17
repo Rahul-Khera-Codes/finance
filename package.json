@@ -11,7 +11,7 @@
     "test:ci": "meteor test --once --driver-package dispatch:mocha-phantomjs"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.10",
+    "@angular-devkit/build-angular": "~15.2.6",
     "@angular/compiler-cli": "11.2.11",
     "@types/chai": "4.0.8",
     "@types/meteor": "1.4.12",
